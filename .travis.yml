@@ -4,7 +4,4 @@ node_js:
 script:
   - npm test
 notifications:
-   notifications:
     slack: team2industrial:Ip29T7QzZ3MN6oXeL0RINJp1
-    on_success: always
-    on_failure: always
