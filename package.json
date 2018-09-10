@@ -1,9 +1,14 @@
 {
-  "name": "node-todo",
-  "version": "0.0.1",
-  "description": "Simple todo application.",
+  "name": "Team-2-Industrial-Team-Project",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsbennett/AC41004-Industrial-Team"
+  },
+  "description": " ",
   "main": "server.js",
-  "author": "Antony",
+  "author": "Team 2",
+  "license": "ISC",
   "dependencies": {
     "body-parser": "^1.4.3",
     "express": "^4.13.4",
