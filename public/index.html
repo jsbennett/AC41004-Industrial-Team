@@ -31,6 +31,8 @@
 
     <!-- Custom styles for this template -->
     <link href="css/modern-business.css" rel="stylesheet">
+
+    <!-- wlrd3 -->
     <script src="https://cdn-webgl.wrld3d.com/wrldjs/dist/latest/wrld.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.0.1/leaflet.css" rel="stylesheet" />
   </head>
@@ -49,17 +51,22 @@
       </div>
     </nav>
 
-    <header>
-      <div style="position: relative">
-        <div id="map" style="height: 800px"></div>
-        <script>
-          var map = L.Wrld.map("map", "534aba75bfd7016e2593d59b9f8845df", {
-            center: [37.7858, -122.401],
-            zoom: 16
-          });
+    <!-- Embed wrld3d map + set camera position -->
+    <div style="position: relative">
+      <div id="map" style="height: 800px"></div>
+      <script>
+        var map = L.Wrld.map("map", "534aba75bfd7016e2593d59b9f8845df", {
+          center: [56.4981776, -3.0744827],
+          zoom: 16
+        });
+
+        setTimeout(function() {
+          map.setView([56.4981776, -3.0744827], 19, {
+            animate: false
+            });
+          }, 5000);
         </script>
       </div>
-    </header>
 
     <!-- Page Content -->
     <div class="container">
