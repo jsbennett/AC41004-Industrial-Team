@@ -1,7 +1,8 @@
 var db = require("../config/database.js");
 function getFieldDetails(res){
     //connect to database
-    //return the data for that field for that farm. 
+    //return the data for that field for that farm.
+    db.ConnectToDatabase(); 
     res.json({"message": "This is a field"});
 };
 

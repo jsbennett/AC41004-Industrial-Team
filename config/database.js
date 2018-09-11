@@ -1,5 +1,6 @@
 module.exports = {
 ConnectToDatabase : function(){
+    var mysql = require('mysql');
     var con = mysql.createConnection({
         host: "acapper.duckdns.org",
         user: "WebApplication",
