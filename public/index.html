@@ -51,7 +51,7 @@
       </div>
     </nav>
 
-    <!-- Embed wrld3d map + set camera position -->
+    <!-- Embed wrld3d map, set camera position + add POI-->
     <div style="position: relative">
       <div id="map" style="height: 800px"></div>
       <script>
@@ -59,12 +59,16 @@
           center: [56.4981776, -3.0744827],
           zoom: 16
         });
-
         setTimeout(function() {
           map.setView([56.4981776, -3.0744827], 19, {
             animate: false
             });
           }, 5000);
+        var marker = L.marker([56.4981776, -3.0744827], {
+          elevation: 260.0,
+          title: "Farm"
+        }).addTo(map);
+        marker.bindPopup("This is a farm").openPopup();
         </script>
       </div>
 
