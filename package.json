@@ -10,7 +10,8 @@
   "author": "Team 2",
   "license": "ISC",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.4.3",
