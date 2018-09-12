@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require("../config/database.js");
+var db = require('../config/database.js');
 
 function GetFieldDetails(res){
   var dbConnection = db.Connect(); 
