@@ -1,9 +1,8 @@
 module.exports = {
 
-
     Connect : function(){
-        var mysql = require('mysql');
-        var dbConnection = mysql.createConnection({
+        global.mysql = require('mysql');
+        global.dbConnection = mysql.createConnection({
             host: "acapper.duckdns.org",
             user: "WebApplication",
             password: "DatabasePassword123"
@@ -17,21 +16,44 @@ module.exports = {
     
     FindField : function(temp)
     {
-        var result;
-    var sql = require('mysql');
-   var dbConnection = sql.createConnection({
-            host: "acapper.duckdns.org",
-            user: "WebApplication",
-            password: "DatabasePassword123"
-            }); 
+    var result;
     dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
     if(err) console.log(err);
-    console.log("Success");
-    console.log(JSON.stringify(recordset));
-    result = JSON.stringify(recordset);});
+    return JSON.stringify(recordset);});
+    },
 
-    
+     FindFarm : function(temp)
+    {
+    var result;
+    dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
+    if(err) console.log(err);
+    return JSON.stringify(recordset);});
+    },
 
-        //return JSON.stringify({ a : 1 }, null, 3);
+    FindCrop : function(temp)
+    {
+    var result;
+    dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
+    if(err) console.log(err);
+    return JSON.stringify(recordset);});
+    },
+
+    FindLocation : function(temp)
+    {
+    var result;
+    dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
+    if(err) console.log(err);
+    return JSON.stringify(recordset);});
+    },
+
+    FindWeather : function(temp)
+    {
+    var result;
+    dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
+    if(err) console.log(err);
+    return JSON.stringify(recordset);});
     }
+
+
+
 };
