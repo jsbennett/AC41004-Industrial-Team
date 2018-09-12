@@ -10,7 +10,7 @@ var updater = require('./updater');
 var fakedata = new(require('./fakedata'));
 var fakedata2 = new(require('./fakedata'));
 
-var u = new updater(1000, "Starting fakedata event");
+var u = new updater(10000, "Starting fakedata event");
 u.init();
 u.on('Event',function () {
 	console.log(1);
