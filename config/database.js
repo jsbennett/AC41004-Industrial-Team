@@ -13,7 +13,11 @@ module.exports = {
                 return dbConnection; 
             });    
     },
-    
+/*
+    *
+    *Extracts all entries from the fields table and returns them as a single JSON object.
+    *    
+*/
     FindField : function(temp)
     {
     var result;
@@ -21,15 +25,23 @@ module.exports = {
     if(err) console.log(err);
     return JSON.stringify(recordset);});
     },
-
-     FindFarm : function(temp)
+/*
+    *
+    *Extracts all entries from the farm table and returns them as a single JSON object.
+    *    
+*/
+    FindFarm : function(temp)
     {
     var result;
     dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
     if(err) console.log(err);
     return JSON.stringify(recordset);});
     },
-
+/*
+    *
+    *Extracts all entries from the crops table and returns them as a single JSON object.
+    *    
+*/
     FindCrop : function(temp)
     {
     var result;
@@ -37,7 +49,11 @@ module.exports = {
     if(err) console.log(err);
     return JSON.stringify(recordset);});
     },
-
+/*
+    *
+    *Extracts all entries from the location table and returns them as a single JSON object.
+    *    
+*/
     FindLocation : function(temp)
     {
     var result;
@@ -45,7 +61,11 @@ module.exports = {
     if(err) console.log(err);
     return JSON.stringify(recordset);});
     },
-
+/*
+    *
+    *Extracts all entries from the weather table and returns them as a single JSON object.
+    *    
+*/
     FindWeather : function(temp)
     {
     var result;

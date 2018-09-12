@@ -2,30 +2,55 @@ var express = require('express');
 var router = express.Router();
 var db = require('../config/database.js');
 
+/*
+*
+*Retrieve field JSON object populated with entries from the field table.
+*
+*/
 function GetFieldDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindField(dbConnection); 
   res.send(json);
 };
 
+/*
+*
+*Retrieve farm JSON object populated with entries from the farm table.
+*
+*/
 function GetFarmDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindFarm(dbConnection); 
   res.send(json);
 };
 
+/*
+*
+*Retrieve location JSON object populated with entries from the location table.
+*
+*/
 function GetLocationDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindLocation(dbConnection); 
   res.send(json);
 };
 
+/*
+*
+*Retrieve weather JSON object populated with entries from the weather table.
+*
+*/
 function GetWeatherDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindWeather(dbConnection); 
   res.send(json);
 };
 
+/*
+*
+*Retrieve crop JSON object populated with entries from the crop table.
+*
+*/
 function GetCropDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindCrop(dbConnection); 
