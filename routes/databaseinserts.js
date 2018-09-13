@@ -4,7 +4,7 @@ var db = require('../config/database.js');
 var config = require('../config/config.js');
 var mysql = require('mysql');
 
-router.get('/', function(req, res) {
+router.get('/addFarmData', function(req, res) {
 	let connection = mysql.createConnection(config.database);
 	connection.connect(function(err) {
 		if (err) throw err;
