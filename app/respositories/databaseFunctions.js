@@ -19,7 +19,7 @@ module.exports = {
     *Extracts all entries from the farm table and returns them as a single JSON object.
     *    
     */
-    FindFarm : function()
+    FindFarm : function(dbConnection, callback)
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
             if(err) console.log(err);
@@ -31,7 +31,7 @@ module.exports = {
     *Extracts all entries from the crops table and returns them as a single JSON object.
     *    
     */
-    FindCrop : function()
+    FindCrop : function(dbConnection, callback)
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
             if(err) console.log(err);
@@ -43,7 +43,7 @@ module.exports = {
     *Extracts all entries from the location table and returns them as a single JSON object.
     *    
     */
-    FindLocation : function()
+    FindLocation : function(dbConnection, callback)
     {
         var result;
         dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
@@ -56,7 +56,7 @@ module.exports = {
     *Extracts all entries from the weather table and returns them as a single JSON object.
     *    
     */
-    FindWeather : function()
+    FindWeather : function(dbConnection, callback)
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
             if(err) console.log(err);
