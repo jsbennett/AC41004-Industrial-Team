@@ -10,15 +10,15 @@ var updater = require('./updater');
 var fakedata = new(require('./fakedata'));
 var fakedata2 = new(require('./fakedata'));
 
-var u = new updater(10000, "Starting fakedata event");
+var u = new updater(1000, "Starting fakedata event");
 u.init();
 u.on('Event',function () {
-	console.log(1);
+	/*console.log(1);
 	fakedata.makeFakeCrop();
 	fakedata.makeFakeFieldData();
 	console.log(2);
 	fakedata2.makeFakeCrop();
-	fakedata2.makeFakeFieldData();
+	fakedata2.makeFakeFieldData();*/
 });
 
 // Get port from environment and store in Express.
