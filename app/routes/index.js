@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../config/database.js');
+var dbQueries = require("../respositories/databaseFunctions.js")
 
 /*
 *
@@ -8,9 +9,11 @@ var db = require('../config/database.js');
 *
 */
 function GetFieldDetails(res){
-  var dbConnection = db.Connect(); 
-  var json = db.FindField(dbConnection); 
-  res.send(json);
+  db.Connect(function(dbConnection){
+      dbQueries.FindField(dbConnection, function(result){
+        res.send(result);
+      }); 
+  });
 };
 
 /*
@@ -55,6 +58,7 @@ function GetCropDetails(res){
   var dbConnection = db.Connect(); 
   var json = db.FindCrop(dbConnection); 
   res.send(json);
+  console.log(json);
 };
 
 
