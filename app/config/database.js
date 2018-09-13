@@ -1,3 +1,5 @@
+var config = require("../config/config.js")
+
 module.exports = {
  
     Connect : function(callback){
