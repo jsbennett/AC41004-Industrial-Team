@@ -15,6 +15,10 @@ module.exports = {
        .then(([fieldResult,farmResult]) => {
          return res.send([fieldResult, farmResult]);
        });
+       /*var t = [{id : 1, data : {data:'2', array: []}},{id : 2},{id : 3}]*/
+       // t[0]['id']
+       // t[1]
+       // t[0]['id']['data'][0][]
         //this.GetFarmDetails().then(function(result){
 
            // res.send(result);
