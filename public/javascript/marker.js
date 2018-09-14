@@ -32,7 +32,7 @@ $.ajax({
 					var lati = data[i].lat;
 					var longi = data[i].long;
 					var markerLocation = new L.LatLng(lati, longi);
-					var marker = new L.marker(markerLocation).addTo(map);
+					var marker = new L.marker(markerLocation, {icon: greenIcon}).addTo(map);
 					marker.bindPopup(customPopup, customOptions).openPopup();
 					console.log(marker);
 		}
