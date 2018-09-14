@@ -20,9 +20,9 @@ router.get('/test', function(req, res, next) {
 });
 router.get('/farmlocations', function(req, res, next) {
 	res.send([
-			 { farmid: 1, name: 'Farm 1', lat: 56.4981776, long: -3.0744827 },
-			 { farmid: 2, name: 'Farm 2', lat: 56.4970665, long: -3.0744827 },
-			 { farmid: 3, name: 'Farm 3', lat: 56.4960554, long: -3.0744827 }
+			 { farmid: 1, name: 'Farm 1', lat: 56.4981776, long: -3.0744827, grown: true },
+			 { farmid: 2, name: 'Farm 2', lat: 56.4970665, long: -3.0744827, grown: false },
+			 { farmid: 3, name: 'Farm 3', lat: 56.4960554, long: -3.0744827, grown: false }
 		 	 ])
 });
 
