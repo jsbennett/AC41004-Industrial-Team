@@ -9,7 +9,9 @@ module.exports = {
     * 
     */
     GetAllFarmDetails : function(res){
+        
         this.GetFieldDetails().then(function(result){
+            
             res.send(result);
         });
     },
