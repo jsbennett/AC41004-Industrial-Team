@@ -1,9 +1,11 @@
 block content
-	h1 #{newkey}
-	hr
-	img.className#IdName(src="https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=350" alt="Image Title")
-	h2 dean
-	p tetstlfdknndskdjfnkjdsjfks.dn k
-	ul
-		li gdgds
-		li hjbjasdhjs
+	ul.nav.nav-tabs()
+		li.nav-item
+			a.nav-link.active(href='#' id='Test' onClick="Test();") Active
+		li.nav-item
+			a.nav-link(href='#' id='Soil' onClick="Soil(this);") Soil
+		li.nav-item
+			a.nav-link(href='#') Link
+		li.nav-item
+			a.nav-link.disabled(href='#') Disabled
+

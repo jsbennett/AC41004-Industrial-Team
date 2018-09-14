@@ -24,4 +24,11 @@ router.get('/test', function(req, res, next) {
 	});
 });
 
+router.get('/soil', function(req, res, next) {
+	res.render('test', {
+		title: 'Express',
+		newkey: 'some text'
+	});
+});
+
 module.exports = router;
