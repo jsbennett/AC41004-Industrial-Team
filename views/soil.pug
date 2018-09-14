@@ -1,10 +1,11 @@
 block content
-	ul.nav.nav-tabs
-		li.nav-item
-			a.nav-link(href='/test') Test
-		li.nav-item
-			a.nav-link.active(href='#') Soil
-		li.nav-item
-			a.nav-link(href='#') Link
-		li.nav-item
-			a.nav-link.disabled(href='#') Disabled
+	div
+		ul.nav.nav-tabs
+			li.nav-item
+				a.nav-link(href='#' id='Test' onClick="Test();") Test
+			li.nav-item
+				a.nav-link.active(href='#' id='Soil' onClick="Soil();") Soil
+			li.nav-item
+				a.nav-link(href='#') Link
+			li.nav-item
+				a.nav-link.disabled(href='#') Disabled

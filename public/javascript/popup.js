@@ -1,20 +1,25 @@
-function Test() {
-	alert('popup.js');
+function AddWrapper(data) {
+	return (
+		"<div class='leaflet-popup-content' style='width: 301px'>" +
+		data +
+		'</div>'
+	);
 }
 
-function Soil(e) {
+function Test() {
+	$.ajax({
+		url: '/test',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function Soil() {
 	$.ajax({
 		url: '/soil',
 		success: function(data) {
-			var customOptions = {
-				maxWidth: '50000',
-				minWidth: '300',
-				className: 'custom'
-			};
-			marker
-				.bindPopup($(data).click(function() {})[0], customOptions)
-				.openPopup();
-			console.log('Success');
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
 	});
 }
