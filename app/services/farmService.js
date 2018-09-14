@@ -9,11 +9,16 @@ module.exports = {
     * 
     */
     GetAllFarmDetails : function(res){
-        
-        this.GetFieldDetails().then(function(result){
-            
-            res.send(result);
-        });
+        var field = this.GetFieldDetails(); 
+        var farm = this.GetFarmDetails();
+    return Promise.all([field, farm])
+       .then(([fieldResult,farmResult]) => {
+         return res.send([fieldResult, farmResult]);
+       });
+        //this.GetFarmDetails().then(function(result){
+
+           // res.send(result);
+        //});
     },
 
     /*
@@ -46,11 +51,21 @@ module.exports = {
     *
     */
     GetFarmDetails: function(res){
-        db.Connect(function(dbConnection){
-            dbQueries.FindFarm(dbConnection, function(result){
-                res.send(result);
+        return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindFarm(dbconnection).then(function(result){
+                    data = result; 
+                    //console.log(result);
+                    resolve(result);
+                });
             }); 
         });
+        //db.Connect(function(dbConnection){
+           // dbQueries.FindFarm(dbConnection, function(result){
+               //res.send(result);
+            //}); 
+        //});
         
     },
     

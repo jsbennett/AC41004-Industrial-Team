@@ -21,12 +21,16 @@ module.exports = {
     *Extracts all entries from the farm table and returns them as a single JSON object.
     *    
     */
-    FindFarm : function(dbConnection, callback)
+    FindFarm : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
-            if(err) console.log(err);
-            //callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
+                if(err) console.log(err);
+                    resolve(JSON.stringify(recordset));
+                });
         });
+            //callback(JSON.stringify(recordset));
+        //});
     },
     /*
     *
