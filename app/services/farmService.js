@@ -13,12 +13,13 @@ module.exports = {
         var farm = this.GetFarmDetails();
     return Promise.all([field, farm])
        .then(([fieldResult,farmResult]) => {
-         return res.send([fieldResult, farmResult]);
+         console.log({fieldResult,farmResult}); //its being displayed like a string but not actually sent like a string!!!!! console confirms this!
+        return res.json({fieldResult, farmResult});
        });
-       /*var t = [{id : 1, data : {data:'2', array: []}},{id : 2},{id : 3}]*/
+       /*var t = [{id : 1, data : {data:'2', array:}},{id : 2},{id : 3}]*/
        // t[0]['id']
        // t[1]
-       // t[0]['id']['data'][0][]
+       // t[0]['data']['data']
         //this.GetFarmDetails().then(function(result){
 
            // res.send(result);
