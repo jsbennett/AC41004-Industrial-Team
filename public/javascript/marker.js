@@ -10,10 +10,16 @@ setTimeout(function() {
 
 var greenIcon = L.icon({
 	iconUrl: 'images/farm_marker_green.png',
-
 	iconSize: [60, 60], // size of the icon
 	iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
 	popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+var redIcon = L.icon({
+	iconUrl: 'images/farm_marker_red.png',
+	iconSize: [60, 60],
+	iconAnchor: [30, 60],
+	popupAnchor: [-3, -76]
 });
 
 $.ajax({
@@ -32,7 +38,15 @@ $.ajax({
 					var lati = data[i].lat;
 					var longi = data[i].long;
 					var markerLocation = new L.LatLng(lati, longi);
-					var marker = new L.marker(markerLocation).addTo(map);
+					if (data[i].grown == true) {
+						var marker = new L.marker(markerLocation, {
+							icon: greenIcon
+						}).addTo(map);
+					} else if (data[i].grown == false) {
+						var marker = new L.marker(markerLocation, {
+							icon: redIcon
+						}).addTo(map);
+					}
 					marker.bindPopup(
 						$(customPopup).click(function() {})[0],
 						customOptions
