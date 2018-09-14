@@ -9,7 +9,9 @@ module.exports = {
     * 
     */
     GetAllFarmDetails : function(res){
-        
+        this.GetFieldDetails().then(function(result){
+            res.send(result);
+        });
     },
 
     /*
@@ -17,16 +19,27 @@ module.exports = {
     *Retrieve field JSON object populated with entries from the field table.
     *
     */
-    GetFieldDetails : function(res){
-        db.Connect(function(dbConnection){
-            dbQueries.FindField(dbConnection, function(result){
-            res.send(result);
+    GetFieldDetails : function(){
+       return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindField(dbconnection).then(function(result){
+                    data = result; 
+                    //console.log(result);
+                    resolve(result);
+                });
             }); 
         });
+        //db.Connect(function(dbConnection){
+            //dbQueries.FindField(dbConnection, function(result){
+            //j = result;
+                //res.send(result);
+            //}); 
+        //});
     },
 
     /*
-    *
+    
     *Retrieve farm JSON object populated with entries from the farm table.
     *
     */

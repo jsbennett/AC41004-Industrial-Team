@@ -7,11 +7,13 @@ module.exports = {
     *    
     */
     
-    FindField : function(dbConnection, callback)
+    FindField : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
-        if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
+            if(err) console.log(err);
+                resolve(JSON.stringify(recordset));
+            });
         });
     },
     /*
@@ -23,7 +25,7 @@ module.exports = {
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
             if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+            //callback(JSON.stringify(recordset));
         });
     },
     /*
@@ -35,7 +37,7 @@ module.exports = {
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
             if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+            //callback(JSON.stringify(recordset));
         });
     },
     /*
@@ -48,7 +50,7 @@ module.exports = {
         var result;
         dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
             if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+            //callback(JSON.stringify(recordset));
         });
     },
     /*
@@ -60,7 +62,7 @@ module.exports = {
     {
         dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
             if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+            //callback(JSON.stringify(recordset));
         });
     }
 
