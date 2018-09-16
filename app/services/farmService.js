@@ -1,5 +1,6 @@
 var db = require('../config/database.js');
 var dbQueries = require("../respositories/databaseFunctions.js")
+var fieldModel = require("../models/fieldModel.js");
 
 module.exports = {
 
@@ -9,21 +10,50 @@ module.exports = {
     * 
     */
     GetAllFarmDetails : function(res){
-        var field = this.GetFieldDetails(); 
-        var farm = this.GetFarmDetails();
-    return Promise.all([field, farm])
-       .then(([fieldResult,farmResult]) => {
-         console.log({fieldResult,farmResult}); //its being displayed like a string but not actually sent like a string!!!!! console confirms this!
-        return res.json({fieldResult, farmResult});
+        var fieldData = this.GetFieldDetails(); 
+        var farmData = this.GetFarmDetails();
+        var cropData = this.GetCropDetails();
+        var locationData = this.GetLocationDetails(); 
+        return Promise.all([fieldData, farmData, cropData,locationData])
+        .then(([fieldResults,farmResults,cropResults,locationResults]) => {
+            var fieldInformation = []; 
+            var fields =  JSON.parse(fieldResults);
+            //var farms = JSON.parse(farmResults); 
+            var crops = JSON.parse(cropResults);
+            var locations = JSON.parse(locationResults);
+            for (i in fields)
+            {
+                var cropName = " "; 
+                var longitude  = 0; 
+                var latitude = 0; 
+                var expectedHarvest = 0;
+                var timeToGrow = 0;
+                
+                for (j in locations)
+                {
+                    if(locations[j]["LocationID"] == fields[i]["LocationID"])
+                    {
+                        longitude = locations[j]["Longitude"]; 
+                        latitude = locations[j]["Latitude"];
+                    }
+                }
+                 
+                for (j in crops)
+                {
+                    if(crops[j]["CropID"] == fields[i]["CropID"])
+                    {
+                        timeToGrow = crops[j]["TimeToMarture"]; 
+                        cropName = crops[j]["CropName"];
+                    }
+                }
+                expectedHarvest = new Date(fields[i]["PlantDate"]); 
+                expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+                
+                var field = new fieldModel(fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
+                fieldInformation.push(field);
+            }
+         return res.json({fieldInformation});
        });
-       /*var t = [{id : 1, data : {data:'2', array:}},{id : 2},{id : 3}]*/
-       // t[0]['id']
-       // t[1]
-       // t[0]['data']['data']
-        //this.GetFarmDetails().then(function(result){
-
-           // res.send(result);
-        //});
     },
 
     /*
@@ -37,17 +67,10 @@ module.exports = {
             { 
                 dbQueries.FindField(dbconnection).then(function(result){
                     data = result; 
-                    //console.log(result);
                     resolve(result);
                 });
             }); 
         });
-        //db.Connect(function(dbConnection){
-            //dbQueries.FindField(dbConnection, function(result){
-            //j = result;
-                //res.send(result);
-            //}); 
-        //});
     },
 
     /*
@@ -61,17 +84,10 @@ module.exports = {
             { 
                 dbQueries.FindFarm(dbconnection).then(function(result){
                     data = result; 
-                    //console.log(result);
                     resolve(result);
                 });
             }); 
-        });
-        //db.Connect(function(dbConnection){
-           // dbQueries.FindFarm(dbConnection, function(result){
-               //res.send(result);
-            //}); 
-        //});
-        
+        });      
     },
     
     /*
@@ -80,9 +96,13 @@ module.exports = {
     *
     */
     GetLocationDetails: function(res){
-        db.Connect(function(dbConnection){
-            dbQueries.FindLocation(dbConnection, function(result){
-                res.send(result);
+        return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindLocation(dbconnection).then(function(result){
+                    data = result; 
+                    resolve(result);
+                });
             }); 
         });
     },
@@ -93,9 +113,13 @@ module.exports = {
     *
     */
     GetWeatherDetails: function(res){
-        db.Connect(function(dbConnection){
-            dbQueries.FindWeather(dbConnection, function(result){
-                res.send(result);
+        return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindWeather(dbconnection).then(function(result){
+                    data = result; 
+                    resolve(result);
+                });
             }); 
         });
     },
@@ -106,9 +130,13 @@ module.exports = {
     *
     */
     GetCropDetails: function(res){
-        db.Connect(function(dbConnection){
-            dbQueries.FindCrop(dbConnection, function(result){
-                res.send(result);
+        return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindCrop(dbconnection).then(function(result){
+                    data = result; 
+                    resolve(result);
+                });
             }); 
         });
     }
