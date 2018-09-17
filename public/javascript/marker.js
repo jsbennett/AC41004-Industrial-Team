@@ -32,17 +32,20 @@ $.ajax({
 		};
 
 		$.ajax({
-			url: '/farmlocations',
+			url: '/getField',
 			success: function(data) {
-				for (var i = 0; i < data.length; i++) {
-					var lati = data[i].lat;
-					var longi = data[i].long;
+				console.log(data["fields"]);
+				for (var i = 0; i < data["fields"].length; i++) {
+					var lati = data["fields"][i].locationLat;
+					var longi = data["fields"][i].locationLong;
 					var markerLocation = new L.LatLng(lati, longi);
-					if (data[i].grown == true) {
+					var todaysDate = new Date();
+					var marker = new L.marker(markerLocation, {icon: greenIcon}).addTo(map);
+					  if (data["fields"][i].expectedHarvest == todaysDate) {
 						var marker = new L.marker(markerLocation, {
 							icon: greenIcon
 						}).addTo(map);
-					} else if (data[i].grown == false) {
+					} else {
 						var marker = new L.marker(markerLocation, {
 							icon: redIcon
 						}).addTo(map);
@@ -51,8 +54,8 @@ $.ajax({
 						$(customPopup).click(function() {})[0],
 						customOptions
 					);
-				}
+				// }
 			}
-		});
-	}
-});
+		}
+	});
+}});
