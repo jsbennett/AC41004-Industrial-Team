@@ -13,7 +13,6 @@ module.exports = {
             dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
             if(err) console.log(err);
                 resolve(JSON.stringify(recordset));
-                //resolve({field: recordset});
             });
         });
     },

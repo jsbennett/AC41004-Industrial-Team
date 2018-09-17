@@ -1,5 +1,6 @@
-function fieldModel(farmID, locationLong, locationLat, cropName, datePlanted, expectedHarvest, timeToMature, phLevel, moistureLevel)//consider using a dto instead
+function fieldModel(farmFieldID, farmID, locationLong, locationLat, cropName, datePlanted, expectedHarvest, timeToMature, phLevel, moistureLevel)//consider using a dto instead
 {
+    this.farmFieldID = farmFieldID; 
     this.farmID = farmID; 
     this.locationLong = locationLong;
     this.locationLat = locationLat;

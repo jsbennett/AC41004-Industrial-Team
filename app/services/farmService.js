@@ -21,6 +21,7 @@ module.exports = {
             //var farms = JSON.parse(farmResults); 
             var crops = JSON.parse(cropResults);
             var locations = JSON.parse(locationResults);
+            
             for (i in fields)
             {
                 var cropName = " "; 
@@ -49,10 +50,10 @@ module.exports = {
                 expectedHarvest = new Date(fields[i]["PlantDate"]); 
                 expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
                 
-                var field = new fieldModel(fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
+                var field = new fieldModel(fields[i]["FarmFieldID"], fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
                 fieldInformation.push(field);
             }
-         return res.json({fieldInformation});
+         return res.json({field: fieldInformation});
        });
     },
 
