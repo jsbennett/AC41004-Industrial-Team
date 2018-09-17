@@ -1,6 +1,7 @@
 var db = require('../config/database.js');
 var dbQueries = require("../respositories/databaseFunctions.js")
 var fieldModel = require("../models/fieldModel.js");
+//var farmModel = require("../models/farmModel.js");
 
 module.exports = {
 
@@ -17,11 +18,19 @@ module.exports = {
         return Promise.all([fieldData, farmData, cropData,locationData])
         .then(([fieldResults,farmResults,cropResults,locationResults]) => {
             var fieldInformation = []; 
+            var farmInformation = []; 
             var fields =  JSON.parse(fieldResults);
-            //var farms = JSON.parse(farmResults); 
+            var farms = JSON.parse(farmResults); 
             var crops = JSON.parse(cropResults);
             var locations = JSON.parse(locationResults);
             
+            for(i in farms)
+            {
+                //avg rainfall
+                //temperature
+                //crops harvested 
+            }
+
             for (i in fields)
             {
                 var cropName = " "; 
@@ -53,7 +62,7 @@ module.exports = {
                 var field = new fieldModel(fields[i]["FarmFieldID"], fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
                 fieldInformation.push(field);
             }
-         return res.json({field: fieldInformation});
+         return res.json({fields: fieldInformation});
        });
     },
 
