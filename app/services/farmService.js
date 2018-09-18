@@ -71,8 +71,10 @@ module.exports = {
         var markerData = this.GetMarkers(); 
         return Promise.all([markerData])
         .then(([markerResults]) => {
-            var markers = JSON.parse(markerResults);
+            var originalMarkers = JSON.parse(markerResults);
+            var markers = originalMarkers[0];
             console.log(markers);
+            return res.json({markers: markers});
         });
     },
 
