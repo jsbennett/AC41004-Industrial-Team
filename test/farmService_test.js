@@ -1,4 +1,4 @@
-/*  'use strict';
+'use strict';
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
@@ -20,24 +20,31 @@ describe('/GET', ()=>{
 	});
 });
 
-describe('/GET farm details', ()=>{
-	it('returns 1 if the farm details GET call returns an object', (done) => {
+describe('/GET farm details', function(){
+	it('returns 1 if the field details GET call returns populated object', (done) => {
 		chai.request('http://localhost:3000')
 		.get('/getFarm')
 		.end((err, res) => {
-			res.should.have.status(200);
-			res.body.should.be.a('Object');
-			done();
+			try{
+			res.body.should.be.a('object');
+			res.body.should.have.property('farms');
+			res.body.should.have.property('fields');
+			res.body.should.have.property('crops');
+			done();}
+			catch(e){
+				done(e);
+			}
+			
 		});
 	});
 });
 
+/*
 describe('/GET field details', ()=>{
-	it('returns 1 if the field details GET call returns an object', (done) => {
+	it('returns 1 if the farm details GET call returns an object', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/getField')
+		.get('/getFarm')
 		.end((err, res) => {
-			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			done();
 		});
@@ -49,7 +56,6 @@ describe('/GET location details', ()=>{
 		chai.request('http://localhost:3000')
 		.get('/getLocation')
 		.end((err, res) => {
-			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			done();
 		});
@@ -61,7 +67,6 @@ describe('/GET weather details', ()=>{
 		chai.request('http://localhost:3000')
 		.get('/getWeather')
 		.end((err, res) => {
-			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			done();
 		});
@@ -73,11 +78,9 @@ describe('/GET crop details', ()=>{
 		chai.request('http://localhost:3000')
 		.get('/getCrop')
 		.end((err, res) => {
-			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			done();
 		});
 	});
 });
-
 */
