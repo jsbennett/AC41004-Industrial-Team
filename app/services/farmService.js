@@ -10,23 +10,26 @@ module.exports = {
     * 
     */
 	GetAllFarmDetails: function(res) {
-		var fieldData = this.GetFieldDetails();
+		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+
+		var fieldData = this.GetFieldDetails('2018-09-12', '2018-09-12');
 		var farmData = this.GetFarmDetails();
-		var cropData = this.GetCropDetails();
 		var locationData = this.GetLocationDetails();
-		return Promise.all([fieldData, farmData, cropData, locationData]).then(
-			([fieldResults, farmResults, cropResults, locationResults]) => {
+		var weatherData = this.GetWeatherDetails();
+		return Promise.all([
+			fieldData,
+			farmData,
+			locationData,
+			weatherData
+		]).then(
+			([fieldResults, farmResults, locationResults, weatherResults]) => {
 				var fieldInformation = [];
 				var farmInformation = [];
 				var fields = JSON.parse(fieldResults);
 				var farms = JSON.parse(farmResults);
-				var crops = JSON.parse(cropResults);
 				var locations = JSON.parse(locationResults);
-				for (i in farms) {
-					//avg rainfall
-					//temperature
-					//crops harvested
-				}
+				var weather = JSON.parse(weatherResults);
+				console.log(weather);
 
 				for (i in fields[0]) {
 					var cropName = ' ';
@@ -45,12 +48,9 @@ module.exports = {
 						}
 					}
 
-					for (j in crops) {
-						if (crops[j]['CropID'] == fields[0][i]['CropID']) {
-							timeToGrow = crops[j]['TimeToMarture'];
-							cropName = crops[j]['CropName'];
-						}
-					}
+					timeToGrow = fields[0][i]['TimeToMature'];
+					cropName = fields[0][i]['CropName'];
+
 					expectedHarvest = new Date(fields[0][i]['PlantDate']);
 					expectedHarvest.setDate(
 						expectedHarvest.getDate() + timeToGrow
@@ -70,22 +70,50 @@ module.exports = {
 					);
 					fieldInformation.push(field);
 				}
+
+				for (i in farms) {
+					//avg rainfall
+					//temperature
+					//crops harvested
+				}
+
 				return res.json({ fields: fieldInformation });
 			}
 		);
 	},
 
+	GetAllMarkers: function(res) {
+		var markerData = this.GetMarkers();
+		return Promise.all([markerData]).then(([markerResults]) => {
+			var originalMarkers = JSON.parse(markerResults);
+			var markers = originalMarkers[0];
+			console.log(markers);
+			return res.json({ markers: markers });
+		});
+	},
+
+	GetMarkers: function() {
+		return new Promise(function(resolve, reject) {
+			db.Connect().then(function(dbconnection) {
+				dbQueries.FindMarkers(dbconnection).then(function(result) {
+					resolve(result);
+				});
+			});
+		});
+	},
 	/*
     *
     *Retrieve field JSON object populated with entries from the field table.
     *
     */
-	GetFieldDetails: function() {
+	GetFieldDetails: function(startDate, endDate) {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
-				dbQueries.FindField(dbconnection).then(function(result) {
-					resolve(result);
-				});
+				dbQueries
+					.FindField(dbconnection, startDate, endDate)
+					.then(function(result) {
+						resolve(result);
+					});
 			});
 		});
 	},
