@@ -1,9 +1,9 @@
 var map = L.Wrld.map('map', '534aba75bfd7016e2593d59b9f8845df', {
-	center: [56.4981776, -3.0744827],
+	center: [56.4941, -2.82058],
 	zoom: 16
 });
 setTimeout(function() {
-	map.setView([56.4981776, -3.0744827], 17, {
+	map.setView([56.4941, -2.82058], 17, {
 		animate: false
 	});
 }, 5000);
@@ -34,14 +34,16 @@ $.ajax({
 		$.ajax({
 			url: '/getField',
 			success: function(data) {
-				console.log(data["fields"]);
-				for (var i = 0; i < data["fields"].length; i++) {
-					var lati = data["fields"][i].locationLat;
-					var longi = data["fields"][i].locationLong;
+				console.log(data['fields']);
+				for (var i = 0; i < data['fields'].length; i++) {
+					var lati = data['fields'][i].locationLat;
+					var longi = data['fields'][i].locationLong;
 					var markerLocation = new L.LatLng(lati, longi);
 					var todaysDate = new Date();
-					var marker = new L.marker(markerLocation, {icon: greenIcon}).addTo(map);
-					  if (data["fields"][i].expectedHarvest == todaysDate) {
+					var marker = new L.marker(markerLocation, {
+						icon: greenIcon
+					}).addTo(map);
+					if (data['fields'][i].expectedHarvest == todaysDate) {
 						var marker = new L.marker(markerLocation, {
 							icon: greenIcon
 						}).addTo(map);
@@ -54,8 +56,9 @@ $.ajax({
 						$(customPopup).click(function() {})[0],
 						customOptions
 					);
-				// }
+					// }
+				}
 			}
-		}
-	});
-}});
+		});
+	}
+});
