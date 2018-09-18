@@ -1,8 +1,28 @@
+var request = require('request');
+
 function FakeData() {
 	this.ph = Math.floor(Math.random() * 14);
 	this.moisture = Math.floor(Math.random() * 100);
 	this.phAlpha = 0.05;
 	this.moistureAlpha = 0.1;
+
+	this.makeData = function() {
+		request.get(
+			{
+				headers: { 'content-type': 'application/json' },
+				url: 'http://localhost:3000/getLocation'
+			},
+			(error, response, body) => {
+				if (error) {
+					return console.dir(error);
+				}
+				var json = JSON.parse(body);
+				for (let i = 0; i < json.length; i++) {
+					console.log(json[i]);
+				}
+			}
+		);
+	};
 
 	this.makeFakeCrop = function() {
 		console.log('Fake Crop');
