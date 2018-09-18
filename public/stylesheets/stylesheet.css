@@ -27,3 +27,26 @@ body {
 .portfolio-item {
   margin-bottom: 30px;
 }
+
+h1 {
+  text-align: center;
+  font-size: 14;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+img {
+  align-items: center;
+}

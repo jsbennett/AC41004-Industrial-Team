@@ -2,9 +2,22 @@ var express = require('express');
 var router = express.Router();
 var farmService = require('../services/farmService.js');
 
-/* GET home page. */
+router.get('/field', function(req, res, next) {
+	res.render('field');
+});
+
+router.get('/farm', function(req, res, next) {
+	res.render('farm');
+});
+
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
+	res.render('index', {
+		title: 'FRM3D'
+	});
+});
+
+router.get('/soil', function(req, res, next) {
+	res.render('soil');
 });
 
 router.get('/api/getMarkers', function(req, res, next) {
