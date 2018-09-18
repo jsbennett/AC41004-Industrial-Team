@@ -8,15 +8,12 @@ var http = require('http');
 var path = require('path');
 var updater = require('../app/services/updater');
 var fakedata = new(require('../app/services/fakeData'));
-var fakedata2 = new(require('../app/services/fakeData'));
 
-var u = new updater(5000, "Starting fakedata event");
+var u = new updater(2500, "Starting fakedata event");
 u.init();
+fakedata.init();
 u.on('Event',function () {
-	console.log(1);
 	fakedata.makeData();
-	console.log(2);
-	fakedata2.makeData();
 });
 
 // Get port from environment and store in Express.

@@ -82,12 +82,12 @@ module.exports = {
 		);
 	},
 
-	GetAllMarkers: function(res) {
+	GetAllMarkers: function() {
 		var markerData = this.GetMarkers();
 		return Promise.all([markerData]).then(([markerResults]) => {
 			var originalMarkers = JSON.parse(markerResults);
 			var markers = originalMarkers[0];
-			return res.json({ markers: markers });
+			return { markers: markers };
 		});
 	},
 

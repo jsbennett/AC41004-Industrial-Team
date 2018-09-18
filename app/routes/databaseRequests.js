@@ -3,7 +3,9 @@ var router = express.Router();
 var farmService = require('../services/farmService.js');
 
 router.get('/getMarkers', function(req, res, next) {
-	farmService.GetAllMarkers(res);
+	farmService.GetAllMarkers().then(function(data) {
+		res.json(data);
+	});
 });
 
 router.get('/getField', function(req, res, next) {

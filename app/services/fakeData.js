@@ -1,37 +1,53 @@
-var request = require('request');
+var farmService = require('./farmService');
 
 function FakeData() {
 	this.ph = Math.floor(Math.random() * 14);
 	this.moisture = Math.floor(Math.random() * 100);
 	this.phAlpha = 0.05;
 	this.moistureAlpha = 0.1;
+	this.markers;
 
-	this.makeData = function() {
-		request.get(
-			{
-				headers: { 'content-type': 'application/json' },
-				url: 'http://localhost:3000/api/getMarkers'
-			},
-			(error, response, body) => {
-				if (error) {
-					return console.dir(error);
-				}
-				var json = JSON.parse(body);
-				for (let i = 0; i < json.length; i++) {
-					console.log(json[i]);
-				}
-			}
-		);
+	this.init = function() {
+		farmService.GetAllMarkers().then(function(data) {
+			markers = data.markers;
+			console.log(markers);
+		});
 	};
 
-	this.makeFakeCrop = function() {
-		console.log('Fake Crop');
-		var crops = ['Potatoes', 'Wheat', 'Corn'];
-		console.log(crops[Math.floor(Math.random() * crops.length)]);
+	this.makeData = function() {
+		for (var i = 0; i < markers.length; i++) {
+			if (markers[i].Type == 'Field') {
+				this.makeFakeFieldData();
+			} else {
+				this.makeFakeWeatherData();
+			}
+		}
+	};
+
+	this.makeFakeWeatherData = function() {
+		console.log('Fake Weather Data');
+		//WeatherID
+		//RecordDate
+		//Season
+		//Temperature
+		//Weathertype
+		//Humidity
+		//WindStrength
+		//FarmID
+		//CurrentTime
 	};
 
 	this.makeFakeFieldData = function() {
 		console.log('Fake Field Data');
+		//ID
+		//FarmFieldID
+		//PHLevel
+		//MoisturePercent
+		//CropID
+		//LocationID
+		//PlantDate
+		//RecordDate
+		//RecordTime
 		console.log(
 			'PH Level ' +
 				this.smoothRandom(this.phAlpha, this.ph) +
