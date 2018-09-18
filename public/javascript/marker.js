@@ -23,42 +23,49 @@ var redIcon = L.icon({
 });
 
 $.ajax({
-	url: '/test',
-	success: function(customPopup) {
-		var customOptions = {
-			maxWidth: '50000',
-			minWidth: '300',
-			className: 'custom'
-		};
+	url: '/api/getMarkers',
+	success: function(data) {
+		for (var i = 0; i < data['markers'].length; i++) {
+			var lati = data['markers'][i].Latitude;
+			var longi = data['markers'][i].Longitude;
+			var markerLocation = new L.LatLng(lati, longi);
+			var todaysDate = new Date();
+			var customOptions = {
+				maxWidth: '50000',
+				minWidth: '300',
+				className: 'custom'
+			};
 
-		$.ajax({
-			url: '/getField',
-			success: function(data) {
-				console.log(data['fields']);
-				for (var i = 0; i < data['fields'].length; i++) {
-					var lati = data['fields'][i].locationLat;
-					var longi = data['fields'][i].locationLong;
-					var markerLocation = new L.LatLng(lati, longi);
-					var todaysDate = new Date();
-					var marker = new L.marker(markerLocation, {
-						icon: greenIcon
-					}).addTo(map);
-					if (data['fields'][i].expectedHarvest == todaysDate) {
-						var marker = new L.marker(markerLocation, {
+			if (data['markers'][i].Type == 'Farm') {
+				//This marker is a farm
+				$.ajax({
+					url: '/farm',
+					location: markerLocation,
+					customOptions,
+					success: function(customPopup) {
+						var marker = new L.marker(this.location, {
 							icon: greenIcon
 						}).addTo(map);
-					} else {
-						var marker = new L.marker(markerLocation, {
+						marker.bindPopup(customPopup, customOptions);
+					}
+				});
+			} else {
+				//This marker is a field
+				$.ajax({
+					url: '/field',
+					location: markerLocation,
+					customOptions,
+					success: function(customPopup) {
+						var marker = new L.marker(this.location, {
 							icon: redIcon
 						}).addTo(map);
+						marker.bindPopup(
+							$(customPopup).click(function() {})[0],
+							customOptions
+						);
 					}
-					marker.bindPopup(
-						$(customPopup).click(function() {})[0],
-						customOptions
-					);
-					// }
-				}
+				});
 			}
-		});
+		}
 	}
 });
