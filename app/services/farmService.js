@@ -1,7 +1,7 @@
 var db = require('../config/database.js');
 var dbQueries = require("../respositories/databaseFunctions.js")
 var fieldModel = require("../models/fieldModel.js");
-//var farmModel = require("../models/farmModel.js");
+var farmModel = require("../models/farmModel.js");
 
 module.exports = {
 
@@ -23,7 +23,6 @@ module.exports = {
             var farms = JSON.parse(farmResults); 
             var crops = JSON.parse(cropResults);
             var locations = JSON.parse(locationResults);
-            
             for(i in farms)
             {
                 //avg rainfall
@@ -31,7 +30,7 @@ module.exports = {
                 //crops harvested 
             }
 
-            for (i in fields)
+            for (i in fields[0])
             {
                 var cropName = " "; 
                 var longitude  = 0; 
@@ -41,7 +40,7 @@ module.exports = {
                 
                 for (j in locations)
                 {
-                    if(locations[j]["LocationID"] == fields[i]["LocationID"])
+                    if(locations[j]["LocationID"] == fields[0][i]["LocationID"])
                     {
                         longitude = locations[j]["Longitude"]; 
                         latitude = locations[j]["Latitude"];
@@ -50,16 +49,16 @@ module.exports = {
                  
                 for (j in crops)
                 {
-                    if(crops[j]["CropID"] == fields[i]["CropID"])
+                    if(crops[j]["CropID"] == fields[0][i]["CropID"])
                     {
                         timeToGrow = crops[j]["TimeToMarture"]; 
                         cropName = crops[j]["CropName"];
                     }
                 }
-                expectedHarvest = new Date(fields[i]["PlantDate"]); 
+                expectedHarvest = new Date(fields[0][i]["PlantDate"]); 
                 expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
                 
-                var field = new fieldModel(fields[i]["FarmFieldID"], fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
+                var field = new fieldModel(fields[0][i]["FarmFieldID"], fields[0][i]["FarmID"], longitude, latitude, cropName, fields[0][i]["PlantDate"], expectedHarvest, timeToGrow, fields[0][i]["PHLevel"], fields[0][i]["MoisturePercent"]);
                 fieldInformation.push(field);
             }
          return res.json({fields: fieldInformation});

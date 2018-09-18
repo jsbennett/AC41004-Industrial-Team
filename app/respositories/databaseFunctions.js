@@ -10,7 +10,7 @@ module.exports = {
     FindField : function(dbConnection)
     {
         return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
+            dbConnection.query('CALL GetDailyFarmDetails(?, ?)',['2018-09-12', '00:00:00'], function(err,recordset){
             if(err) console.log(err);
                 resolve(JSON.stringify(recordset));
             });
