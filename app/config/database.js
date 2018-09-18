@@ -1,19 +1,21 @@
 var config = require("../config/config.js")
-
 module.exports = {
  
-    Connect : function(callback){
-        var mysql = require('mysql');
-        var dbConnection = mysql.createConnection({
-            host: "acapper.duckdns.org",
-            user: "WebApplication",
-            password: "DatabasePassword123"
+    Connect : function(){
+        return new Promise(function(resolve,reject)
+        {
+            var mysql = require('mysql');
+            var dbConnection = mysql.createConnection({
+                host: "acapper.duckdns.org",
+                user: "WebApplication",
+                password: "DatabasePassword123",
+                database : "IndustrialProject"
             }); 
-       dbConnection.connect(function(err) {
-            if (err) throw err;
-            callback(dbConnection);
-                console.log("Successfully connected to db");
-            }); 
-        return dbConnection;    
+            dbConnection.connect(function(err) {
+                if (err) throw err;
+                    console.log("Successfully connected to db");
+                }); 
+            resolve(dbConnection);  
+    });  
     }
 };

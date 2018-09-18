@@ -7,11 +7,13 @@ module.exports = {
     *    
     */
     
-    FindField : function(dbConnection, callback)
+    FindField : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
-        if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('CALL GetDailyFarmDetails(?, ?)',['2018-09-12', '00:00:00'], function(err,recordset){
+            if(err) console.log(err);
+                resolve(JSON.stringify(recordset));
+            });
         });
     },
     /*
@@ -19,11 +21,13 @@ module.exports = {
     *Extracts all entries from the farm table and returns them as a single JSON object.
     *    
     */
-    FindFarm : function()
+    FindFarm : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
-            if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
+                if(err) console.log(err);
+                    resolve(JSON.stringify(recordset));
+                });
         });
     },
     /*
@@ -31,11 +35,13 @@ module.exports = {
     *Extracts all entries from the crops table and returns them as a single JSON object.
     *    
     */
-    FindCrop : function()
+    FindCrop : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
-            if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
+                if(err) console.log(err);
+                    resolve(JSON.stringify(recordset));
+            });
         });
     },
     /*
@@ -43,12 +49,13 @@ module.exports = {
     *Extracts all entries from the location table and returns them as a single JSON object.
     *    
     */
-    FindLocation : function()
+    FindLocation : function(dbConnection)
     {
-        var result;
-        dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
-            if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
+                if(err) console.log(err);
+                    resolve(JSON.stringify(recordset));
+            });
         });
     },
     /*
@@ -56,11 +63,13 @@ module.exports = {
     *Extracts all entries from the weather table and returns them as a single JSON object.
     *    
     */
-    FindWeather : function()
+    FindWeather : function(dbConnection)
     {
-        dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
-            if(err) console.log(err);
-            callback(JSON.stringify(recordset));
+        return new Promise(function(resolve, reject){
+            dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
+                if(err) console.log(err);
+                    resolve(JSON.stringify(recordset));
+            });
         });
     }
 

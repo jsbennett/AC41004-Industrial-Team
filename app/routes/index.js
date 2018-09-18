@@ -1,66 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../config/database.js');
-var dbQueries = require("../respositories/databaseFunctions.js")
-
-/*
-*
-*Retrieve field JSON object populated with entries from the field table.
-*
-*/
-function GetFieldDetails(res){
-  db.Connect(function(dbConnection){
-      dbQueries.FindField(dbConnection, function(result){
-        res.send(result);
-      }); 
-  });
-};
-
-/*
-*
-*Retrieve farm JSON object populated with entries from the farm table.
-*
-*/
-function GetFarmDetails(res){
-  var dbConnection = db.Connect(); 
-  var json = db.FindFarm(dbConnection); 
-  res.send(json);
-};
-
-/*
-*
-*Retrieve location JSON object populated with entries from the location table.
-*
-*/
-function GetLocationDetails(res){
-  var dbConnection = db.Connect(); 
-  var json = db.FindLocation(dbConnection); 
-  res.send(json);
-};
-
-/*
-*
-*Retrieve weather JSON object populated with entries from the weather table.
-*
-*/
-function GetWeatherDetails(res){
-  var dbConnection = db.Connect(); 
-  var json = db.FindWeather(dbConnection); 
-  res.send(json);
-};
-
-/*
-*
-*Retrieve crop JSON object populated with entries from the crop table.
-*
-*/
-function GetCropDetails(res){
-  var dbConnection = db.Connect(); 
-  var json = db.FindCrop(dbConnection); 
-  res.send(json);
-  console.log(json);
-};
-
+var farmService = require("../services/farmService.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -68,23 +8,23 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/getField', function (req,res,next) {
-        GetFieldDetails(res); 
+    farmService.GetAllFarmDetails(res);  
 });
 
 router.get('/getFarm', function (req,res,next) {
-        GetFarmDetails(res); 
+  farmService.GetFarmDetails(res); 
 }); 
 
 router.get('/getLocation', function (req,res,next) {
-        GetLocationDetails(res); 
+  farmService.GetLocationDetails(res); 
 }); 
 
 router.get('/getWeather', function (req,res,next) {
-        GetWeatherDetails(res); 
+  farmService.GetWeatherDetails(res); 
 }); 
 
 router.get('/getCrop', function (req,res,next) {
-        GetCropDetails(res); 
+  farmService.GetCropDetails(res); 
 });  
 
 module.exports = router;
