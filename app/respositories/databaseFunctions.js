@@ -1,16 +1,25 @@
 
 module.exports = {
 
+    FindMarkers : function(dbConnection)
+    {
+        return new Promise(function(resolve, reject){
+            dbConnection.query('CALL AllMarkers()', function(err,recordset){
+            if(err) console.log(err);
+            console.log(JSON.stringify(recordset));
+                resolve(JSON.stringify(recordset));
+            });
+        });
+    },
     /*
     *
     *Extracts all entries from the fields table and returns them as a single JSON object.
     *    
     */
-    
-    FindField : function(dbConnection)
+    FindField : function(dbConnection, startDate, EndDate)
     {
         return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Farmfield', function(err,recordset){
+            dbConnection.query('CALL GetDailyFarmFieldsDetails(?, ?)',[startDate, EndDate], function(err,recordset){
             if(err) console.log(err);
                 resolve(JSON.stringify(recordset));
             });

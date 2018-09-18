@@ -1,7 +1,7 @@
 var db = require('../config/database.js');
 var dbQueries = require("../respositories/databaseFunctions.js")
 var fieldModel = require("../models/fieldModel.js");
-//var farmModel = require("../models/farmModel.js");
+var farmModel = require("../models/farmModel.js");
 
 module.exports = {
 
@@ -11,27 +11,23 @@ module.exports = {
     * 
     */
     GetAllFarmDetails : function(res){
-        var fieldData = this.GetFieldDetails(); 
+        var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object 
+
+        var fieldData = this.GetFieldDetails('2018-09-12', '2018-09-12'); 
         var farmData = this.GetFarmDetails();
-        var cropData = this.GetCropDetails();
         var locationData = this.GetLocationDetails(); 
-        return Promise.all([fieldData, farmData, cropData,locationData])
-        .then(([fieldResults,farmResults,cropResults,locationResults]) => {
+        var weatherData = this.GetWeatherDetails(); 
+        return Promise.all([fieldData, farmData, locationData, weatherData])
+        .then(([fieldResults,farmResults,locationResults, weatherResults]) => {
             var fieldInformation = []; 
             var farmInformation = []; 
             var fields =  JSON.parse(fieldResults);
             var farms = JSON.parse(farmResults); 
-            var crops = JSON.parse(cropResults);
             var locations = JSON.parse(locationResults);
-            
-            for(i in farms)
-            {
-                //avg rainfall
-                //temperature
-                //crops harvested 
-            }
-
-            for (i in fields)
+            var weather = JSON.parse(weatherResults);
+            console.log(weather); 
+           
+            for (i in fields[0])
             {
                 var cropName = " "; 
                 var longitude  = 0; 
@@ -41,42 +37,68 @@ module.exports = {
                 
                 for (j in locations)
                 {
-                    if(locations[j]["LocationID"] == fields[i]["LocationID"])
+                    if(locations[j]["LocationID"] == fields[0][i]["LocationID"])
                     {
                         longitude = locations[j]["Longitude"]; 
                         latitude = locations[j]["Latitude"];
                     }
                 }
                  
-                for (j in crops)
-                {
-                    if(crops[j]["CropID"] == fields[i]["CropID"])
-                    {
-                        timeToGrow = crops[j]["TimeToMarture"]; 
-                        cropName = crops[j]["CropName"];
-                    }
-                }
-                expectedHarvest = new Date(fields[i]["PlantDate"]); 
+                timeToGrow = fields[0][i]["TimeToMature"]; 
+                cropName = fields[0][i]["CropName"];
+                
+                expectedHarvest = new Date(fields[0][i]["PlantDate"]); 
                 expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
                 
-                var field = new fieldModel(fields[i]["FarmFieldID"], fields[i]["FarmID"], longitude, latitude, cropName, fields[i]["PlantDate"], expectedHarvest, timeToGrow, fields[i]["PHLevel"], fields[i]["MoisturePercent"]);
+                var field = new fieldModel(fields[0][i]["FarmFieldID"], fields[0][i]["FarmID"], longitude, latitude, cropName, fields[0][i]["PlantDate"], expectedHarvest, timeToGrow, fields[0][i]["PHLevel"], fields[0][i]["MoisturePercent"]);
                 fieldInformation.push(field);
             }
+            
+            for(i in farms)
+            {
+                
+                //avg rainfall
+                //temperature
+                //crops harvested 
+            }
+
          return res.json({fields: fieldInformation});
        });
     },
 
+    GetAllMarkers : function(res)
+    {
+        var markerData = this.GetMarkers(); 
+        return Promise.all([markerData])
+        .then(([markerResults]) => {
+            var originalMarkers = JSON.parse(markerResults);
+            var markers = originalMarkers[0];
+            console.log(markers);
+            return res.json({markers: markers});
+        });
+    },
+
+    GetMarkers : function()
+    {
+        return new Promise(function(resolve, reject){
+            db.Connect().then(function(dbconnection)
+            { 
+                dbQueries.FindMarkers(dbconnection).then(function(result){
+                    resolve(result);
+                });
+            }); 
+        });
+    },
     /*
     *
     *Retrieve field JSON object populated with entries from the field table.
     *
     */
-    GetFieldDetails : function(){
+    GetFieldDetails : function(startDate, endDate){
        return new Promise(function(resolve, reject){
             db.Connect().then(function(dbconnection)
             { 
-                dbQueries.FindField(dbconnection).then(function(result){
-                    data = result; 
+                dbQueries.FindField(dbconnection, startDate, endDate).then(function(result){
                     resolve(result);
                 });
             }); 
@@ -93,7 +115,6 @@ module.exports = {
             db.Connect().then(function(dbconnection)
             { 
                 dbQueries.FindFarm(dbconnection).then(function(result){
-                    data = result; 
                     resolve(result);
                 });
             }); 
@@ -110,7 +131,6 @@ module.exports = {
             db.Connect().then(function(dbconnection)
             { 
                 dbQueries.FindLocation(dbconnection).then(function(result){
-                    data = result; 
                     resolve(result);
                 });
             }); 
@@ -127,7 +147,6 @@ module.exports = {
             db.Connect().then(function(dbconnection)
             { 
                 dbQueries.FindWeather(dbconnection).then(function(result){
-                    data = result; 
                     resolve(result);
                 });
             }); 
@@ -144,7 +163,6 @@ module.exports = {
             db.Connect().then(function(dbconnection)
             { 
                 dbQueries.FindCrop(dbconnection).then(function(result){
-                    data = result; 
                     resolve(result);
                 });
             }); 

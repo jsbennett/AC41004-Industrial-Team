@@ -8,7 +8,8 @@ module.exports = {
             var dbConnection = mysql.createConnection({
                 host: "acapper.duckdns.org",
                 user: "WebApplication",
-                password: "DatabasePassword123"
+                password: "DatabasePassword123",
+                database : "IndustrialProject"
             }); 
             dbConnection.connect(function(err) {
                 if (err) throw err;

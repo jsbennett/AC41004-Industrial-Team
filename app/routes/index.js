@@ -47,24 +47,24 @@ router.get('/soil', function(req, res, next) {
 	});
 });
 
-router.get('/getField', function (req,res,next) {
-    farmService.GetAllFarmDetails(res);  
+router.get('/api/getMarkers', function (req,res,next) {
+  farmService.GetAllMarkers(res);  
 });
 
-router.get('/getFarm', function (req,res,next) {
+router.get('/api/getField', function (req,res,next) {
+    farmService.GetAllMarkers(res);  
+});
+
+router.get('/api/getFarmSummary', function (req,res,next) {
+  farmService.GetFarmDetails(res); 
+}); 
+
+router.get('/api/getFarmAnalysis', function (req,res,next) {
   farmService.GetFarmDetails(res); 
 }); 
 
 router.get('/getLocation', function (req,res,next) {
   farmService.GetLocationDetails(res); 
-}); 
-
-router.get('/getWeather', function (req,res,next) {
-  farmService.GetWeatherDetails(res); 
-}); 
-
-router.get('/getCrop', function (req,res,next) {
-  farmService.GetCropDetails(res); 
 });  
 
 module.exports = router;

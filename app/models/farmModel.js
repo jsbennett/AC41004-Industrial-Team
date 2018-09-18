@@ -1,4 +1,4 @@
-function farmdModel(farmFieldID)
+function farmModel(farmFieldID)
 {
 
 };
