@@ -1,85 +1,91 @@
-
 module.exports = {
-
-    FindMarkers : function(dbConnection)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('CALL AllMarkers()', function(err,recordset){
-            if(err) console.log(err);
-            console.log(JSON.stringify(recordset));
-                resolve(JSON.stringify(recordset));
-            });
-        });
-    },
-    /*
+	FindMarkers: function(dbConnection) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query('CALL AllMarkers()', function(err, recordset) {
+				if (err) console.log(err);
+				resolve(JSON.stringify(recordset));
+			});
+		});
+	},
+	/*
     *
     *Extracts all entries from the fields table and returns them as a single JSON object.
     *    
     */
-    FindField : function(dbConnection, startDate, EndDate)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('CALL GetDailyFarmFieldsDetails(?, ?)',[startDate, EndDate], function(err,recordset){
-            if(err) console.log(err);
-                resolve(JSON.stringify(recordset));
-            });
-        });
-    },
-    /*
+	FindField: function(dbConnection, startDate, EndDate) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query(
+				'CALL GetDailyFarmFieldsDetails(?, ?)',
+				[startDate, EndDate],
+				function(err, recordset) {
+					if (err) console.log(err);
+					resolve(JSON.stringify(recordset));
+				}
+			);
+		});
+	},
+	/*
     *
     *Extracts all entries from the farm table and returns them as a single JSON object.
     *    
     */
-    FindFarm : function(dbConnection)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(err,recordset){
-                if(err) console.log(err);
-                    resolve(JSON.stringify(recordset));
-                });
-        });
-    },
-    /*
+	FindFarm: function(dbConnection) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(
+				err,
+				recordset
+			) {
+				if (err) console.log(err);
+				resolve(JSON.stringify(recordset));
+			});
+		});
+	},
+	/*
     *
     *Extracts all entries from the crops table and returns them as a single JSON object.
     *    
     */
-    FindCrop : function(dbConnection)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(err,recordset){
-                if(err) console.log(err);
-                    resolve(JSON.stringify(recordset));
-            });
-        });
-    },
-    /*
+	FindCrop: function(dbConnection) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query('SELECT * FROM IndustrialProject.Crop', function(
+				err,
+				recordset
+			) {
+				if (err) console.log(err);
+				resolve(JSON.stringify(recordset));
+			});
+		});
+	},
+	/*
     *
     *Extracts all entries from the location table and returns them as a single JSON object.
     *    
     */
-    FindLocation : function(dbConnection)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Location', function(err,recordset){
-                if(err) console.log(err);
-                    resolve(JSON.stringify(recordset));
-            });
-        });
-    },
-    /*
+	FindLocation: function(dbConnection) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query(
+				'SELECT * FROM IndustrialProject.Location',
+				function(err, recordset) {
+					if (err) console.log(err);
+					resolve(JSON.stringify(recordset));
+				}
+			);
+		});
+	},
+	/*
     *
     *Extracts all entries from the weather table and returns them as a single JSON object.
     *    
     */
-    FindWeather : function(dbConnection)
-    {
-        return new Promise(function(resolve, reject){
-            dbConnection.query('SELECT * FROM IndustrialProject.Weather', function(err,recordset){
-                if(err) console.log(err);
-                    resolve(JSON.stringify(recordset));
-            });
-        });
-    }
-
+	FindWeather: function(dbConnection) {
+		return new Promise(function(resolve, reject) {
+			dbConnection.query(
+				'SELECT * FROM IndustrialProject.Weather',
+				function(err, recordset) {
+					if (err) console.log(err);
+					resolve(JSON.stringify(recordset));
+				}
+			);
+		});
+	}
 };

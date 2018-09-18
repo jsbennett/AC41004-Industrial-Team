@@ -7,17 +7,17 @@ var debug = require('debug')('industrial-project:server');
 var http = require('http');
 var path = require('path');
 var updater = require('../app/services/updater');
-var fakedata = new(require('../app/services/fakedata'));
-var fakedata2 = new(require('../app/services/fakedata'));
+var fakedata = new(require('../app/services/fakeData'));
+var fakedata2 = new(require('../app/services/fakeData'));
 
-/*var u = new updater(5000, "Starting fakedata event");
+var u = new updater(5000, "Starting fakedata event");
 u.init();
 u.on('Event',function () {
 	console.log(1);
 	fakedata.makeData();
 	console.log(2);
 	fakedata2.makeData();
-});*/
+});
 
 // Get port from environment and store in Express.
 var port = normalizePort(process.env.PORT || '3000');

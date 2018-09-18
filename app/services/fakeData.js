@@ -10,7 +10,7 @@ function FakeData() {
 		request.get(
 			{
 				headers: { 'content-type': 'application/json' },
-				url: 'http://localhost:3000/getLocation'
+				url: 'http://localhost:3000/api/getMarkers'
 			},
 			(error, response, body) => {
 				if (error) {

@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./app/routes/index');
-var databaseinsertsRouter = require('./app/routes/databaseinserts');
+var databaseInsertsRouter = require('./app/routes/databaseInserts');
+var databaseRequestsRouter = require('./app/routes/databaseRequests');
 
 var app = express();
 
@@ -20,7 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/api/insert', databaseinsertsRouter);
+app.use('/api/', databaseInsertsRouter);
+app.use('/api/', databaseRequestsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
