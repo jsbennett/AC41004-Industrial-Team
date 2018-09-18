@@ -38,7 +38,7 @@ function FakeData() {
 
 		farmService.GetAllMarkers().then(function(data) {
 			markers = data.markers;
-			console.log(markers);
+			//console.log(markers);
 		});
 	};
 
@@ -83,8 +83,8 @@ function FakeData() {
 		};
 
 		fakeDataService.InsertWeather(data);
-		console.log('Fake Weather Data');
-		console.log(data);
+		//console.log('Fake Weather Data');
+		//console.log(data);
 	};
 
 	this.currentSeason = function(date) {
@@ -112,7 +112,7 @@ function FakeData() {
 	};
 
 	this.makeFakeFieldData = function(marker) {
-		console.log('Fake Field Data');
+		//console.log('Fake Field Data');
 		//ID
 		//FarmFieldID
 		//PHLevel
@@ -122,14 +122,14 @@ function FakeData() {
 		//PlantDate
 		//RecordDate
 		//RecordTime
-		console.log(
+		/*console.log(
 			'PH Level ' +
 				this.smoothRandom(this.phAlpha, this.ph) +
 				' ' +
 				'Moisture ' +
 				this.smoothRandom(this.moistureAlpha, this.moisture) +
 				'%'
-		);
+		);*/
 	};
 
 	this.smoothRandom = function(factor, start) {
