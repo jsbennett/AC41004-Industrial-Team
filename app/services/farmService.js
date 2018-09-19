@@ -9,7 +9,6 @@ module.exports = {
 		return Promise.all([markerData]).then(([markerResults]) => {
 			var originalMarkers = JSON.parse(markerResults);
 			var markers = originalMarkers[0];
-			console.log(markers);
 			return { markers: markers };
 		});
 	},

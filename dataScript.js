@@ -1,7 +1,10 @@
 var updater = require('./app/services/updater');
 var fakedata = new (require('./app/services/fakeDataCreation'))();
 
-var u = new updater(1000 * 60 * 60, 'Starting fakedata event');
+var tickTime = 1000 * 60 * 60;
+var tickTime = 5000;
+
+var u = new updater(tickTime, 'Starting fakedata event');
 u.init();
 fakedata.init(function() {
 	fakedata.makeData();

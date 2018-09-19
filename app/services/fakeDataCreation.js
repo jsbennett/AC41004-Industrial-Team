@@ -1,6 +1,7 @@
 var farmService = require('./farmService');
 var fakeDataService = require('./fakeDataService');
 var request = require('request');
+var dateFormat = require('dateformat');
 
 var seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 var weathers = [
@@ -41,8 +42,7 @@ function FakeData() {
 		farmService.GetAllMarkers().then(function(markerData) {
 			markers = markerData.markers;
 			farmService.GetCropDetails().then(cropData => {
-				crops = cropData;
-				console.log(crops);
+				this.crops = JSON.parse(cropData);
 				callback();
 			});
 		});
@@ -51,7 +51,18 @@ function FakeData() {
 	this.makeData = function() {
 		for (var i = 0; i < markers.length; i++) {
 			if (markers[i].Type == 'Field') {
-				this.makeFakeFieldData(markers[i]);
+				var marker = markers[i];
+				farmService
+					.GetFieldDetails(
+						marker.FarmID,
+						new Date(0, 0, 0),
+						new Date(9999, 0, 0)
+					)
+					.then(fieldData => {
+						fakeDataService.InsertFarmField(
+							this.makeFakeFieldData(marker, fieldData)
+						);
+					});
 			} else {
 				var forecast = [];
 				for (var j = 0; j < 5; j++) {
@@ -61,7 +72,6 @@ function FakeData() {
 						);
 					}
 				}
-				//console.log(forecast);
 				fakeDataService.InsertWeather(forecast);
 			}
 		}
@@ -86,13 +96,6 @@ function FakeData() {
 		var id = marker.FarmID;
 		//CurrentTime
 		var time = hour + ':00:00';
-
-		/*date =
-			date.getFullYear() +
-			'-' +
-			(date.getMonth() + 1) +
-			'-' +
-			date.getDate();*/
 
 		var data = {
 			date,
@@ -131,8 +134,8 @@ function FakeData() {
 		}
 	};
 
-	this.makeFakeFieldData = function(marker) {
-		//console.log('Fake Field Data');
+	this.makeFakeFieldData = function(marker, fieldData) {
+		fieldData = JSON.parse(fieldData)[0][0];
 		//FarmFieldID
 		var id = marker.FarmID;
 		//PHLevel
@@ -143,18 +146,32 @@ function FakeData() {
 			this.moisture
 		);
 		//CropID
+		var cropID = crops[Math.floor(Math.random() * crops.length)].CropID;
 		//LocationID
+		var location = marker.LocationID;
 		//PlantDate
+		var plantDate;
+		if (fieldData != undefined) {
+			plantDate = dateFormat(fieldData.PlantDate, 'yyyy-mm-dd');
+		} else {
+			plantDate = dateFormat(new Date(), 'yyyy-mm-dd');
+		}
 		//RecordDate
+		var recordDate = dateFormat(new Date(), 'yyyy-mm-dd');
 		//RecordTime
-		/*console.log(
-			'PH Level ' +
-				this.smoothRandom(this.phAlpha, this.ph) +
-				' ' +
-				'Moisture ' +
-				this.smoothRandom(this.moistureAlpha, this.moisture) +
-				'%'
-		);*/
+		var recordTime = dateFormat(new Date(), 'h:MM:ss');
+
+		var data = {
+			id,
+			phLevel,
+			moisturePercent,
+			cropID,
+			location,
+			plantDate,
+			recordDate,
+			recordTime
+		};
+		return data;
 	};
 
 	this.smoothRandom = function(factor, start) {
