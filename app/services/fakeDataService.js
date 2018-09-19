@@ -4,9 +4,7 @@ var dbQueries = require('../respositories/databaseInsertFunctions.js');
 module.exports = {
 	InsertWeather: function(data) {
 		db.Connect().then(function(dbconnection) {
-			dbQueries.InsertWeather(dbconnection, data).then(function() {
-				console.log('Weather update inserted');
-			});
+			dbQueries.InsertWeather(dbconnection, data);
 		});
 	}
 };

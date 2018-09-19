@@ -8,7 +8,7 @@ function AddWrapper(data) {
 
 function Test() {
 	$.ajax({
-		url: '/test',
+		url: '/field',
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}

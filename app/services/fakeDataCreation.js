@@ -47,15 +47,25 @@ function FakeData() {
 			if (markers[i].Type == 'Field') {
 				this.makeFakeFieldData(markers[i]);
 			} else {
-				this.makeFakeWeatherData(markers[i]);
+				var forecast = [];
+				for (var j = 0; j < 5; j++) {
+					for (var k = 0; k < 24; k++) {
+						forecast.push(
+							this.makeFakeWeatherData(markers[i], j, k)
+						);
+					}
+				}
+				//console.log(forecast);
+				fakeDataService.InsertWeather(forecast);
 			}
 		}
 	};
 
-	this.makeFakeWeatherData = function(marker) {
+	this.makeFakeWeatherData = function(marker, dayOffset, hour) {
 		//WeatherID Auto
 		//RecordDate
 		var date = new Date();
+		date.setDate(date.getDate() + dayOffset);
 		//Season
 		var season = this.currentSeason(date);
 		//Temperature
@@ -69,7 +79,7 @@ function FakeData() {
 		//FarmID
 		var id = marker.FarmID;
 		//CurrentTime
-		var time = date;
+		var time = hour + ':00:00';
 
 		var data = {
 			date,
@@ -81,10 +91,7 @@ function FakeData() {
 			id,
 			time
 		};
-
-		fakeDataService.InsertWeather(data);
-		//console.log('Fake Weather Data');
-		//console.log(data);
+		return data;
 	};
 
 	this.currentSeason = function(date) {
