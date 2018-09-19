@@ -47,7 +47,10 @@ module.exports = {
             var timeToGrow =0;
             var cropName = "";
             var expectedHarvest = 0; 
-            
+            var image2Date = 0; 
+            var image3Date = 0; 
+            var growthDelay = 0;
+
             for (j in locations)
             {
                 if(locations[j]["LocationID"] == fields[0]["LocationID"])
@@ -57,13 +60,21 @@ module.exports = {
                 }
             }
             
+            //calculate growing periods - add it to final json 
             timeToGrow = fields[0]["TimeToMature"]; 
             cropName = fields[0]["CropName"];
-                
+            
+            growthDelay = timeToGrow/4;  
+            image2Date = new Date(fields[0]["PlantDate"]);
+            image2Date.setDate(image2Date.getDate()+growthDelay);
+            image3Date = new Date(image2Date); 
+            image3Date.setDate(image3Date.getDate()+growthDelay);
+            
+            
             expectedHarvest = new Date(fields[0]["PlantDate"]); 
             expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
                 
-            var field = new fieldModel(fields[0]["FarmFieldID"], longitude, latitude, cropName, fields[0]["PlantDate"], expectedHarvest, timeToGrow, fields[0]["PHLevel"], fields[0]["MoisturePercent"]);
+            var field = new fieldModel(fields[0]["FarmFieldID"], longitude, latitude, cropName, fields[0]["PlantDate"], expectedHarvest, timeToGrow, fields[0]["PHLevel"], fields[0]["MoisturePercent"], fields[0]["PlantDate"], image2Date,image3Date,expectedHarvest );
             return res.json({field: field});
         });
     },
@@ -82,17 +93,28 @@ module.exports = {
             }); 
         });
     },
-
+    GetFarmSummary : function(req,res)
+    {
+        var farmID = req.param("farmID");
+        var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object 
+        var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
+        var locationData = this.GetLocationDetails(); 
+        return Promise.all([farmData, locationData])
+        .then(([fieldResults, locationResults]) => {
+            console.log(fieldResults);
+        });
+        //return res.json({field: field});
+    },
     /*
     
     *Retrieve farm JSON object populated with entries from the farm table.
     *
     */
-    GetFarmDetails: function(res){
+    GetFarmDetails: function(farmID, startDate, endDate){
         return new Promise(function(resolve, reject){
             db.Connect().then(function(dbconnection)
             { 
-                dbQueries.FindFarm(dbconnection).then(function(result){
+                dbQueries.FindFarm(dbconnection,farmID, startDate, endDate).then(function(result){
                     resolve(result);
                 });
             }); 

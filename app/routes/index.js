@@ -15,8 +15,8 @@ router.get('/api/getField/:fieldID', function (req,res,next) {
     farmService.GetCurrentFieldDetails(req, res);  
 });
 
-router.get('/api/getFarmSummary', function (req,res,next) {
-  farmService.GetFarmDetails(res); 
+router.get('/api/getFarmSummary/:farmID', function (req,res,next) {
+  farmService.GetFarmSummary(req, res); 
 }); 
 
 router.get('/api/getFarmAnalysis', function (req,res,next) {
