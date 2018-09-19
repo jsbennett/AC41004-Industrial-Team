@@ -9,21 +9,21 @@ setTimeout(function() {
 }, 5000);
 
 // Sets the map theme
-        /*map.themes.setTheme(
+/*map.themes.setTheme(
         L.Wrld.themes.season.Winter,
         L.Wrld.themes.time.Night,
         L.Wrld.themes.weather.Snowy
         );
     */
-    // Set the season to whichever
-    // Depending on Current date, change to which ever season with if statement.
-    map.themes.setSeason(
-    L.Wrld.themes.season.Winter // March 1 to May 31
-    /*  L.Wrld.themes.season.Autumn  Sep 1 - Nov 30
+// Set the season to whichever
+// Depending on Current date, change to which ever season with if statement.
+map.themes.setSeason(
+	L.Wrld.themes.season.Winter // March 1 to May 31
+	/*  L.Wrld.themes.season.Autumn  Sep 1 - Nov 30
      *  L.Wrld.themes.season.Winter  Dec 1 - Feb 28
      *  L.Wrld.themes.season.Spring  June 1 - Aug 31
      *  */
-)
+);
 
 var greenIcon = L.icon({
 	iconUrl: 'images/farm_marker_green.png',
@@ -48,7 +48,7 @@ $.ajax({
 			var markerLocation = new L.LatLng(lati, longi);
 			var todaysDate = new Date();
 			var customOptions = {
-				maxWidth: '50000',
+				maxWidth: '1000',
 				minWidth: '300',
 				className: 'custom'
 			};
@@ -56,7 +56,7 @@ $.ajax({
 			if (data['markers'][i].Type == 'Farm') {
 				//This marker is a farm
 				$.ajax({
-					url: '/farm',
+					url: '/farm/' + data['markers'][i].FarmID,
 					location: markerLocation,
 					customOptions,
 					success: function(customPopup) {
@@ -69,7 +69,7 @@ $.ajax({
 			} else {
 				//This marker is a field
 				$.ajax({
-					url: '/field',
+					url: '/field/' + data['markers'][i].FieldID,
 					location: markerLocation,
 					customOptions,
 					success: function(customPopup) {

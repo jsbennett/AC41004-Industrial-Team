@@ -1,13 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var farmService = require('../services/farmService.js');
+var request = require('request');
 
-router.get('/field', function(req, res, next) {
-	res.render('field');
+router.get('/field/:fieldID', function(req, res, next) {
+	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
+		res.render('field', { data: json });
+	});
 });
 
-router.get('/farm', function(req, res, next) {
-	res.render('farm');
+router.get('/soil/:fieldID', function(req, res, next) {
+	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
+		res.render('soil', { data: json });
+	});
+});
+
+router.get('/farm/:farmID', function(req, res, next) {
+	farmService.GetFarmSummary(req, res).then(function(json) {
+		res.render('farm', { data: json });
+	});
 });
 
 router.get('/', function(req, res, next) {
@@ -16,38 +27,34 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.get('/soil', function(req, res, next) {
-	res.render('soil');
+router.get('/api/getField/:fieldID', function(req, res, next) {
+	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
+		res.json(json);
+	});
 });
 
-<<<<<<< HEAD
-router.get('/api/getMarkers', function(req, res, next) {
-	farmService.GetAllMarkers(res);
+router.get('/api/getFarmSummary/:farmID', function(req, res, next) {
+	farmService.GetFarmSummary(req, res).then(function(json) {
+		res.json(json);
+	});
 });
-
-router.get('/api/getField', function(req, res, next) {
-	farmService.GetAllMarkers(res);
-});
-=======
-router.get('/api/getField/:fieldID', function (req,res,next) {
-    farmService.GetCurrentFieldDetails(req, res);  
-});
-
-router.get('/api/getFarmSummary/:farmID', function (req,res,next) {
-  farmService.GetFarmSummary(req, res); 
-}); 
->>>>>>> repo-service-layer
 
 router.get('/api/getFarmSummary', function(req, res, next) {
-	farmService.GetFarmDetails(res);
+	farmService.GetFarmDetails(res).then(function(json) {
+		res.json(json);
+	});
 });
 
 router.get('/api/getFarmAnalysis', function(req, res, next) {
-	farmService.GetFarmDetails(res);
+	farmService.GetFarmDetails(res).then(function(json) {
+		res.send(json);
+	});
 });
 
-router.get('/getLocation', function(req, res, next) {
-	farmService.GetLocationDetails(res);
+router.get('/api/getMarkers', function(req, res, next) {
+	farmService.GetAllMarkers(res).then(function(json) {
+		res.render('field', { data: json });
+	});
 });
 
 module.exports = router;
