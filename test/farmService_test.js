@@ -3,12 +3,12 @@
 let chai = require('chai');
 let chaiHttp = require('chai-http');
 let should = chai.should();
-let expect = chai.expect();
+const { expect } = require('chai')
 let server = require('../bin/www');//Do not use in chai.request as it stops the tests working
 
 
 chai.use(chaiHttp);
-
+/*
 describe('/GET', ()=>{
 	it('returns homepage', (done) => {
 		chai.request('http://localhost:3000')
@@ -18,22 +18,30 @@ describe('/GET', ()=>{
 			done();
 		});
 	});
-});
+});*/
 
 describe('/GET farm details', function(){
 	it('returns 1 if the field details GET call returns populated object', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/getFarm')
+		.get('/getFarmSummary')
 		.end((err, res) => {
-			try{
-			res.body.should.be.a('object');
-			res.body.should.have.property('farms');
-			res.body.should.have.property('fields');
-			res.body.should.have.property('crops');
-			done();}
-			catch(e){
+		try{
+			res.should.have.status(200);
+			console.log(res.body);
+			expect(res.body).to.eql('farm');
+			
+
+			expect({ res: {} }).to.have.property('farm').that.deep.equals({})
+			
+			console.log("farms passed");
+			
+			//res.body.should.have.property('farms');
+			done();
+		}
+
+		catch(e){
 				done(e);
-			}
+		}
 			
 		});
 	});

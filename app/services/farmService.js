@@ -147,6 +147,19 @@ module.exports = {
 		});
 	},
 
+	GetFarmSummary: function(req, res) {
+		var farmID = req.param('farmID');
+		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
+		var locationData = this.GetLocationDetails();
+		return Promise.all([farmData, locationData]).then(
+			([fieldResults, locationResults]) => {
+				console.log(fieldResults);
+			}
+		);
+		//return res.json({field: field});
+	},
+
 	/*
     *
     *Retrieve weather JSON object populated with entries from the weather table.

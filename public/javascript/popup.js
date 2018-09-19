@@ -23,3 +23,12 @@ function Soil() {
 		}
 	});
 }
+
+function Summary() {
+	$.ajax({
+		url: '/summary',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
