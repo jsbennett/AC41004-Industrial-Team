@@ -20,6 +20,7 @@ router.get('/soil', function(req, res, next) {
 	res.render('soil');
 });
 
+<<<<<<< HEAD
 router.get('/api/getMarkers', function(req, res, next) {
 	farmService.GetAllMarkers(res);
 });
@@ -27,6 +28,15 @@ router.get('/api/getMarkers', function(req, res, next) {
 router.get('/api/getField', function(req, res, next) {
 	farmService.GetAllMarkers(res);
 });
+=======
+router.get('/api/getField/:fieldID', function (req,res,next) {
+    farmService.GetCurrentFieldDetails(req, res);  
+});
+
+router.get('/api/getFarmSummary/:farmID', function (req,res,next) {
+  farmService.GetFarmSummary(req, res); 
+}); 
+>>>>>>> repo-service-layer
 
 router.get('/api/getFarmSummary', function(req, res, next) {
 	farmService.GetFarmDetails(res);
