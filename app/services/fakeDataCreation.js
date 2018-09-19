@@ -56,7 +56,7 @@ function FakeData() {
 					}
 				}
 				//console.log(forecast);
-				fakeDataService.InsertWeather(forecast);
+				//fakeDataService.InsertWeather(forecast);
 			}
 		}
 	};
