@@ -12,7 +12,7 @@ router.get('/api/getMarkers', function (req,res,next) {
 });
 
 router.get('/api/getField/:fieldID', function (req,res,next) {
-    farmService.GetCurrentFieldDetais(req, res);  
+    farmService.GetCurrentFieldDetails(req, res);  
 });
 
 router.get('/api/getFarmSummary', function (req,res,next) {
