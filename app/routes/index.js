@@ -53,7 +53,7 @@ router.get('/api/getFarmAnalysis', function(req, res, next) {
 
 router.get('/api/getMarkers', function(req, res, next) {
 	farmService.GetAllMarkers(res).then(function(json) {
-		res.render('field', { data: json });
+		res.json(json);
 	});
 });
 

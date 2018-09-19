@@ -10,7 +10,7 @@ module.exports = {
 			var originalMarkers = JSON.parse(markerResults);
 			var markers = originalMarkers[0];
 			console.log(markers);
-			return res.json({ markers: markers });
+			return { markers: markers };
 		});
 	},
 
