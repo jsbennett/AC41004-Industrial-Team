@@ -9,6 +9,10 @@ block content
 				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Summary
 			li.nav-item
 				a.nav-link(href='#') Link
-			li.nav-item
-				a.nav-link.disabled(href='#') Disabled
-		h1 This is THE SUMMARY PAGE
+			p #{JSON.stringify(data)}
+			//each item in data
+			//	tr
+			//	td FarmID: #{JSON.stringify(data.farmID)}
+			//	br
+			//	td todays date: #{data.Name}
+			//	br

@@ -21,20 +21,16 @@ describe('/GET', ()=>{
 });*/
 
 describe('/GET farm details', function(){
-	it('returns 1 if the field details GET call returns populated object', (done) => {
+	it('returns 1 if the farm summary GET call returns populated object', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/getFarmSummary')
+		.get('/summary/1')
 		.end((err, res) => {
 		try{
 			res.should.have.status(200);
+			res.body.should.be.a('Object');
 			console.log(res.body);
-			expect(res.body).to.eql('farm');
-			
-
-			expect({ res: {} }).to.have.property('farm').that.deep.equals({})
-			
-			console.log("farms passed");
-			
+			//res.body.should.have.property('1');
+			//expect({ res: {} }).to.have.property('FarmID').that.deep.equals(1);
 			//res.body.should.have.property('farms');
 			done();
 		}
@@ -47,12 +43,13 @@ describe('/GET farm details', function(){
 	});
 });
 
-/*
+
 describe('/GET field details', ()=>{
 	it('returns 1 if the farm details GET call returns an object', (done) => {
 		chai.request('http://localhost:3000')
 		.get('/getFarm')
 		.end((err, res) => {
+			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			done();
 		});

@@ -147,7 +147,7 @@ module.exports = {
 		});
 	},
 
-	GetFarmSummary: function(req, res) {
+		GetFarmSummary: function(req, res) {
 		var farmID = req.param('farmID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
@@ -157,7 +157,7 @@ module.exports = {
 				console.log(fieldResults);
 			}
 		);
-		//return res.json({field: field});
+		return res.json({field: field});
 	},
 
 	/*

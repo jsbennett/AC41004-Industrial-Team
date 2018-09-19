@@ -14,12 +14,16 @@ router.get('/soil', function(req, res, next) {
 	res.render('soil');
 });
 
-router.get('/summary', function(req, res, next) {
-	res.render('summary');
+router.get('/summary/:farmID', function(req, res, next) {
+	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
+		res.render('farm', { data: json });
+	});
 });
 
-router.get('/api/getFarmSummary:FarmID', function(req, res, next) {
-	farmService.GetFarmSummary(req, res);
+router.get('/api/getFarmSummary/:farmID', function(req, res, next) {
+	farmService.GetFarmSummary(req, res).then(function(json) {
+		res.json(json);
+	});
 });
 
 router.get('/', function(req, res, next) {

@@ -26,7 +26,7 @@ function Soil() {
 
 function Summary() {
 	$.ajax({
-		url: '/summary',
+		url: '/summary/1',
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
