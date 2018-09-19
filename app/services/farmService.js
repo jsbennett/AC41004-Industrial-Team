@@ -49,6 +49,7 @@ module.exports = {
             var expectedHarvest = 0; 
             var image2Date = 0; 
             var image3Date = 0; 
+            var image4Date = 0; 
             var growthDelay = 0;
 
             for (j in locations)
@@ -64,17 +65,18 @@ module.exports = {
             timeToGrow = fields[0]["TimeToMature"]; 
             cropName = fields[0]["CropName"];
             
-            growthDelay = timeToGrow/4;  
+            growthDelay = timeToGrow/5;  
             image2Date = new Date(fields[0]["PlantDate"]);
             image2Date.setDate(image2Date.getDate()+growthDelay);
             image3Date = new Date(image2Date); 
             image3Date.setDate(image3Date.getDate()+growthDelay);
-            
+            image4Date =  new Date(image3Date); 
+            image4Date.setDate(image4Date.getDate() + growthDelay); 
             
             expectedHarvest = new Date(fields[0]["PlantDate"]); 
             expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
                 
-            var field = new fieldModel(fields[0]["FarmFieldID"], longitude, latitude, cropName, fields[0]["PlantDate"], expectedHarvest, timeToGrow, fields[0]["PHLevel"], fields[0]["MoisturePercent"], fields[0]["PlantDate"], image2Date,image3Date,expectedHarvest );
+            var field = new fieldModel(fields[0]["FarmFieldID"], longitude, latitude, cropName, fields[0]["PlantDate"], expectedHarvest, timeToGrow, fields[0]["PHLevel"], fields[0]["MoisturePercent"], fields[0]["PlantDate"], image2Date,image3Date,image4Date, expectedHarvest );
             return res.json({field: field});
         });
     },
