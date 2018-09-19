@@ -6,5 +6,11 @@ module.exports = {
 		db.Connect().then(function(dbconnection) {
 			dbQueries.InsertWeather(dbconnection, data);
 		});
+	},
+
+	InsertFarmField: function(data) {
+		db.Connect().then(function(dbconnection) {
+			dbQueries.InsertFarmField(dbconnection, data);
+		});
 	}
 };

@@ -24,10 +24,10 @@ function FakeData() {
 	this.humidAlpha;
 	this.markers;
 
-	this.init = function() {
+	this.init = function(callback) {
 		this.ph = Math.floor(Math.random() * 14);
 		this.moisture = Math.floor(Math.random() * 100);
-		this.temp = Math.floor(Math.random() * (45 - -15) + -15);
+		this.temp = Math.floor(Math.random() * 50 + -20);
 		this.humid = Math.floor(Math.random() * 100);
 		this.wind = Math.floor(Math.random() * 150);
 		this.phAlpha = 0.05;
@@ -39,6 +39,7 @@ function FakeData() {
 		farmService.GetAllMarkers().then(function(data) {
 			markers = data.markers;
 			//console.log(markers);
+			callback();
 		});
 	};
 
@@ -56,7 +57,7 @@ function FakeData() {
 					}
 				}
 				//console.log(forecast);
-				//fakeDataService.InsertWeather(forecast);
+				fakeDataService.InsertWeather(forecast);
 			}
 		}
 	};
@@ -80,6 +81,13 @@ function FakeData() {
 		var id = marker.FarmID;
 		//CurrentTime
 		var time = hour + ':00:00';
+
+		/*date =
+			date.getFullYear() +
+			'-' +
+			(date.getMonth() + 1) +
+			'-' +
+			date.getDate();*/
 
 		var data = {
 			date,
