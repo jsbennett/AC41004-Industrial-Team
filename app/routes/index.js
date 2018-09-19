@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 var farmService = require('../services/farmService.js');
-var request = require('request');
+//var request = require('request');
 
 router.get('/field/:fieldID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
 		res.render('field', { data: json });
 	});
 });
-
+ 
 router.get('/soil/:fieldID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
 		res.render('soil', { data: json });
