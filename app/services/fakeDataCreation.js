@@ -1,5 +1,6 @@
 var farmService = require('./farmService');
 var fakeDataService = require('./fakeDataService');
+var request = require('request');
 
 var seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 var weathers = [
@@ -23,6 +24,7 @@ function FakeData() {
 	this.tempAlpha;
 	this.humidAlpha;
 	this.markers;
+	this.crops;
 
 	this.init = function(callback) {
 		this.ph = Math.floor(Math.random() * 14);
@@ -36,10 +38,13 @@ function FakeData() {
 		this.humidAlpha = 0.2;
 		this.windAlpha = 0.5;
 
-		farmService.GetAllMarkers().then(function(data) {
-			markers = data.markers;
-			//console.log(markers);
-			callback();
+		farmService.GetAllMarkers().then(function(markerData) {
+			markers = markerData.markers;
+			farmService.GetCropDetails().then(cropData => {
+				crops = cropData;
+				console.log(crops);
+				callback();
+			});
 		});
 	};
 
@@ -128,10 +133,15 @@ function FakeData() {
 
 	this.makeFakeFieldData = function(marker) {
 		//console.log('Fake Field Data');
-		//ID
 		//FarmFieldID
+		var id = marker.FarmID;
 		//PHLevel
+		var phLevel = this.smoothRandom(this.phAlpha, this.ph);
 		//MoisturePercent
+		var moisturePercent = this.smoothRandom(
+			this.moistureAlpha,
+			this.moisture
+		);
 		//CropID
 		//LocationID
 		//PlantDate
