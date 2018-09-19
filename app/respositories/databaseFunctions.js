@@ -16,10 +16,10 @@ module.exports = {
     *Extracts all entries from the fields table and returns them as a single JSON object.
     *    
     */
-    FindField : function(dbConnection, startDate, EndDate)
+    FindField : function(dbConnection, startDate, EndDate, fieldID)
     {
         return new Promise(function(resolve, reject){
-            dbConnection.query('CALL GetDailyFarmFieldsDetails(?, ?)',[startDate, EndDate], function(err,recordset){
+            dbConnection.query('CALL GetDailyFarmFieldsDetails(?, ?, ?)',[fieldID, startDate, EndDate], function(err,recordset){
             if(err) console.log(err);
                 resolve(JSON.stringify(recordset));
             });

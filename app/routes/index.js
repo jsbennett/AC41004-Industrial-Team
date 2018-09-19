@@ -11,8 +11,8 @@ router.get('/api/getMarkers', function (req,res,next) {
   farmService.GetAllMarkers(res);  
 });
 
-router.get('/api/getField', function (req,res,next) {
-    farmService.GetAllMarkers(res);  
+router.get('/api/getFields', function (req,res,next) {
+    farmService.GetAllFieldDetais(res);  
 });
 
 router.get('/api/getFarmSummary', function (req,res,next) {

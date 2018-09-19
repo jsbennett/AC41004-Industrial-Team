@@ -10,7 +10,7 @@ module.exports = {
     * Retrieves all the details for the farm and puts then into one JSON
     * 
     */
-    GetAllFarmDetails : function(res){
+    /*GetAllFarmDetails : function(res){
         var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object 
 
         var fieldData = this.GetFieldDetails('2018-09-12', '2018-09-12'); 
@@ -64,7 +64,7 @@ module.exports = {
 
          return res.json({fields: fieldInformation});
        });
-    },
+    },*/
 
     GetAllMarkers : function(res)
     {
@@ -87,6 +87,16 @@ module.exports = {
                     resolve(result);
                 });
             }); 
+        });
+    },
+
+    GetAllFieldDetais : function(res){
+        var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object 
+        var fieldData = this.GetFieldDetails(todaysDate, todaysDate);
+        return Promise.all([fieldData])
+        .then(([fieldResults]) => {
+            var fields = JSON.parse(fieldResults);
+            return res.json({fields: fields});
         });
     },
     /*
