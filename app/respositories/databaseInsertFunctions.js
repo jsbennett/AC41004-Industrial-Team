@@ -29,30 +29,33 @@ module.exports = {
 		});
 	},
 
-	InsertFarmField: function(dbc, data) {
+	InsertFarmField: function(dbc, fields) {
 		return new Promise(function(resolve, reject) {
-			var query =
-				'call InsertField(' +
-				dbc.escape(data.id) +
-				',' +
-				dbc.escape(data.phLevel) +
-				',' +
-				dbc.escape(data.moisturePercent) +
-				',' +
-				dbc.escape(data.cropID) +
-				',' +
-				dbc.escape(data.location) +
-				',' +
-				dbc.escape(data.plantDate) +
-				',' +
-				dbc.escape(data.recordDate) +
-				',' +
-				dbc.escape(data.recordTime) +
-				')';
-			//console.log(query);
-			dbc.query(query, function(err) {
-				if (err) console.log(err);
-			});
+			for (var i = 0; i < fields.length; i++) {
+				var data = fields[i];
+				var query =
+					'call InsertField(' +
+					dbc.escape(data.id) +
+					',' +
+					dbc.escape(data.phLevel) +
+					',' +
+					dbc.escape(data.moisturePercent) +
+					',' +
+					dbc.escape(data.cropID) +
+					',' +
+					dbc.escape(data.location) +
+					',' +
+					dbc.escape(data.plantDate) +
+					',' +
+					dbc.escape(data.recordDate) +
+					',' +
+					dbc.escape(data.recordTime) +
+					')';
+				//console.log(query);
+				dbc.query(query, function(err) {
+					if (err) console.log(err);
+				});
+			}
 		});
 	}
 };
