@@ -10,7 +10,15 @@ block content
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
 		h1 field
-		p #{JSON.stringify(data)}
-		img(src='', id='plantImg')
-		body
-			script(src='/javascript/datavis.js')
+		p #{JSON.stringify(data.field)}
+		h2 #{data.field.cropName}
+		ul
+			each val in data.field
+				li= val
+
+		if data.field.cropName == 'sdkld'
+			h3 yoyoyo
+		else 
+			h3 jsdjfdnsd
+
+		img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
