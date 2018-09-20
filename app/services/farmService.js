@@ -54,7 +54,7 @@ module.exports = {
 				image2Date = new Date(fields[0]['PlantDate']);
 				image2Date.setDate(image2Date.getDate() + growthDelay);
 				image3Date = new Date(image2Date);
-				image3Date.setDate(image3Date.getDate() + growthDelay);
+				image3Date.setDate(image3Date.getDate() + dhgrowthDelay);
 				image4Date = new Date(image3Date);
 				image4Date.setDate(image4Date.getDate() + growthDelay);
 
@@ -63,7 +63,13 @@ module.exports = {
 				image = 0;
 				
 				expectedHarvest = new Date(fields[0]['PlantDate']);
-				expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+				expectedHarvest.setDate(expectedHarvest.getDate() +  nhbjhgt); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+				
+				var expectedHarvestDay = expectedHarvest.getDate();
+				
+				var month = ["January","Feburary","March","April","May","June","July","August","September","October","November","December"];
+				var expectedHarvestMonth = month[expectedHarvest.getMonth()];
+				
 				if(image2Date >  today)
 				{
 					image = 1;
@@ -84,8 +90,9 @@ module.exports = {
 				var field = new fieldModel(
 					fields[0]['FarmFieldID'],
 					cropName,
+					expectedHarvestMonth,
+					expectedHarvestDay,
 					fields[0]['PlantDate'],
-					expectedHarvest,
 					timeToGrow,
 					fields[0]['PHLevel'],
 					fields[0]['MoisturePercent'],
@@ -115,47 +122,69 @@ module.exports = {
 	GetFarmSummary: function(req, res) {
 		var farmID = req.param('farmID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+		
 		var futureDate = new Date();
 		futureDate.setDate(futureDate.getDate() + 4);
 		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
 		var weatherData = this.GetWeatherDetails(farmID, todaysDate, futureDate);
-		console.log(futureDate);
+		
 		return Promise.all([farmData, weatherData]).then(
 			([fieldResults, weatherResults]) => {
 				var farmCrops = JSON.parse(fieldResults);
-				//var markers = JSON.parse(markerResults);
+				console.log("here1");
 				var weather = JSON.parse(weatherResults);
+				console.log(weather);
 				var today = new Date();
 				today.setHours(0,0,0,0);
 				var currentCrops = [];
 				var displayWeather = []; 
-				for (i in farmCrops[0])
+				console.log("here1.5");
+				/*for (i in farmCrops[0])
 				{
+					console.log("here2");
 					var expectedHarvest = new Date(farmCrops[0][i]['PlantDate']);
 					expectedHarvest.setDate(expectedHarvest.getDate() + farmCrops[0][i]["TimeToMature"]);
-					if(expectedHarvest >= today)
+					var date = new Date();
+					var time = date.getHours() + ":00:00";
+
+					if(expectedHarvest >= today && farmCrops[0][i]["RecordTime"] == time)
 					{
+						//console.log(farmCrops[0][i]["RecordTime"]);
 						var crop = new cropSummaryModel(farmCrops[0][i]["CropName"], expectedHarvest);
 						currentCrops.push(crop);
 					}
-				}
-
-				var date = new Date();
-				var time = date.getHours() + ":00:00";
-				
-				for(i in weather[0])
+				}*/
+				//console.log(farmCrops[0].length);
+;				for(i in weather[0])
 				{
+					console.log("here3");
 					var weatherDate = weather[0][i]["RecordDate"].split('T')[0]; 
 					var comparisonDate = todaysDate; 
-
 					var weatherTime = weather[0][i]["CurrentTime"];
-					if(weatherDate == comparisonDate && weatherTime == time)
+					if(weatherDate == comparisonDate && weatherTime == '12:00:00')
 					{
 						var todayWeather = new weatherSummaryModel(
-							
-						);//make new weather 
-						//add it to 
+							weather[0][i]["Season"],
+							weather[0][i]["WeatherType"],
+							weather[0][i]["Temperature"],
+							weather[0][i]["Humidity"],
+							weather[0][i]["WindStrength"]
+						);
+						displayWeather.push(weather[0][i]["RecordDate"]);
 					}
+					console.log(todayWeather);
+					var day2 = new Date(weather[0][i]["RecordDate"]);
+					day2.setDate(day2.getDate()+1);
+					console.log(day2);
+					var day3 = new Date(day2);
+					day2.setDate(day3.getDate()+1);
+					console.log(day3);
+					var day4 = new Date(day3);
+					day2.setDate(day4.getDate()+1);
+					console.log(day4);
+					var day5 = new Date(day4);
+					day2.setDate(day5.getDate()+1);
+					console.log(day5);
 				} 
 
 				var farm = new farmSummaryModel(
