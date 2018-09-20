@@ -78,10 +78,11 @@ module.exports = {
     *Extracts all entries from the weather table and returns them as a single JSON object.
     *    
     */
-	FindWeather: function(dbConnection) {
+	FindWeather: function(dbConnection, farmID, startDate, endDate) {
 		return new Promise(function(resolve, reject) {
 			dbConnection.query(
-				'SELECT * FROM IndustrialProject.Weather',
+				'CALL GetDailyWeatherDetails(?, ?, ?)',
+				[farmID, startDate, endDate],
 				function(err, recordset) {
 					if (err) console.log(err);
 					resolve(JSON.stringify(recordset));

@@ -1,7 +1,9 @@
 var db = require('../config/database.js');
 var dbQueries = require('../respositories/databaseFunctions.js');
 var fieldModel = require('../models/fieldModel.js');
-var farmModel = require('../models/farmModel.js');
+var farmSummaryModel = require('../models/farmSummaryModel.js');
+var cropSummaryModel = require('../models/currentCropsSummaryModel.js');
+var weatherSummaryModel = require('../models/currentWeatherSummaryModel.js');
 
 module.exports = {
 	GetAllMarkers: function(res) {
@@ -9,7 +11,6 @@ module.exports = {
 		return Promise.all([markerData]).then(([markerResults]) => {
 			var originalMarkers = JSON.parse(markerResults);
 			var markers = originalMarkers[0];
-			console.log(markers);
 			return { markers: markers };
 		});
 	},
@@ -34,7 +35,7 @@ module.exports = {
 			([fieldResults, locationResults]) => {
 				var originalFields = JSON.parse(fieldResults);
 				var locations = JSON.parse(locationResults);
-				console.log(originalFields);
+
 				var fields = originalFields[0];
 				var longitude = 0;
 				var latitude = 0;
@@ -45,13 +46,7 @@ module.exports = {
 				var image3Date = 0;
 				var image4Date = 0;
 				var growthDelay = 0;
-
-				for (j in locations) {
-					if (locations[j]['LocationID'] == fields[0]['LocationID']) {
-						longitude = locations[j]['Longitude'];
-						latitude = locations[j]['Latitude'];
-					}
-				}
+				var image = 0; 
 
 				//calculate growing periods - add it to final json
 				timeToGrow = fields[0]['TimeToMature'];
@@ -65,24 +60,38 @@ module.exports = {
 				image4Date = new Date(image3Date);
 				image4Date.setDate(image4Date.getDate() + growthDelay);
 
+				var today = new Date(); 
+				today.setTime(0,0,0,0,0);
+				image = 0;
+				
 				expectedHarvest = new Date(fields[0]['PlantDate']);
 				expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
-
+				if(image2Date >  today)
+				{
+					image = 1;
+				}
+				else if(image3Date > today)
+				{
+					image= 2;
+				}
+				else if(image4Date > today)
+				{
+					image = 3; 
+				}
+				else if(expectedHarvest > today)
+				{
+					image = 4; 
+				}
+				
 				var field = new fieldModel(
 					fields[0]['FarmFieldID'],
-					longitude,
-					latitude,
 					cropName,
 					fields[0]['PlantDate'],
 					expectedHarvest,
 					timeToGrow,
 					fields[0]['PHLevel'],
 					fields[0]['MoisturePercent'],
-					fields[0]['PlantDate'],
-					image2Date,
-					image3Date,
-					image4Date,
-					expectedHarvest
+					image
 				);
 				return { field: field };
 			}
@@ -107,12 +116,69 @@ module.exports = {
 	GetFarmSummary: function(req, res) {
 		var farmID = req.param('farmID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+		var futureDate = new Date();
+		futureDate.setDate(futureDate.getDate() + 4);
 		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
 		var locationData = this.GetLocationDetails();
-		return Promise.all([farmData, locationData]).then(
-			([fieldResults, locationResults]) => {
-				console.log(fieldResults);
+		var markerData = this.GetMarkers();
+		var weatherData = this.GetWeatherDetails(farmID, todaysDate, futureDate);
+		return Promise.all([farmData, weatherData]).then(
+			([fieldResults, weatherResults]) => {
+				var farmCrops = JSON.parse(fieldResults);
+				//var markers = JSON.parse(markerResults);
+				var weather = JSON.parse(weatherResults);
+				var today = new Date();
+				today.setHours(0,0,0,0);
+				var currentCrops = [];
+				var locationID = 0; 
+				var displayWeather = []; 
+				for (i in farmCrops[0])
+				{
+					var expectedHarvest = new Date(farmCrops[0][i]['PlantDate']);
+					expectedHarvest.setDate(expectedHarvest.getDate() + farmCrops[0][i]["TimeToMature"]);
+					if(expectedHarvest > today)
+					{
+						var crop = new cropSummaryModel(farmCrops[0][i]["CropName"], expectedHarvest);
+						currentCrops.push(crop);
+					}
+				}
+
+				var date = new Date();
+				var time = date.getHours() + ":00:00";
+				
+				for(i in weather[0])
+				{
+					console.log("from database: " + weather[0][i]["RecordDate"]);
+					var newDate = todaysDate + "T23:00:00.000Z";
+					console.log(newDate);
+					console.log("from database: " + weather[0][i]["CurrentTime"]);
+					console.log(time);
+					if(weather[0][i]["CurrentTime"] == time && weather[0][i]["RecordDate"] == newDate);
+					{
+						console.log("works");
+					}
+				}
+				//get all weather
+				//get weather for todays date and todays time 
+				//get weather for tomoorrow at noon and so on for 5 days
+
+				for (i in markers[0])
+				{
+					if((markers[0][i]["Type"]=="Farm") && (markers[0][i]["FarmID"] == farmID))
+					{
+						locationID = markers[0][i]["LocationID"];
+					}	
+				}
+
+
+				//console.log(weather);
+				var farm = new farmSummaryModel(
+					crops = currentCrops,
+					weather = 0
+				);
+				return res.json({farm: farm});
 			}
+		
 		);
 		//return res.json({field: field});
 	},
@@ -153,10 +219,10 @@ module.exports = {
     *Retrieve weather JSON object populated with entries from the weather table.
     *
     */
-	GetWeatherDetails: function(res) {
+	GetWeatherDetails: function(farmID, todaysDate, futureDate) {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
-				dbQueries.FindWeather(dbconnection).then(function(result) {
+				dbQueries.FindWeather(dbconnection,farmID, todaysDate, futureDate).then(function(result) {
 					resolve(result);
 				});
 			});

@@ -8,7 +8,7 @@ router.get('/field/:fieldID', function(req, res, next) {
 		res.render('field', { data: json });
 	});
 });
-
+ 
 router.get('/soil/:fieldID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
 		res.render('soil', { data: json });
@@ -39,11 +39,6 @@ router.get('/api/getFarmSummary/:farmID', function(req, res, next) {
 	});
 });
 
-router.get('/api/getFarmSummary', function(req, res, next) {
-	farmService.GetFarmDetails(res).then(function(json) {
-		res.json(json);
-	});
-});
 
 router.get('/api/getFarmAnalysis', function(req, res, next) {
 	farmService.GetFarmDetails(res).then(function(json) {
