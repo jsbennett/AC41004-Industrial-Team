@@ -1,5 +1,7 @@
 var farmService = require('./farmService');
 var fakeDataService = require('./fakeDataService');
+var request = require('request');
+var dateFormat = require('dateformat');
 
 var seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 var weathers = [
@@ -23,11 +25,12 @@ function FakeData() {
 	this.tempAlpha;
 	this.humidAlpha;
 	this.markers;
+	this.crops;
 
-	this.init = function() {
+	this.init = function(callback) {
 		this.ph = Math.floor(Math.random() * 14);
 		this.moisture = Math.floor(Math.random() * 100);
-		this.temp = Math.floor(Math.random() * (45 - -15) + -15);
+		this.temp = Math.floor(Math.random() * 50 + -20);
 		this.humid = Math.floor(Math.random() * 100);
 		this.wind = Math.floor(Math.random() * 150);
 		this.phAlpha = 0.05;
@@ -36,16 +39,30 @@ function FakeData() {
 		this.humidAlpha = 0.2;
 		this.windAlpha = 0.5;
 
-		farmService.GetAllMarkers().then(function(data) {
-			markers = data.markers;
-			//console.log(markers);
+		farmService.GetAllMarkers().then(function(markerData) {
+			markers = markerData.markers;
+			farmService.GetCropDetails().then(cropData => {
+				this.crops = JSON.parse(cropData);
+				callback();
+			});
 		});
 	};
 
 	this.makeData = function() {
 		for (var i = 0; i < markers.length; i++) {
 			if (markers[i].Type == 'Field') {
-				this.makeFakeFieldData(markers[i]);
+				var marker = markers[i];
+				farmService
+					.GetFieldDetails(
+						marker.FarmID,
+						new Date(0, 0, 0),
+						new Date(9999, 0, 0)
+					)
+					.then(fieldData => {
+						fakeDataService.InsertFarmField(
+							this.makeFakeFieldData(marker, fieldData)
+						);
+					});
 			} else {
 				var forecast = [];
 				for (var j = 0; j < 5; j++) {
@@ -55,8 +72,7 @@ function FakeData() {
 						);
 					}
 				}
-				//console.log(forecast);
-				//fakeDataService.InsertWeather(forecast);
+				fakeDataService.InsertWeather(forecast);
 			}
 		}
 	};
@@ -118,25 +134,44 @@ function FakeData() {
 		}
 	};
 
-	this.makeFakeFieldData = function(marker) {
-		//console.log('Fake Field Data');
-		//ID
+	this.makeFakeFieldData = function(marker, fieldData) {
+		fieldData = JSON.parse(fieldData)[0][0];
 		//FarmFieldID
+		var id = marker.FarmID;
 		//PHLevel
+		var phLevel = this.smoothRandom(this.phAlpha, this.ph);
 		//MoisturePercent
+		var moisturePercent = this.smoothRandom(
+			this.moistureAlpha,
+			this.moisture
+		);
 		//CropID
+		var cropID = crops[Math.floor(Math.random() * crops.length)].CropID;
 		//LocationID
+		var location = marker.LocationID;
 		//PlantDate
+		var plantDate;
+		if (fieldData != undefined) {
+			plantDate = dateFormat(fieldData.PlantDate, 'yyyy-mm-dd');
+		} else {
+			plantDate = dateFormat(new Date(), 'yyyy-mm-dd');
+		}
 		//RecordDate
+		var recordDate = dateFormat(new Date(), 'yyyy-mm-dd');
 		//RecordTime
-		/*console.log(
-			'PH Level ' +
-				this.smoothRandom(this.phAlpha, this.ph) +
-				' ' +
-				'Moisture ' +
-				this.smoothRandom(this.moistureAlpha, this.moisture) +
-				'%'
-		);*/
+		var recordTime = dateFormat(new Date(), 'h:MM:ss');
+
+		var data = {
+			id,
+			phLevel,
+			moisturePercent,
+			cropID,
+			location,
+			plantDate,
+			recordDate,
+			recordTime
+		};
+		return data;
 	};
 
 	this.smoothRandom = function(factor, start) {

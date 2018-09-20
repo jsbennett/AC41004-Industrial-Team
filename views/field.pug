@@ -2,13 +2,39 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link.active(href='#' id='Test' onClick="Test();") Test
+				a.nav-link.active(href='#' id='Field' onClick="Test();") Test
 			li.nav-item
-				a.nav-link(href='#' id='Soil' onClick="Soil(this);") Soil
+				a.nav-link(href='#' id='Soil' onClick="Soil();") Soil
 			li.nav-item
 				a.nav-link(href='#' id='Summary' onClick="Summary();") Summary
 			li.nav-item
 				a.nav-link(href='#') Link
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
-		h1 This is some information
+		// p #{JSON.stringify(data.field)}
+		// h1 #{data.field.cropName}
+		br
+		hr
+		if data.field.cropName == 'Potatoes'
+			img(src='/images/crops/potatoes2.png', class= 'cropImg')
+		else if data.field.cropName == 'Corn'
+			img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
+		else if data.field.cropName == 'Strawberries'
+			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
+		hr
+		br
+		time.icon(datetime='#{data.field.expectedHarvest}')
+			em Saturday
+			strong September
+			span 20
+		p #{data.field.expectedHarvest}
+
+		hr
+		br
+		h2 Plant Growth
+		br
+		hr
+		
+		img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
+		style
+			include ../public/stylesheets/stylesheet.css

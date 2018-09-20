@@ -1,15 +1,15 @@
-function fieldModel(farmFieldID, farmID, locationLong, locationLat, cropName, datePlanted, expectedHarvest, timeToMature, phLevel, moistureLevel)//consider using a dto instead
+function fieldModel(farmFieldID, cropName, datePlanted, expectedHarvest, timeToMature, phLevel, moistureLevel, image)
 {
     this.farmFieldID = farmFieldID; 
-    this.farmID = farmID; 
-    this.locationLong = locationLong;
-    this.locationLat = locationLat;
     this.cropName = cropName;
     this.datePlanted = datePlanted; 
     this.expectedHarvest = expectedHarvest; 
     this.timeToMature = timeToMature; 
     this.phLevel = phLevel; 
     this.moistureLevel = moistureLevel; 
+    this.image = image; 
+    harvestMonth = "September";
+    harvestDay = 20; 
 };
 
 module.exports = fieldModel; 

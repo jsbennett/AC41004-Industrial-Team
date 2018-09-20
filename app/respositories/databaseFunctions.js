@@ -12,11 +12,11 @@ module.exports = {
     *Extracts all entries from the fields table and returns them as a single JSON object.
     *    
     */
-	FindField: function(dbConnection, startDate, EndDate) {
+	FindField: function(dbConnection, fieldID, startDate, endDate) {
 		return new Promise(function(resolve, reject) {
 			dbConnection.query(
-				'CALL GetDailyFarmFieldsDetails(?, ?)',
-				[startDate, EndDate],
+				'CALL GetDailyFarmFieldsDetails(?, ?, ?)',
+				[fieldID, startDate, endDate],
 				function(err, recordset) {
 					if (err) console.log(err);
 					resolve(JSON.stringify(recordset));
@@ -29,15 +29,16 @@ module.exports = {
     *Extracts all entries from the farm table and returns them as a single JSON object.
     *    
     */
-	FindFarm: function(dbConnection) {
+	FindFarm: function(dbConnection, farmID, startDate, endDate) {
 		return new Promise(function(resolve, reject) {
-			dbConnection.query('SELECT * FROM IndustrialProject.Farm', function(
-				err,
-				recordset
-			) {
-				if (err) console.log(err);
-				resolve(JSON.stringify(recordset));
-			});
+			dbConnection.query(
+				'CALL FarmAnalysisData(?, ?, ?)',
+				[farmID, startDate, endDate],
+				function(err, recordset) {
+					if (err) console.log(err);
+					resolve(JSON.stringify(recordset));
+				}
+			);
 		});
 	},
 	/*
@@ -77,10 +78,11 @@ module.exports = {
     *Extracts all entries from the weather table and returns them as a single JSON object.
     *    
     */
-	FindWeather: function(dbConnection) {
+	FindWeather: function(dbConnection, farmID, startDate, endDate) {
 		return new Promise(function(resolve, reject) {
 			dbConnection.query(
-				'SELECT * FROM IndustrialProject.Weather',
+				'CALL GetDailyWeatherDetails(?, ?, ?)',
+				[farmID, startDate, endDate],
 				function(err, recordset) {
 					if (err) console.log(err);
 					resolve(JSON.stringify(recordset));
