@@ -48,7 +48,7 @@ function FakeData() {
 		});
 	};
 
-	this.makeData = function() {
+	this.makeData = function(date) {
 		for (var i = 0; i < markers.length; i++) {
 			if (markers[i].Type == 'Field') {
 				var marker = markers[i];
@@ -60,7 +60,7 @@ function FakeData() {
 					)
 					.then(fieldData => {
 						fakeDataService.InsertFarmField(
-							this.makeFakeFieldData(marker, fieldData)
+							this.makeFakeFieldData(marker, fieldData, date)
 						);
 					});
 			} else {
@@ -68,7 +68,7 @@ function FakeData() {
 				for (var j = 0; j < 5; j++) {
 					for (var k = 0; k < 24; k++) {
 						forecast.push(
-							this.makeFakeWeatherData(markers[i], j, k)
+							this.makeFakeWeatherData(markers[i], j, k, date)
 						);
 					}
 				}
@@ -77,10 +77,9 @@ function FakeData() {
 		}
 	};
 
-	this.makeFakeWeatherData = function(marker, dayOffset, hour) {
+	this.makeFakeWeatherData = function(marker, dayOffset, hour, date) {
 		//WeatherID Auto
 		//RecordDate
-		var date = new Date();
 		date.setDate(date.getDate() + dayOffset);
 		//Season
 		var season = this.currentSeason(date);
@@ -134,7 +133,7 @@ function FakeData() {
 		}
 	};
 
-	this.makeFakeFieldData = function(marker, fieldData) {
+	this.makeFakeFieldData = function(marker, fieldData, date) {
 		fieldData = JSON.parse(fieldData)[0][0];
 		//FarmFieldID
 		var id = marker.FarmID;
@@ -154,12 +153,12 @@ function FakeData() {
 		if (fieldData != undefined) {
 			plantDate = dateFormat(fieldData.PlantDate, 'yyyy-mm-dd');
 		} else {
-			plantDate = dateFormat(new Date(), 'yyyy-mm-dd');
+			plantDate = dateFormat(date, 'yyyy-mm-dd');
 		}
 		//RecordDate
-		var recordDate = dateFormat(new Date(), 'yyyy-mm-dd');
+		var recordDate = dateFormat(date, 'yyyy-mm-dd');
 		//RecordTime
-		var recordTime = dateFormat(new Date(), 'h:MM:ss');
+		var recordTime = dateFormat(date, 'h:MM:ss');
 
 		var data = {
 			id,

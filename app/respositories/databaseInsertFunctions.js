@@ -21,6 +21,7 @@ module.exports = {
 					',' +
 					dbc.escape(data.time) +
 					')';
+				//console.log(query);
 				dbc.query(query, function(err) {
 					if (err) console.log(err);
 				});
@@ -48,6 +49,7 @@ module.exports = {
 				',' +
 				dbc.escape(data.recordTime) +
 				')';
+			//console.log(query);
 			dbc.query(query, function(err) {
 				if (err) console.log(err);
 			});
