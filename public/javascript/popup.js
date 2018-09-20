@@ -1,6 +1,9 @@
 function AddWrapper(data) {
+	var width = $('.leaflet-popup-content').css('width');
 	return (
-		"<div class='leaflet-popup-content' style='width: 301px'>" +
+		"<div class='leaflet-popup-content' style='width: " +
+		width +
+		"'>" +
 		data +
 		'</div>'
 	);

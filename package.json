@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"test": "mocha",
-		"start": "nodemon ./bin/www"
+		"start": "nodemon ./bin/www",
+		"data": "nodemon dataScript.js"
 	},
 	"dependencies": {
 		"chai": "^4.1.2",
