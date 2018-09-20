@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 /* GET field */
 describe('/GET add farmData', function(){
-	it('returns 1 if the getFarmData API route returns '\got here'\ ', (done) => {
+	it('returns 1 if the getFarmData API route returns got here ', (done) => {
 		chai.request('http://localhost:3000')
 		.get('/addFarmData')
 		.end((err, res) => {
