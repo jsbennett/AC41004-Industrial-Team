@@ -5,6 +5,7 @@ var farmService = require('../services/farmService.js');
 
 router.get('/field/:fieldID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
+		console.log(json);
 		res.render('field', { data: json });
 	});
 });

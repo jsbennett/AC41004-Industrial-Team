@@ -8,8 +8,8 @@ function fieldModel(farmFieldID, cropName, datePlanted, expectedHarvest, timeToM
     this.phLevel = phLevel; 
     this.moistureLevel = moistureLevel; 
     this.image = image; 
-    harvestMonth = "September";
-    harvestDay = 20; 
+    this.harvestMonth = "September";
+    this.harvestDay = 20; 
 };
 
 module.exports = fieldModel; 
