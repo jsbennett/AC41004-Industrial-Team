@@ -19,8 +19,10 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
 				dbQueries.FindMarkers(dbconnection).then(function(result) {
+					dbconnection.end();
 					resolve(result);
 				});
+				
 			});
 		});
 	},
@@ -29,16 +31,12 @@ module.exports = {
 		var fieldID = req.param('fieldID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		var fieldData = this.GetFieldDetails(fieldID, todaysDate, todaysDate);
-		var locationData = this.GetLocationDetails();
 
-		return Promise.all([fieldData, locationData]).then(
-			([fieldResults, locationResults]) => {
+		return Promise.all([fieldData]).then(
+			([fieldResults]) => {
 				var originalFields = JSON.parse(fieldResults);
-				var locations = JSON.parse(locationResults);
 
 				var fields = originalFields[0];
-				var longitude = 0;
-				var latitude = 0;
 				var timeToGrow = 0;
 				var cropName = '';
 				var expectedHarvest = 0;
@@ -108,9 +106,10 @@ module.exports = {
 				dbQueries
 					.FindField(dbconnection, fieldID, startDate, endDate)
 					.then(function(result) {
+						dbconnection.end();
 						resolve(result);
 					});
-			});
+				});
 		});
 	},
 	GetFarmSummary: function(req, res) {
@@ -119,9 +118,8 @@ module.exports = {
 		var futureDate = new Date();
 		futureDate.setDate(futureDate.getDate() + 4);
 		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
-		var locationData = this.GetLocationDetails();
-		var markerData = this.GetMarkers();
 		var weatherData = this.GetWeatherDetails(farmID, todaysDate, futureDate);
+		console.log(futureDate);
 		return Promise.all([farmData, weatherData]).then(
 			([fieldResults, weatherResults]) => {
 				var farmCrops = JSON.parse(fieldResults);
@@ -130,13 +128,12 @@ module.exports = {
 				var today = new Date();
 				today.setHours(0,0,0,0);
 				var currentCrops = [];
-				var locationID = 0; 
 				var displayWeather = []; 
 				for (i in farmCrops[0])
 				{
 					var expectedHarvest = new Date(farmCrops[0][i]['PlantDate']);
 					expectedHarvest.setDate(expectedHarvest.getDate() + farmCrops[0][i]["TimeToMature"]);
-					if(expectedHarvest > today)
+					if(expectedHarvest >= today)
 					{
 						var crop = new cropSummaryModel(farmCrops[0][i]["CropName"], expectedHarvest);
 						currentCrops.push(crop);
@@ -148,35 +145,24 @@ module.exports = {
 				
 				for(i in weather[0])
 				{
-					console.log("from database: " + weather[0][i]["RecordDate"]);
-					var newDate = todaysDate + "T23:00:00.000Z";
-					console.log(newDate);
-					console.log("from database: " + weather[0][i]["CurrentTime"]);
-					console.log(time);
-					if(weather[0][i]["CurrentTime"] == time && weather[0][i]["RecordDate"] == newDate);
+					var weatherDate = weather[0][i]["RecordDate"].split('T')[0]; 
+					var comparisonDate = todaysDate; 
+
+					var weatherTime = weather[0][i]["CurrentTime"];
+					if(weatherDate == comparisonDate && weatherTime == time)
 					{
-						console.log("works");
+						var todayWeather = new weatherSummaryModel(
+							
+						);//make new weather 
+						//add it to 
 					}
-				}
-				//get all weather
-				//get weather for todays date and todays time 
-				//get weather for tomoorrow at noon and so on for 5 days
+				} 
 
-				for (i in markers[0])
-				{
-					if((markers[0][i]["Type"]=="Farm") && (markers[0][i]["FarmID"] == farmID))
-					{
-						locationID = markers[0][i]["LocationID"];
-					}	
-				}
-
-
-				//console.log(weather);
 				var farm = new farmSummaryModel(
 					crops = currentCrops,
 					weather = 0
 				);
-				return res.json({farm: farm});
+				return {farm: farm};
 			}
 		
 		);
@@ -193,6 +179,7 @@ module.exports = {
 				dbQueries
 					.FindFarm(dbconnection, farmID, startDate, endDate)
 					.then(function(result) {
+						dbconnection.end();
 						resolve(result);
 					});
 			});
@@ -208,6 +195,7 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
 				dbQueries.FindLocation(dbconnection).then(function(result) {
+					dbconnection.end();
 					resolve(result);
 				});
 			});
@@ -223,6 +211,7 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
 				dbQueries.FindWeather(dbconnection,farmID, todaysDate, futureDate).then(function(result) {
+					dbconnection.end();
 					resolve(result);
 				});
 			});
@@ -238,6 +227,7 @@ module.exports = {
 		return new Promise(function(resolve, reject) {
 			db.Connect().then(function(dbconnection) {
 				dbQueries.FindCrop(dbconnection).then(function(result) {
+					dbconnection.end();
 					resolve(result);
 				});
 			});
