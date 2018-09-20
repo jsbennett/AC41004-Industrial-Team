@@ -2,7 +2,7 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link.active(href='#' id='Field' onClick="Test();") Test
+				a.nav-link.active(href='#' id='Crop' onClick="Crop();") Crop
 			li.nav-item
 				a.nav-link(href='#' id='Soil' onClick="Soil();") Soil
 			li.nav-item
@@ -21,15 +21,16 @@ block content
 			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
 		hr
 		br
+		h2 Expected Harvest
+		br
 		time.icon(datetime='#{data.field.expectedHarvest}')
-			em Saturday
-			strong September
+			em #{data.field.harvestDay}
+			strong #{data.field.harvestMonth}
 			span 20
-		p #{data.field.expectedHarvest}
-
+		br
 		hr
 		br
-		h2 Plant Growth
+		h3 Plant Growth
 		br
 		hr
 		

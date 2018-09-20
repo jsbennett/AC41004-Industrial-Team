@@ -9,7 +9,7 @@ function AddWrapper(data) {
 	);
 }
 
-function Test() {
+function Crop() {
 	$.ajax({
 		url: '/field/1',
 		success: function(data) {
