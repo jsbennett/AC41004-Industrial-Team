@@ -8,20 +8,26 @@
 		"data": "nodemon dataScript.js"
 	},
 	"dependencies": {
+		"balanced-match": "^1.0.0",
+		"brace-expansion": "^1.1.11",
 		"chai": "^4.1.2",
 		"chai-http": "^4.2.0",
+		"concat-map": "0.0.1",
 		"cookie-parser": "~1.4.3",
 		"debug": "~2.6.9",
 		"events": "^3.0.0",
 		"express": "~4.16.0",
 		"faker": "^4.1.0",
+		"has-flag": "^3.0.0",
 		"http-errors": "~1.6.2",
+		"minimatch": "^3.0.4",
 		"mocha": "^5.2.0",
 		"morgan": "~1.9.0",
 		"mysql": "^2.16.0",
 		"nodemon": "^1.18.4",
 		"package": "^1.0.1",
 		"path": "^0.12.7",
+		"path-is-absolute": "^1.0.1",
 		"pug": "2.0.0-beta11"
 	}
 }
