@@ -20,6 +20,7 @@
 		"faker": "^4.1.0",
 		"has-flag": "^3.0.0",
 		"http-errors": "~1.6.2",
+		"is-buffer": "^2.0.3",
 		"minimatch": "^3.0.4",
 		"mocha": "^5.2.0",
 		"morgan": "~1.9.0",
