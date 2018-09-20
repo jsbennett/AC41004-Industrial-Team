@@ -11,7 +11,6 @@ block content
 				a.nav-link.disabled(href='#') Disabled
 		h1 field
 		p #{JSON.stringify(data.field)}
-		h2 #{data.field.cropName}
 		ul
 			each val in data.field
 				li= val
@@ -21,4 +20,4 @@ block content
 		else 
 			h3 jsdjfdnsd
 
-		img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
+		//img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
