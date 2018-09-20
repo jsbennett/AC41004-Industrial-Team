@@ -29,16 +29,12 @@ module.exports = {
 		var fieldID = req.param('fieldID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		var fieldData = this.GetFieldDetails(fieldID, todaysDate, todaysDate);
-		var locationData = this.GetLocationDetails();
 
 		return Promise.all([fieldData, locationData]).then(
-			([fieldResults, locationResults]) => {
+			([fieldResults]) => {
 				var originalFields = JSON.parse(fieldResults);
-				var locations = JSON.parse(locationResults);
 
 				var fields = originalFields[0];
-				var longitude = 0;
-				var latitude = 0;
 				var timeToGrow = 0;
 				var cropName = '';
 				var expectedHarvest = 0;
@@ -148,16 +144,17 @@ module.exports = {
 				
 				for(i in weather[0])
 				{
-					console.log("from database: " + weather[0][i]["RecordDate"]);
+					console.log(weather[0][i]["RecordDate"]);
 					var newDate = todaysDate + "T23:00:00.000Z";
 					console.log(newDate);
-					console.log("from database: " + weather[0][i]["CurrentTime"]);
+					console.log(weather[0][i]["CurrentTime"]);
 					console.log(time);
-					if(weather[0][i]["CurrentTime"] == time && weather[0][i]["RecordDate"] == newDate);
+					if(String(weather[0][i]["RecordDate"]) == String(newDate));
 					{
 						console.log("works");
 					}
 				}
+				//(weather[0][i]["CurrentTime"] == time)
 				//get all weather
 				//get weather for todays date and todays time 
 				//get weather for tomoorrow at noon and so on for 5 days
@@ -176,7 +173,7 @@ module.exports = {
 					crops = currentCrops,
 					weather = 0
 				);
-				return res.json({farm: farm});
+				return {farm: farm};
 			}
 		
 		);
