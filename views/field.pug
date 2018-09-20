@@ -9,15 +9,30 @@ block content
 				a.nav-link(href='#') Link
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
-		h1 field
-		p #{JSON.stringify(data.field)}
-		ul
-			each val in data.field
-				li= val
+		// p #{JSON.stringify(data.field)}
+		// h1 #{data.field.cropName}
+		br
+		hr
+		if data.field.cropName == 'Potatoes'
+			img(src='/images/crops/potatoes2.png', class= 'cropImg')
+		else if data.field.cropName == 'Corn'
+			img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
+		else if data.field.cropName == 'Strawberries'
+			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
+		hr
+		br
+		time.icon(datetime='#{data.field.expectedHarvest}')
+			em Saturday
+			strong September
+			span 20
+		p #{data.field.expectedHarvest}
 
-		if data.field.cropName == 'sdkld'
-			h3 yoyoyo
-		else 
-			h3 jsdjfdnsd
-
-		//img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
+		hr
+		br
+		h2 Plant Growth
+		br
+		hr
+		
+		img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
+		style
+			include ../public/stylesheets/stylesheet.css
