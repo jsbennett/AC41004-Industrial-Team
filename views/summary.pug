@@ -9,6 +9,14 @@ block content
 				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Summary
 			li.nav-item
 				a.nav-link(href='#') Link
-			h2 summary
-			p #{JSON.stringify(data)}
-			
+			h2.summaryHeader farm summary
+			br
+			//p #{JSON.stringify(data)}
+			for result in data
+				p.label Crops: 
+				p.result #{result.crops}
+				br
+				p.label Weather: 
+				p.result #{result.weather}
+
+			link(rel='stylesheet', href='/stylesheets/stylesheet.css')
