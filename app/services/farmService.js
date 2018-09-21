@@ -6,7 +6,7 @@ var cropSummaryModel = require('../models/currentCropsSummaryModel.js');
 var weatherSummaryModel = require('../models/currentWeatherSummaryModel.js');
 
 module.exports = {
-	GetAllMarkers: function(res) {
+	GetAllMarkers: function() {
 		var markerData = this.GetMarkers();
 		return Promise.all([markerData]).then(([markerResults]) => {
 			var originalMarkers = JSON.parse(markerResults);
@@ -27,13 +27,14 @@ module.exports = {
 		});
 	},
 
-	GetCurrentFieldDetails: function(req, res) {
+	GetCurrentFieldDetails: function(req) {
 		var fieldID = req.param('fieldID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		var fieldData = this.GetFieldDetails(fieldID, todaysDate, todaysDate);
-		console.log(fieldData);
+		
 		return Promise.all([fieldData]).then(
 			([fieldResults]) => {
+
 				var originalFields = JSON.parse(fieldResults);
 
 				var fields = originalFields[0];
@@ -65,10 +66,13 @@ module.exports = {
 				expectedHarvest = new Date(fields[0]['PlantDate']);
 				expectedHarvest.setDate(expectedHarvest.getDate() +  growthDelay); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
 				
-				var expectedHarvestDay = expectedHarvest.getDate();
+				var expectedHarvestDate = expectedHarvest.getDate();
 				
 				var month = ["January","Feburary","March","April","May","June","July","August","September","October","November","December"];
 				var expectedHarvestMonth = month[expectedHarvest.getMonth()];
+
+				var day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]; 
+				var expectedHarvestDay= day[expectedHarvest.getDay()];
 				
 				if(image2Date >  today)
 				{
@@ -92,6 +96,7 @@ module.exports = {
 					cropName,
 					expectedHarvestMonth,
 					expectedHarvestDay,
+					expectedHarvestDate,
 					fields[0]['PlantDate'],
 					timeToGrow,
 					fields[0]['PHLevel'],
@@ -120,7 +125,7 @@ module.exports = {
 				});
 		});
 	},
-	GetFarmSummary: function(req, res) {
+	GetFarmSummary: function(req) {
 		var farmID = req.param('farmID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		
@@ -264,6 +269,28 @@ module.exports = {
 				return {farm: farm};
 			}
 		
+		);
+	},
+
+	GetFarmAnalysis : function(req)
+	{
+		var farmID = req.param('farmID');
+		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+		var pastDate = new  Date(2018,2,4).toISOString().split('T')[0];
+		var farmData = this.GetFarmDetails(farmID, pastDate, FutureDate);
+		var weatherData = this.GetWeatherDetails(farmID, pastDate, todaysDate);
+		
+		return Promise.all([farmData, weatherData]).then(
+			([fieldResults, weatherResults]) => {
+				var farmCrops = JSON.parse(fieldResults);
+				var weather = JSON.parse(weatherResults);
+
+				for(i in farmCrops)
+				{
+					console.log(farmCrops[0][i]["RecordDate"]);
+				}
+					
+			}
 		);
 	},
 	/*
