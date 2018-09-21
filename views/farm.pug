@@ -1,3 +1,21 @@
 block content
-	div
-		h1 this is a farm
+  div
+    h1 The current season is
+    hr
+    br
+    // Whenever you remove the array, nothing shows up for season. 
+    // This means its not realtime as your always selecting a certain row. 
+    // if the weather table with array 1 contains a season autumn
+    if data.farm.weather[1].season == 'Autumn'
+       img(src='/images/Autumn.png')
+       p it does contain autumn
+    else if data.farm.weather[1].season == 'Spring'
+       img(src='/images/Spring.png')
+    else if data.farm.weather[1].season == 'Winter'
+       img(src='/images/Winter.png')
+    else if data.farm.weather[1].season == 'Summer'
+       img(src='/images/Summer.png')
+    // hr
+    // Use this line to change the data
+    // p #{JSON.stringify(data.farm.weather.season)}
+    // hr
