@@ -26,3 +26,13 @@ function Soil() {
 		}
 	});
 }
+
+
+function Summary() {
+	$.ajax({
+		url: '/farmSummary/1',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
