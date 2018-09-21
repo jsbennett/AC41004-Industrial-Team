@@ -31,7 +31,7 @@ module.exports = {
 		var fieldID = req.param('fieldID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		var fieldData = this.GetFieldDetails(fieldID, todaysDate, todaysDate);
-
+		console.log(fieldData);
 		return Promise.all([fieldData]).then(
 			([fieldResults]) => {
 				var originalFields = JSON.parse(fieldResults);
@@ -113,6 +113,7 @@ module.exports = {
 				dbQueries
 					.FindField(dbconnection, fieldID, startDate, endDate)
 					.then(function(result) {
+						console.log(result);
 						dbconnection.end();
 						resolve(result);
 					});
@@ -124,78 +125,146 @@ module.exports = {
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
 		
 		var futureDate = new Date();
-		futureDate.setDate(futureDate.getDate() + 4);
+		futureDate.setDate(futureDate.getDate() + 5);
+		
 		var farmData = this.GetFarmDetails(farmID, todaysDate, todaysDate);
 		var weatherData = this.GetWeatherDetails(farmID, todaysDate, futureDate);
 		
 		return Promise.all([farmData, weatherData]).then(
 			([fieldResults, weatherResults]) => {
 				var farmCrops = JSON.parse(fieldResults);
-				console.log("here1");
 				var weather = JSON.parse(weatherResults);
-				console.log(weather);
+	
 				var today = new Date();
 				today.setHours(0,0,0,0);
 				var currentCrops = [];
 				var displayWeather = []; 
-				console.log("here1.5");
-				/*for (i in farmCrops[0])
+				
+				for (i in farmCrops[0])
 				{
-					console.log("here2");
 					var expectedHarvest = new Date(farmCrops[0][i]['PlantDate']);
 					expectedHarvest.setDate(expectedHarvest.getDate() + farmCrops[0][i]["TimeToMature"]);
 					var date = new Date();
-					var time = date.getHours() + ":00:00";
-
-					if(expectedHarvest >= today && farmCrops[0][i]["RecordTime"] == time)
+	
+					if(expectedHarvest >= today)
 					{
-						//console.log(farmCrops[0][i]["RecordTime"]);
+					
 						var crop = new cropSummaryModel(farmCrops[0][i]["CropName"], expectedHarvest);
 						currentCrops.push(crop);
 					}
-				}*/
-				//console.log(farmCrops[0].length);
-;				for(i in weather[0])
+				}
+				var startDate; 
+			
+				var day2Date;
+				var day3Date;
+				var day4Date;
+				var day5Date;
+
+				for(i in weather[0])
 				{
-					console.log("here3");
 					var weatherDate = weather[0][i]["RecordDate"].split('T')[0]; 
 					var comparisonDate = todaysDate; 
-					var weatherTime = weather[0][i]["CurrentTime"];
-					if(weatherDate == comparisonDate && weatherTime == '12:00:00')
+					
+					if(weatherDate == comparisonDate)
 					{
+						startDate = weather[0][i]["RecordDate"];
 						var todayWeather = new weatherSummaryModel(
+							weatherDate,
+							1,
 							weather[0][i]["Season"],
-							weather[0][i]["WeatherType"],
+							weather[0][i]["Weathertype"],
 							weather[0][i]["Temperature"],
 							weather[0][i]["Humidity"],
 							weather[0][i]["WindStrength"]
 						);
-						displayWeather.push(weather[0][i]["RecordDate"]);
-					}
-					console.log(todayWeather);
-					var day2 = new Date(weather[0][i]["RecordDate"]);
-					day2.setDate(day2.getDate()+1);
-					console.log(day2);
-					var day3 = new Date(day2);
-					day2.setDate(day3.getDate()+1);
-					console.log(day3);
-					var day4 = new Date(day3);
-					day2.setDate(day4.getDate()+1);
-					console.log(day4);
-					var day5 = new Date(day4);
-					day2.setDate(day5.getDate()+1);
-					console.log(day5);
-				} 
+						displayWeather.push(todayWeather);
+						
+						var day2 = new Date(startDate);
+						day2.setDate(day2.getDate()+1);
+						var day3 = new Date(day2);
+						day2 = day2.toISOString().split('T')[0];
+						day2Date = day2; 
 
+						day3.setDate(day3.getDate()+1);
+						var day4 = new Date(day3);
+						day3 = day3.toISOString().split('T')[0];
+						day3Date = day3; 
+
+						day4.setDate(day4.getDate()+1);
+						var day5 = new Date(day4);
+						day4 = day4.toISOString().split('T')[0];
+						day4Date = day4; 
+
+						day5.setDate(day5.getDate()+1);
+						day5 = day5.toISOString().split('T')[0];
+						day5Date = day5; 
+					}
+
+					if(String(weatherDate) == String(day2Date))
+					{
+						var day2Weather = new weatherSummaryModel(
+							day2Date,
+							2,
+							weather[0][i]["Season"],
+							weather[0][i]["Weathertype"],
+							weather[0][i]["Temperature"],
+							weather[0][i]["Humidity"],
+							weather[0][i]["WindStrength"]
+						);
+						displayWeather.push(day2Weather);
+					}
+
+					if(String(weatherDate) == String(day3Date))
+					{
+						var day3Weather = new weatherSummaryModel(
+							day3Date,
+							3,
+							weather[0][i]["Season"],
+							weather[0][i]["Weathertype"],
+							weather[0][i]["Temperature"],
+							weather[0][i]["Humidity"],
+							weather[0][i]["WindStrength"]
+						);
+						displayWeather.push(day3Weather);
+					}
+
+					if(String(weatherDate) == String(day4Date))
+					{
+						var day4Weather = new weatherSummaryModel(
+							day4Date,
+							4,
+							weather[0][i]["Season"],
+							weather[0][i]["Weathertype"],
+							weather[0][i]["Temperature"],
+							weather[0][i]["Humidity"],
+							weather[0][i]["WindStrength"]
+						);
+						displayWeather.push(day4Weather);
+					}
+
+					if(String(weatherDate) == String(day5Date))
+					{
+						var day5Weather = new weatherSummaryModel(
+							day5Date,
+							5,
+							weather[0][i]["Season"],
+							weather[0][i]["Weathertype"],
+							weather[0][i]["Temperature"],
+							weather[0][i]["Humidity"],
+							weather[0][i]["WindStrength"]
+						);
+						displayWeather.push(day5Weather);
+					}
+				}
+				 
 				var farm = new farmSummaryModel(
 					crops = currentCrops,
-					weather = 0
+					weather = displayWeather
 				);
 				return {farm: farm};
 			}
 		
 		);
-		//return res.json({field: field});
 	},
 	/*
     
