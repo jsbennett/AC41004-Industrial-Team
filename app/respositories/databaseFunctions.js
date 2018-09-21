@@ -18,6 +18,7 @@ module.exports = {
 				'CALL GetDailyFarmFieldsDetails(?, ?, ?)',
 				[fieldID, startDate, endDate],
 				function(err, recordset) {
+					console.log(recordset);
 					if (err) console.log(err);
 					resolve(JSON.stringify(recordset));
 				}

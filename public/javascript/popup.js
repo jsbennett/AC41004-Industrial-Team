@@ -27,9 +27,10 @@ function Soil() {
 	});
 }
 
+
 function Summary() {
 	$.ajax({
-		url: '/farm/1',
+		url: '/farmSummary/1',
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}

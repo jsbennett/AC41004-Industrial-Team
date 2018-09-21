@@ -9,14 +9,20 @@ block content
 				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Summary
 			li.nav-item
 				a.nav-link(href='#') Link
-			h2.summaryHeader farm summary
 			br
-			//p #{JSON.stringify(data)}
-			for result in data
-				p.label Crops: 
-				p.result #{result.crops}
-				br
-				p.label Weather: 
-				p.result #{result.weather}
-
-			link(rel='stylesheet', href='/stylesheets/stylesheet.css')
+			h2.summary Header farm summary
+			br
+			p #{JSON.stringify(data.farm.weather)}
+			for i in data.farm.crops
+				p Crop name: #{JSON.stringify(data.farm.crops[0].cropName)}
+				p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
+			for j in data.farm.weather
+				p Date: #{JSON.stringify(data.farm.weather[0].date)}
+				p Day: #{JSON.stringify(data.farm.weather[0].dayNumber)}
+				p Season: #{JSON.stringify(data.farm.weather[0].season)}
+				p Weather: #{JSON.stringify(data.farm.weather[0].weatherType)}
+				p Temperature: #{JSON.stringify(data.farm.weather[0].temperature)}
+				p Humidity: #{JSON.stringify(data.farm.weather[0].humidity)}
+				p Wind: #{JSON.stringify(data.farm.weather[0].windStrength)}
+			
+			
