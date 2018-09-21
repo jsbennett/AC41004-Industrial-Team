@@ -11,6 +11,7 @@ block content
 				a.nav-link.disabled(href='#') Disabled
 		// p #{JSON.stringify(data.field)}
 		// h1 #{data.field.cropName}
+		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		br
 		hr
 		if data.field.cropName == 'Potatoes'
