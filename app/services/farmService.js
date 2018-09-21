@@ -54,7 +54,7 @@ module.exports = {
 				image2Date = new Date(fields[0]['PlantDate']);
 				image2Date.setDate(image2Date.getDate() + growthDelay);
 				image3Date = new Date(image2Date);
-				image3Date.setDate(image3Date.getDate() + dhgrowthDelay);
+				image3Date.setDate(image3Date.getDate() + growthDelay);
 				image4Date = new Date(image3Date);
 				image4Date.setDate(image4Date.getDate() + growthDelay);
 
@@ -63,7 +63,7 @@ module.exports = {
 				image = 0;
 				
 				expectedHarvest = new Date(fields[0]['PlantDate']);
-				expectedHarvest.setDate(expectedHarvest.getDate() +  nhbjhgt); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+				expectedHarvest.setDate(expectedHarvest.getDate() +  growthDelay); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
 				
 				var expectedHarvestDay = expectedHarvest.getDate();
 				
