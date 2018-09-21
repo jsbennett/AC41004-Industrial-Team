@@ -37,6 +37,14 @@ h1 {
 
 h2 {
 	text-align: center;
+	font-family: Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+h3 {
+	text-align: center;
+	font-family: Helvetica,Arial,sans-serif;
 	font-size: 18px;
 	font-weight: bold;
 }
@@ -65,8 +73,20 @@ img {
 }
 
 .plantImg {
+}
+
+.harvestImg {
 	display: block;
-	margin: 0 auto;
+	float: left;
+	padding-top: 10px;
+}
+
+.growthHeadingImg {
+	display: block;
+	float: left;
+	padding-top: 85px;
+	padding-right: 30px;
+	padding-left: 10px;
 }
 
 time.icon
