@@ -29,7 +29,7 @@ function Soil() {
 
 function Summary() {
 	$.ajax({
-		url: '/summary/1',
+		url: '/farm/1',
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}

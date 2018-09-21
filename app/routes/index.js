@@ -17,27 +17,22 @@ router.get('/soil/:fieldID', function(req, res, next) {
 
 router.get('/farm/:farmID', function(req, res, next) {
 	farmService.GetFarmSummary(req, res).then(function(json) {
-		res.render('farm', { data: json });
-	});
-});
-
-router.get('/farmSummary/:farmID', function(req, res, next) {
-	farmService.GetFarmSummary(req, res).then(function(json) {
 		res.render('summary', { data: json });
 	});
 });
 
 router.get('/summary/:farmID', function(req, res, next) {
+	farmService.GetFarmSummary(req, res).then(function(json) {
+		res.render('summary', { data: json });
+	});
+});
+
+router.get('/farmsummary/:farmID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req, res).then(function(json) {
 		res.render('farm', { data: json });
 	});
 });
-
-router.get('/api/getFarmSummary/:farmID', function(req, res, next) {
-	farmService.GetFarmSummary(req, res).then(function(json) {
-		res.json(json);
-	});
-});
+	 
 
 router.get('/', function(req, res, next) {
 	res.render('index', {

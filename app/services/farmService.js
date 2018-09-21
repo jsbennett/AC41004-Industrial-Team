@@ -45,10 +45,11 @@ module.exports = {
 				var image4Date = 0;
 				var growthDelay = 0;
 				var image = 0; 
-
+				try{
 				//calculate growing periods - add it to final json
 				timeToGrow = fields[0]['TimeToMature'];
 				cropName = fields[0]['CropName'];
+				
 
 				growthDelay = timeToGrow / 5;
 				image2Date = new Date(fields[0]['PlantDate']);
@@ -64,6 +65,9 @@ module.exports = {
 				
 				expectedHarvest = new Date(fields[0]['PlantDate']);
 				expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+				}catch(e){
+
+				}
 				if(image2Date >  today)
 				{
 					image = 1;
@@ -80,7 +84,7 @@ module.exports = {
 				{
 					image = 4; 
 				}
-				
+				try{
 				var field = new fieldModel(
 					fields[0]['FarmFieldID'],
 					cropName,
@@ -90,7 +94,7 @@ module.exports = {
 					fields[0]['PHLevel'],
 					fields[0]['MoisturePercent'],
 					image
-				);
+				);}catch(e){}
 				return { field: field };
 			}
 		);
@@ -201,7 +205,7 @@ module.exports = {
 			});
 		});
 	},
-
+		
 		GetFarmSummary: function(req, res) {
 		var farmID = req.param('farmID');
 		var todaysDate = new Date().toISOString().split('T')[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object

@@ -5,7 +5,8 @@
 	"scripts": {
 		"test": "mocha",
 		"start": "nodemon ./bin/www",
-		"data": "nodemon dataScript.js"
+		"data": "nodemon dataScript.js", 
+		"debug": "nodemon --inspect ./bin/www"
 	},
 	"dependencies": {
 		"balanced-match": "^1.0.0",
