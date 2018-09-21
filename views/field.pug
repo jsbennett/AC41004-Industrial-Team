@@ -24,9 +24,9 @@ block content
 		h2 Expected Harvest
 		br
 		time.icon(datetime='#{data.field.expectedHarvest}')
-			em #{data.field.harvestDay}
+			em #{data.field.harvestDay + 1}
 			strong #{data.field.harvestMonth}
-			span 20
+			span #{data.field.harvestDay}
 		br
 		hr
 		br
