@@ -10,19 +10,41 @@ block content
 			li.nav-item
 				a.nav-link(href='#') Link
 			br
-			h2.summary Header farm summary
 			br
-			p #{JSON.stringify(data.farm.weather)}
-			for i in data.farm.crops
-				p Crop name: #{JSON.stringify(data.farm.crops[0].cropName)}
-				p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
-			for j in data.farm.weather
-				p Date: #{JSON.stringify(data.farm.weather[0].date)}
-				p Day: #{JSON.stringify(data.farm.weather[0].dayNumber)}
-				p Season: #{JSON.stringify(data.farm.weather[0].season)}
-				p Weather: #{JSON.stringify(data.farm.weather[0].weatherType)}
-				p Temperature: #{JSON.stringify(data.farm.weather[0].temperature)}
-				p Humidity: #{JSON.stringify(data.farm.weather[0].humidity)}
-				p Wind: #{JSON.stringify(data.farm.weather[0].windStrength)}
-			
-			
+			.grid-container
+				hr
+				if data.farm.crops[0].cropName == 'Potatoes'
+					img(src='/images/crops/potatoes2.png', class= 'cropImg')
+				else if data.farm.crops[0].cropName == 'Corn'
+					img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
+				else if data.farm.crops[0].cropName == 'Strawberries'
+					img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
+				hr
+				
+				img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
+				time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate}')
+				//em #{data.farm.crops[0].expectedHarvestDate}
+				//strong #{data.farm.crops[0].expectedHarvestDate}
+				//span #{data.farm.crops[0].expectedHarvestDate}
+				//p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
+				//.farm
+					//h5 Farm Weather Summary
+					//p.label Date:
+					//p.result #{JSON.stringify(data.farm.weather[0].date)}
+					//p.label Day:
+					//p.result #{JSON.stringify(data.farm.weather[0].dayNumber)}
+					//p.label Season: 
+					//p.result #{JSON.stringify(data.farm.weather[0].season)}
+					//p.label Weather:
+					//p.result #{JSON.stringify(data.farm.weather[0].weatherType)}
+					//p.label Temperature:
+					//p.result #{JSON.stringify(data.farm.weather[0].temperature)}
+					//p.label Humidity:
+					//p.result #{JSON.stringify(data.farm.weather[0].humidity)}
+					//p.label Wind:
+					//p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
+							
+
+			////.crop
+			//for j in data.farm.weather
+			//for i in data.farm.crops

@@ -141,7 +141,22 @@ time.icon span
 
 .label{
 color:#505151;
+font-size:12px;
 }
 .result{
 color:#6D6D6D;
+font-size:12px;
 }
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr;
+  grid-gap: 2.5px 2.5px;
+  grid-template-areas: ". .";
+  padding:1;
+}
+.crop { grid-area: crop; }
+
+.weather { grid-area: weather; }
+
