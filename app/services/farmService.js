@@ -1,3 +1,9 @@
+/*
+*	name: farmService.js
+* 	function: This is the service layer for the application. It acts as the bridge between the repository layer (the data access) and the routes which are used by the front end. 
+			  By doing this, this means that the routes and front end does not need to know about the database.
+
+*/
 var db = require("../config/database.js");
 var dbQueries = require("../respositories/databaseFunctions.js");
 var fieldModel = require("../models/fieldModel.js");
@@ -8,6 +14,11 @@ var weatherAnalysisModel = require("../models/analysisWeatherModel");
 var cropAnalysisModel = require("../models/analysisCropsModel.js");
 
 module.exports = {
+    /*
+	*
+	* Returns an JSON object with all the markers locations and IDs
+	*
+	*/
     GetAllMarkers: function() {
         var markerData = this.GetMarkers();
         return Promise.all([markerData]).then(([markerResults]) => {
@@ -16,7 +27,11 @@ module.exports = {
             return { markers: markers };
         });
     },
-
+    /*
+	*
+	*
+	*
+	*/
     GetCurrentFieldDetails: function(req) {
         var fieldID = req.param("fieldID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
