@@ -1,5 +1,7 @@
-function currentWeatherSummaryModel(season, weatherType, temperature, humidity, windStrength)
+function currentWeatherSummaryModel(date, dayNumber, season, weatherType, temperature, humidity, windStrength)
 {
+    this.date = date; 
+    this.dayNumber = dayNumber;
     this.season = season; 
     this.weatherType = weatherType;
     this.temperature = temperature; 
