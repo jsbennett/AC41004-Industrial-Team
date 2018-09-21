@@ -1,12 +1,12 @@
 var map = L.Wrld.map('map', '534aba75bfd7016e2593d59b9f8845df', {
 	center: [56.4941, -2.82058],
-	zoom: 16
+	zoom: 14
 });
-setTimeout(function() {
+/*setTimeout(function() {
 	map.setView([56.4941, -2.82058], 17, {
 		animate: false
 	});
-}, 5000);
+}, 500);*/
 
 // Sets the map theme
 /*map.themes.setTheme(
@@ -50,7 +50,8 @@ $.ajax({
 			var customOptions = {
 				maxWidth: '1000',
 				minWidth: '300',
-				className: 'custom'
+				className: 'custom',
+				closeOnClick: false
 			};
 
 			if (data['markers'][i].Type == 'Farm') {

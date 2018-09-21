@@ -73,6 +73,16 @@ img {
 }
 
 .plantImg {
+}
+
+.harvestImg {
+	display: block;
+	float: left;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+.growthHeadingImg {
 	display: block;
 	margin: 0 auto;
 }

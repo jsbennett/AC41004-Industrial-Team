@@ -2,13 +2,14 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link(href='#' id='Crop' onClick="Crop();") Crop
+				a.nav-link(href='#' id='Crop' data-bind=data.field.farmFieldID onClick="Crop();") Crop
 			li.nav-item
 				a.nav-link.active(href='#' id='Soil' onClick="Soil();") Soil
 			li.nav-item
 				a.nav-link(href='#') Link
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
+		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		h1 soil
 		include ../public/javascript/gauge.html
 

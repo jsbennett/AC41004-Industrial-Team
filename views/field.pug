@@ -11,6 +11,7 @@ block content
 				a.nav-link.disabled(href='#') Disabled
 		// p #{JSON.stringify(data.field)}
 		// h1 #{data.field.cropName}
+		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		br
 		hr
 		if data.field.cropName == 'Potatoes'
@@ -21,19 +22,15 @@ block content
 			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
 		hr
 		br
-		h2 Expected Harvest
-		br
+		img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
 		time.icon(datetime='#{data.field.expectedHarvest}')
-			em #{data.field.harvestDay + 1}
+			em #{data.field.harvestDay}
 			strong #{data.field.harvestMonth}
-			span #{data.field.harvestDay}
+			span #{data.field.harvestDate}
 		br
 		hr
 		br
-		h3 Plant Growth
-		br
-		hr
-		
-		img(src='/images/plant_image'+data.field.image+'.png', class='plantImg')
+		img(src='images/headings/plantgrowth.png', class = 'growthHeadingImg')
+		img(src='/images/plants/plant_image'+data.field.image+'.png', class='plantImg')
 		style
 			include ../public/stylesheets/stylesheet.css
