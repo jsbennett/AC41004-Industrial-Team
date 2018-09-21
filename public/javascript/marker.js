@@ -25,15 +25,15 @@ map.themes.setSeason(
      *  */
 );
 
-var greenIcon = L.icon({
-	iconUrl: 'images/farm_marker_green.png',
+var farmIcon = L.icon({
+	iconUrl: 'images/markers/farm_marker.png',
 	iconSize: [60, 60], // size of the icon
 	iconAnchor: [30, 60], // point of the icon which will correspond to marker's location
 	popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-var redIcon = L.icon({
-	iconUrl: 'images/farm_marker_red.png',
+var fieldIcon = L.icon({
+	iconUrl: 'images/markers/field_marker_green.png',
 	iconSize: [60, 60],
 	iconAnchor: [30, 60],
 	popupAnchor: [-3, -76]
@@ -62,7 +62,7 @@ $.ajax({
 					customOptions,
 					success: function(customPopup) {
 						var marker = new L.marker(this.location, {
-							icon: greenIcon
+							icon: farmIcon
 						}).addTo(map);
 						marker.bindPopup(customPopup, customOptions);
 					}
@@ -75,7 +75,7 @@ $.ajax({
 					customOptions,
 					success: function(customPopup) {
 						var marker = new L.marker(this.location, {
-							icon: redIcon
+							icon: fieldIcon
 						}).addTo(map);
 						marker.bindPopup(
 							$(customPopup).click(function() {})[0],
