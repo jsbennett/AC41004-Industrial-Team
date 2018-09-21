@@ -17,17 +17,6 @@ module.exports = {
         });
     },
 
-    GetMarkers: function() {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries.FindMarkers(dbconnection).then(function(result) {
-                    dbconnection.end();
-                    resolve(result);
-                });
-            });
-        });
-    },
-
     GetCurrentFieldDetails: function(req) {
         var fieldID = req.param("fieldID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -117,24 +106,6 @@ module.exports = {
                 image
             );
             return { field: field };
-        });
-    },
-    /*
-    *
-    *Retrieve field JSON object populated with entries from the field table.
-    *
-    */
-    GetFieldDetails: function(fieldID, startDate, endDate) {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries
-                    .FindField(dbconnection, fieldID, startDate, endDate)
-                    .then(function(result) {
-                        console.log(result);
-                        dbconnection.end();
-                        resolve(result);
-                    });
-            });
         });
     },
     GetFarmSummary: function(req) {
@@ -392,6 +363,34 @@ module.exports = {
                 return { months, weatherMonths };
             }
         );
+    },
+    /*
+    *
+    *Retrieve field JSON object populated with entries from the field table.
+    *
+    */
+    GetFieldDetails: function(fieldID, startDate, endDate) {
+        return new Promise(function(resolve, reject) {
+            db.Connect().then(function(dbconnection) {
+                dbQueries
+                    .FindField(dbconnection, fieldID, startDate, endDate)
+                    .then(function(result) {
+                        console.log(result);
+                        dbconnection.end();
+                        resolve(result);
+                    });
+            });
+        });
+    },
+    GetMarkers: function() {
+        return new Promise(function(resolve, reject) {
+            db.Connect().then(function(dbconnection) {
+                dbQueries.FindMarkers(dbconnection).then(function(result) {
+                    dbconnection.end();
+                    resolve(result);
+                });
+            });
+        });
     },
 
     FindFarm: function(farmID, pastDate, todaysDate) {
