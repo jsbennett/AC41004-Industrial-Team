@@ -73,8 +73,20 @@ img {
 }
 
 .plantImg {
+}
+
+.harvestImg {
 	display: block;
-	margin: 0 auto;
+	float: left;
+	padding-top: 10px;
+}
+
+.growthHeadingImg {
+	display: block;
+	float: left;
+	padding-top: 85px;
+	padding-right: 30px;
+	padding-left: 10px;
 }
 
 time.icon
