@@ -1,19 +1,18 @@
 <html>
   <head>
-   <script type="text/javascript">
+    <script type="text/javascript">
 
       google.charts.load('current', {'packages':['gauge']});
       google.charts.setOnLoadCallback(drawChart);
-
       function drawChart() {
 
-        var data = google.visualization.arrayToDataTable([
+        var info = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
-          ['Moisture', 80]
+          ['Moisture', 0]
         ]);
 
         var options = {
-          width: 400, height: 120,
+          width: 400, height: 160,
           redFrom: 90, redTo: 100,
           yellowFrom:75, yellowTo: 90,
           minorTicks: 5
@@ -21,16 +20,18 @@
 
         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 
-        chart.draw(data, options);
+        chart.draw(info, options);
 
         setInterval(function() {
-          data.setValue(0, 1, 5);
-          chart.draw(data, options);
-        }, 1000);
+          info.setValue(0, 1, 5);
+          chart.draw(info, options);
+        }, 10000);
       }
     </script>
   </head>
+
   <body>
     <div id="chart_div" style="width: 400px; height: 120px;"></div>
   </body>
+
 </html>

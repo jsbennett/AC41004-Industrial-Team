@@ -8,7 +8,7 @@ router.get('/field/:fieldID', function(req, res, next) {
 		res.render('field', { data: json });
 	});
 });
- 
+
 router.get('/soil/:fieldID', function(req, res, next) {
 	farmService.GetCurrentFieldDetails(req).then(function(json) {
 		res.render('soil', { data: json });
