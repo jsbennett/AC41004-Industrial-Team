@@ -43,6 +43,24 @@ module.exports = {
 	},
 	/*
     *
+    *Extracts all entries from the farm table and returns them as a single JSON object.
+    *    
+    */
+  /* FindFarm: function(dbConnection, farmID, startDate, endDate) {
+	return new Promise(function(resolve, reject) {
+		var query = 'CALL  FarmAnalysisData(' +farmID+','+startDate+','+endDate+')';
+		console.log(query);
+		dbConnection.query(
+			query,
+			function(err, recordset) {
+				if (err) console.log(err);
+				resolve(JSON.stringify(recordset));
+			}
+		);
+	});
+},*/
+	/*
+    *
     *Extracts all entries from the crops table and returns them as a single JSON object.
     *    
     */
