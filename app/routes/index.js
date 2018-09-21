@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 var farmService = require("../services/farmService.js");
-//var request = require('request');
 
 router.get("/field/:fieldID", function(req, res, next) {
     farmService.GetCurrentFieldDetails(req).then(function(json) {

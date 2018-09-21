@@ -126,7 +126,7 @@ module.exports = {
             ([fieldResults, weatherResults]) => {
                 var farmCrops = JSON.parse(fieldResults);
                 var weather = JSON.parse(weatherResults);
-                console.log(farmData);
+
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
                 var currentCrops = [];
@@ -141,7 +141,7 @@ module.exports = {
                             farmCrops[0][i]["TimeToMature"]
                     );
                     var date = new Date();
-                    console.log(farmCrops[0]);
+
                     if (expectedHarvest >= today) {
                         var crop = new cropSummaryModel(
                             farmCrops[0][i]["CropName"],
@@ -318,10 +318,6 @@ module.exports = {
                                 .getMonth()
                                 .toString() == String(i)
                         ) {
-                            if (i == 0) {
-                                console.log(weatherResults[j].Temperature);
-                            }
-
                             if (weatherResults[j].Temperature != undefined) {
                                 avgTemp += weatherResults[j].Temperature;
                             }
@@ -375,7 +371,6 @@ module.exports = {
                 dbQueries
                     .FindField(dbconnection, fieldID, startDate, endDate)
                     .then(function(result) {
-                        console.log(result);
                         dbconnection.end();
                         resolve(result);
                     });
