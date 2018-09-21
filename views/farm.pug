@@ -1,20 +1,22 @@
 block content
-  div
-    h3 The current season is
-    hr
-    br
-    // Whenever you remove the array, nothing shows up for season. 
-    // This means its not realtime as your always selecting a certain row. 
-    // if the weather table with array 1 contains a season autumn
-    if data.farm.weather[1].season == 'Autumn'
-       img(src='images/seasons/autumn.png')
-    else if data.farm.weather[1].season == 'Spring'
-       img(src='images/seasons/spring.png')
-    else if data.farm.weather[1].season == 'Winter'
-       img(src='images/seasons/winter.png')
-    else if data.farm.weather[1].season == 'Summer'
-       img(src='images/seasons/summer.png')
-    // hr
-    // Use this line to change the data
-    // p #{JSON.stringify(data.farm.weather.season)}
-    // hr
+	div
+		h3 The current season is 
+		div(id='weather' data-bind=data.farm.weather[1].weatherType style='display:none')
+		div(id='season' data-bind=data.farm.weather[1].season style='display:none')
+		hr
+		br
+		// Whenever you remove the array, nothing shows up for season. 
+		// This means its not realtime as your always selecting a certain row. 
+		// if the weather table with array 1 contains a season autumn
+		if data.farm.weather[1].season == 'Autumn'
+			img(src='images/seasons/autumn.png')
+		else if data.farm.weather[1].season == 'Spring'
+			img(src='images/seasons/spring.png')
+		else if data.farm.weather[1].season == 'Winter'
+			img(src='images/seasons/winter.png')
+		else if data.farm.weather[1].season == 'Summer'
+			img(src='images/seasons/summer.png')
+		// hr
+		// Use this line to change the data
+		// p #{JSON.stringify(data.farm.weather.season)}
+		// hr
