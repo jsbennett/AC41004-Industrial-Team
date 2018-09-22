@@ -27,10 +27,9 @@ function Soil() {
 	});
 }
 
-
 function Summary() {
 	$.ajax({
-		url: '/farmSummary/1',
+		url: '/farmSummary/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
@@ -39,10 +38,9 @@ function Summary() {
 
 function Weather() {
 	$.ajax({
-		url: '/farm/1',
+		url: '/farm/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
 	});
 }
-

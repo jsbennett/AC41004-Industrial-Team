@@ -1,44 +1,42 @@
 block content
 	div
-	ul.nav.nav-tabs
-		li.nav-item
-			a.nav-link.active(href='#' id='Farm' onClick="Weather();") Weather Summary
-		li.nav-item
-			a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
-		div(id='weather' data-bind=data.farm.weather[1].weatherType style='display:none')
-		div(id='season' data-bind=data.farm.weather[1].season style='display:none')
-		hr
+		ul.nav.nav-tabs
+			li.nav-item
+				a.nav-link.active(href='#' id='Farm' onClick="Weather();") Weather Summary
+			li.nav-item
+				a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
+		div(id='weather' data-bind=data.farm.weather[0].weatherType style='display:none')
+		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
+		div(id='id' data-bind=data.farmID style='display:none')
 		.grid-container
 			.l1
 				p.label Season: 
 			.r1
-				if data.farm.weather[1].season == 'Autumn'
+				if data.farm.weather[0].season == 'Autumn'
 					img(src='images/seasons/autumn.png')
-				else if data.farm.weather[1].season == 'Spring'
+				else if data.farm.weather[0].season == 'Spring'
 					img(src='images/seasons/spring.png')
-				else if data.farm.weather[1].season == 'Winter'
+				else if data.farm.weather[0].season == 'Winter'
 					img(src='images/seasons/winter.png')
-				else if data.farm.weather[1].season == 'Summer'
+				else if data.farm.weather[0].season == 'Summer'
 					img(src='images/seasons/summer.png')
 			.l2
 				p.label Weather:
 			.r2
-				if data.farm.weather[1].weatherType == 'Clear'
+				if data.farm.weather[0].weatherType == 'Clear'
 					img(src='images/weather/clear.png')
-				else if data.farm.weather[1].weatherType == 'Cloudy'
+				else if data.farm.weather[0].weatherType == 'Cloudy'
 					img(src='images/weather/cloudy.png')
-				else if data.farm.weather[1].weatherType == 'Fog'
+				else if data.farm.weather[0].weatherType == 'Fog'
 					img(src='images/weather/fog.png')
-				else if data.farm.weather[1].weatherType == 'Lightning'
+				else if data.farm.weather[0].weatherType == 'Lightning'
 					img(src='images/weather/lightning.png')
-				else if data.farm.weather[1].weatherType == 'Rain'
+				else if data.farm.weather[0].weatherType == 'Rain'
 					img(src='images/weather/rain.png')
-				else if data.farm.weather[1].weatherType == 'Snow'
+				else if data.farm.weather[0].weatherType == 'Snow'
 					img(src='images/weather/snow.png')
-				else if data.farm.weather[1].weatherType == 'Sunny'
+				else if data.farm.weather[0].weatherType == 'Sunny'
 					img(src='images/weather/sunny.png')
-				else if data.farm.weather[1].weatherType == 'Cloudy'
-					img(src='images/weather/cloudy.png')
 			.l3
 				p.label Temperature:
 			.r3

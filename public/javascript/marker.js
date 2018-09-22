@@ -64,7 +64,10 @@ $.ajax({
 						var marker = new L.marker(this.location, {
 							icon: farmIcon
 						}).addTo(map);
-						marker.bindPopup(customPopup, customOptions);
+						marker.bindPopup(
+							$(customPopup).click(function() {})[0],
+							customOptions
+						);
 						DynamicMap(marker, customPopup);
 
 						marker.on('popupopen', function(e) {

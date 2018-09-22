@@ -273,7 +273,7 @@ module.exports = {
 					(crops = currentCrops),
 					(weather = displayWeather)
 				);
-				return { farm: farm };
+				return { farmID, farm: farm };
 			}
 		);
 	},
@@ -383,7 +383,7 @@ module.exports = {
 						);
 					}
 				}
-				return { months, weatherMonths };
+				return { farmID, months, weatherMonths };
 			}
 		);
 	},
