@@ -1,13 +1,18 @@
+var moisture;
+var info;
+var chart;
+var options;
+
 google.charts.load('current', { packages: ['gauge'] });
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
-	var moisture = $('#moisture').data().bind;
-	var info = google.visualization.arrayToDataTable([
+	moisture = $('#moisture').data().bind;
+	info = google.visualization.arrayToDataTable([
 		['Label', 'Value'],
 		['Moisture', 0]
 	]);
 
-	var options = {
+	options = {
 		width: 400,
 		height: 160,
 		redColor: '#FF9900',
@@ -20,14 +25,21 @@ function drawChart() {
 		minorTicks: 5
 	};
 
-	var chart = new google.visualization.Gauge(
+	chart = new google.visualization.Gauge(
 		document.getElementById('chart_div')
 	);
 
 	chart.draw(info, options);
-
-	setInterval(function() {
-		info.setValue(0, 1, moisture);
-		chart.draw(info, options);
-	}, 250);
 }
+
+setInterval(function() {
+	var min = moisture - moisture / 10;
+	var max = moisture + moisture / 10;
+
+	var fluxValue = Math.floor(Math.random() * (max - min)) + min;
+	if (fluxValue < 0) {
+		fluxValue = 0;
+	}
+	info.setValue(0, 1, fluxValue);
+	chart.draw(info, options);
+}, 500);
