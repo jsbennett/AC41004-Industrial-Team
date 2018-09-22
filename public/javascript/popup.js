@@ -17,7 +17,7 @@ function Crop(id) {
 		}
 	});
 }
-
+//
 function Soil() {
 	$.ajax({
 		url: '/soil/' + $('#id').data().bind,
@@ -26,3 +26,23 @@ function Soil() {
 		}
 	});
 }
+
+
+function Summary() {
+	$.ajax({
+		url: '/farmSummary/1',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function Weather() {
+	$.ajax({
+		url: '/farm/1',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
