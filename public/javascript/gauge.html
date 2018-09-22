@@ -23,12 +23,19 @@
         var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
 
         chart.draw(info, options);
+        //replace 5 with the phLevel variable
+        var min = 5 - 1;
+        var max = 5 + 2;
+
+        
 
         setInterval(function() {
-          info.setValue(0, 1, 5);
+          info.setValue(0, 1, Math.floor(Math.random() * (max - min) ) + min) ;
           chart.draw(info, options);
-        }, 10000);
+        }, 1000);
+
       }
+
     </script>
   </head>
 
