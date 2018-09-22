@@ -29,7 +29,8 @@ module.exports = {
     },
     /*
 	*
-	*
+	* Returns a JSON object of all the details for the current field
+	* This is used for displaying the information about a field at a point of interest
 	*
 	*/
     GetCurrentFieldDetails: function(req) {
@@ -50,7 +51,6 @@ module.exports = {
             var growthDelay = 0;
             var image = 0;
 
-            //calculate growing periods - add it to final json
             timeToGrow = fields[0]["TimeToMature"];
             cropName = fields[0]["CropName"];
 
@@ -67,7 +67,7 @@ module.exports = {
             image = 0;
 
             expectedHarvest = new Date(fields[0]["PlantDate"]);
-            expectedHarvest.setDate(expectedHarvest.getDate() + growthDelay); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+            expectedHarvest.setDate(expectedHarvest.getDate() + growthDelay);
 
             var expectedHarvestDate = expectedHarvest.getDate();
 
@@ -123,6 +123,12 @@ module.exports = {
             return { field: field };
         });
     },
+    /*
+	*
+	* Returns a JSON object of the information about a farm
+	* This is used to display information about all the crops and the weather for the next 5 days in the summary tab of the farm point of interest
+	*
+	*/
     GetFarmSummary: function(req) {
         var farmID = req.param("farmID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -271,7 +277,13 @@ module.exports = {
             }
         );
     },
-
+    /*
+	*
+	* Returns a JSON object with all the information used for the farm analysis
+	* This is used to display the averages and totals for crops and weather information on the analysis tab on the farm point of interest
+	* This is used to give an insight to the farmer the history of his crops and weather trends
+	*
+	*/
     GetFarmAnalysis: function(req) {
         var farmID = req.param("farmID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -392,6 +404,11 @@ module.exports = {
             });
         });
     },
+    /*
+    *
+    *Retrieve field JSON object populated with entries from the marker table.
+    *
+    */
     GetMarkers: function() {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {
@@ -402,7 +419,11 @@ module.exports = {
             });
         });
     },
-
+    /*
+    *
+    *Retrieve field JSON object populated with entries from using the farm analyis stored procedure.
+    *
+    */
     FindFarm: function(farmID, pastDate, todaysDate) {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {
