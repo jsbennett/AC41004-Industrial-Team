@@ -65,57 +65,7 @@ $.ajax({
 							icon: farmIcon
 						}).addTo(map);
 						marker.bindPopup(customPopup, customOptions);
-						marker.on('popupopen', () => {
-							var curSeason = $($.parseHTML(customPopup))
-								.find('#season')
-								.data().bind;
-							if (curSeason == 'Spring') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Spring
-								);
-							} else if (curSeason == 'Summer') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Summer
-								);
-							} else if (curSeason == 'Autumn') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Autumn
-								);
-							} else if (curSeason == 'Winter') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Winter
-								);
-							}
-							var curWeather = $($.parseHTML(customPopup))
-								.find('#weather')
-								.data().bind;
-
-							if (curWeather == 'Rain') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Rainy
-								);
-							} else if (curWeather == 'Cloudy') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Overcast
-								);
-							} else if (curWeather == 'Sunny') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Clear
-								);
-							} else if (curWeather == 'Snow') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Snowy
-								);
-							} else if (curWeather == 'Fog') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Foggy
-								);
-							}
-						});
-						marker.on('popupclose', () => {
-							map.themes.setWeather(L.Wrld.themes.weather.Clear);
-							map.themes.setSeason(L.Wrld.themes.season.Summer);
-						});
+						DynamicMap(marker, customPopup);
 					}
 				});
 			} else {
@@ -138,3 +88,39 @@ $.ajax({
 		}
 	}
 });
+
+function DynamicMap(marker, customPopup) {
+	marker.on('popupopen', () => {
+		var curSeason = $($.parseHTML(customPopup))
+			.find('#season')
+			.data().bind;
+		if (curSeason == 'Spring') {
+			map.themes.setSeason(L.Wrld.themes.season.Spring);
+		} else if (curSeason == 'Summer') {
+			map.themes.setSeason(L.Wrld.themes.season.Summer);
+		} else if (curSeason == 'Autumn') {
+			map.themes.setSeason(L.Wrld.themes.season.Autumn);
+		} else if (curSeason == 'Winter') {
+			map.themes.setSeason(L.Wrld.themes.season.Winter);
+		}
+		var curWeather = $($.parseHTML(customPopup))
+			.find('#weather')
+			.data().bind;
+
+		if (curWeather == 'Rain') {
+			map.themes.setWeather(L.Wrld.themes.weather.Rainy);
+		} else if (curWeather == 'Cloudy') {
+			map.themes.setWeather(L.Wrld.themes.weather.Overcast);
+		} else if (curWeather == 'Sunny') {
+			map.themes.setWeather(L.Wrld.themes.weather.Clear);
+		} else if (curWeather == 'Snow') {
+			map.themes.setWeather(L.Wrld.themes.weather.Snowy);
+		} else if (curWeather == 'Fog') {
+			map.themes.setWeather(L.Wrld.themes.weather.Foggy);
+		}
+	});
+	marker.on('popupclose', () => {
+		map.themes.setWeather(L.Wrld.themes.weather.Clear);
+		map.themes.setSeason(L.Wrld.themes.season.Summer);
+	});
+}

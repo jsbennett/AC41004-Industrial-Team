@@ -9,7 +9,7 @@ var weathers = [
 	'Rain',
 	'Sunny',
 	'Fog',
-	'Lighting',
+	'Lightning',
 	'Snow',
 	'Windy',
 	'Clear'
@@ -59,7 +59,7 @@ function FakeData() {
 			}
 			if (markers[i].Type == 'Field') {
 				var marker = markers[i];
-				this.makeFarmFieldLoop(marker, date, i);
+				this.makeFarmFieldLoop(marker, new Date(date), i);
 			} else {
 				var forecast = [];
 				for (var j = 0; j < 5; j++) {
@@ -169,7 +169,7 @@ function FakeData() {
 			}
 		}
 		//FarmFieldID
-		var id = marker.FarmID;
+		var id = marker.FieldID;
 		//PHLevel
 		var phLevel = this.smoothRandom(this.phAlpha, this.ph);
 		//MoisturePercent
