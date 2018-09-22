@@ -66,14 +66,22 @@ $.ajax({
 						}).addTo(map);
 						marker.bindPopup(customPopup, customOptions);
 						DynamicMap(marker, customPopup);
+
+						marker.on('popupopen', function(e) {
+							var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+							px.y -= e.popup._container.clientHeight / 3.5; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+							map.panTo(map.unproject(px), { animate: true }); // pan to new center
+						});
 					}
 				});
 			} else {
 				//This marker is a field
+				var farmID = data['markers'][i].FarmID;
 				$.ajax({
 					url: '/field/' + data['markers'][i].FieldID,
 					location: markerLocation,
 					customOptions,
+					farmID,
 					success: function(customPopup) {
 						var marker = new L.marker(this.location, {
 							icon: fieldIcon
@@ -82,6 +90,20 @@ $.ajax({
 							$(customPopup).click(function() {})[0],
 							customOptions
 						);
+						marker.on('popupopen', function(e) {
+							var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+							px.y -= e.popup._container.clientHeight / 3.5; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+							map.panTo(map.unproject(px), { animate: true }); // pan to new center
+						});
+						$.ajax({
+							url: '/farm/' + this.farmID,
+							location: markerLocation,
+							customOptions,
+							marker,
+							success: function(customPopup) {
+								DynamicMap(marker, customPopup);
+							}
+						});
 					}
 				});
 			}
