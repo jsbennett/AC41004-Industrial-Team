@@ -139,23 +139,41 @@ time.icon span
 
 .label{
 color:#505151;
-font-size:12px;
+font-size:15px;
+font-weight: bold;
+
 }
 
-.grid-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.5fr;
-  grid-gap: 2.5px 2.5px;
-  grid-template-areas: ". .";
-  padding:1;
-}
-.crop { grid-area: crop; }
-
-.weather { grid-area: weather; }
 
 .result{
 	font-size:15px;
 	font-weight: bold;
 }
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 3px 3px;
+  grid-template-areas: "l1 r1" "l2 r2" "l3 r3" "l4 r4" "l5 r5";
+}
+
+.l1 { grid-area: l1; }
+
+.l2 { grid-area: l2; }
+
+.l3 { grid-area: l3; }
+
+.l4 { grid-area: l4; }
+
+.l5 { grid-area: l5; }
+
+.r1 { grid-area: r1; }
+
+.r2 { grid-area: r2; }
+
+.r3 { grid-area: r3; }
+
+.r4 { grid-area: r4; }
+
+.r5 { grid-area: r5; }

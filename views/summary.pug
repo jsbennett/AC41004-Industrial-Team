@@ -2,44 +2,29 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link.active(href='#' id='Farm' onClick="Summary();") Weather Summary
+				a.nav-link(href='#' id='Farm' onClick="Weather();") Weather Summary
 			li.nav-item
-				a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
+				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Crop Summary
 			br
 			br
 			.grid-container
-				hr
-				if data.farm.crops[0].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'cropImg')
-				else if data.farm.crops[0].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
-				else if data.farm.crops[0].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
-				hr
-				img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
-				time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate}')
-					em #{data.farm.crops[0].expectedHarvestDate}
-					strong #{data.farm.crops[0].expectedHarvestDate}
-					span #{data.farm.crops[0].expectedHarvestDate}
+				l1
+					if data.farm.crops[0].cropName == 'Potatoes'
+						img(src='/images/crops/potatoes2.png', class= 'label')
+					else if data.farm.crops[0].cropName == 'Corn'
+						img(src='/images/crops/corn2.png', class= 'label', style= {float: right, padding: '10px'})
+					else if data.farm.crops[0].cropName == 'Strawberries'
+						img(src='images/crops/strawberries2.png', class= 'label', style= {float:right, padding: '10px'})
+				r1
+				l2
+				r2
+				l3
+					img(src='/images/headings/expectedharvestdate.png', class = 'label')
+				r3
+				time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate[0]}')
+							em #{data.farm.crops[0].expectedHarvestDate[1]}
+							strong #{data.farm.crops[0].expectedHarvestDate[2]}
+							span #{data.farm.crops[0].expectedHarvestDate[3]}
 				//p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
-				//.farm
-					//h5 Farm Weather Summary
-					//p.label Date:
-					//p.result #{JSON.stringify(data.farm.weather[0].date)}
-					//p.label Day:
-					//p.result #{JSON.stringify(data.farm.weather[0].dayNumber)}
-					//p.label Season: 
-					//p.result #{JSON.stringify(data.farm.weather[0].season)}
-					//p.label Weather:
-					//p.result #{JSON.stringify(data.farm.weather[0].weatherType)}
-					//p.label Temperature:
-					//p.result #{JSON.stringify(data.farm.weather[0].temperature)}
-					//p.label Humidity:
-					//p.result #{JSON.stringify(data.farm.weather[0].humidity)}
-					//p.label Wind:
-					//p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
-							
-
-			////.crop
-			//for j in data.farm.weather
-			//for i in data.farm.crops
+		style
+			include ../public/stylesheets/stylesheet.css
