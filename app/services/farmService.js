@@ -425,66 +425,66 @@ module.exports = {
     *Retrieve farm JSON object populated with entries from the farm table.
     *
     */
-    GetFarmDetails: function(farmID, startDate, endDate) {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries
-                    .FindFarm(dbconnection, farmID, startDate, endDate)
-                    .then(function(result) {
-                        dbconnection.end();
-                        resolve(result);
-                    });
-            });
-        });
-    },
+	GetFarmDetails: function(farmID, startDate, endDate) {
+		return new Promise(function(resolve, reject) {
+			db.Connect().then(function(dbconnection) {
+				dbQueries
+					.FindFarm(dbconnection, farmID, startDate, endDate)
+					.then(function(result) {
+						dbconnection.end();
+						resolve(result);
+					});
+			});
+		});
+	},
 
-    /*
+	/*
     *
     *Retrieve location JSON object populated with entries from the location table.
     *
     */
-    GetLocationDetails: function(res) {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries.FindLocation(dbconnection).then(function(result) {
-                    dbconnection.end();
-                    resolve(result);
-                });
-            });
-        });
-    },
+	GetLocationDetails: function(res) {
+		return new Promise(function(resolve, reject) {
+			db.Connect().then(function(dbconnection) {
+				dbQueries.FindLocation(dbconnection).then(function(result) {
+					dbconnection.end();
+					resolve(result);
+				});
+			});
+		});
+	},
 
-    /*
+	/*
     *
     *Retrieve weather JSON object populated with entries from the weather table.
     *
     */
-    GetWeatherDetails: function(farmID, todaysDate, futureDate) {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries
-                    .FindWeather(dbconnection, farmID, todaysDate, futureDate)
-                    .then(function(result) {
-                        dbconnection.end();
-                        resolve(result);
-                    });
-            });
-        });
-    },
+	GetWeatherDetails: function(farmID, todaysDate, futureDate) {
+		return new Promise(function(resolve, reject) {
+			db.Connect().then(function(dbconnection) {
+				dbQueries
+					.FindWeather(dbconnection, farmID, todaysDate, futureDate)
+					.then(function(result) {
+						dbconnection.end();
+						resolve(result);
+					});
+			});
+		});
+	},
 
-    /*
+	/*
     *
     *Retrieve crop JSON object populated with entries from the crop table.
     *
     */
-    GetCropDetails: function(res) {
-        return new Promise(function(resolve, reject) {
-            db.Connect().then(function(dbconnection) {
-                dbQueries.FindCrop(dbconnection).then(function(result) {
-                    dbconnection.end();
-                    resolve(result);
-                });
-            });
-        });
-    }
+	GetCropDetails: function(res) {
+		return new Promise(function(resolve, reject) {
+			db.Connect().then(function(dbconnection) {
+				dbQueries.FindCrop(dbconnection).then(function(result) {
+					dbconnection.end();
+					resolve(result);
+				});
+			});
+		});
+	}
 };

@@ -2,12 +2,35 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link.active(href='#' id='Field' onClick="Test();") Test
+				a.nav-link.active(href='#' id='Crop' onClick="Crop();") Crop
 			li.nav-item
 				a.nav-link(href='#' id='Soil' onClick="Soil();") Soil
 			li.nav-item
 				a.nav-link(href='#') Link
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
-		h1 field
-		p #{JSON.stringify(data)}
+		// p #{JSON.stringify(data.field)}
+		// h1 #{data.field.cropName}
+		div(id='id' data-bind=data.field.farmFieldID style='display:none')
+		br
+		hr
+		if data.field.cropName == 'Potatoes'
+			img(src='/images/crops/potatoes2.png', class= 'cropImg')
+		else if data.field.cropName == 'Corn'
+			img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
+		else if data.field.cropName == 'Strawberries'
+			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
+		hr
+		br
+		img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
+		time.icon(datetime='#{data.field.expectedHarvest}')
+			em #{data.field.harvestDay}
+			strong #{data.field.harvestMonth}
+			span #{data.field.harvestDate}
+		br
+		hr
+		br
+		img(src='images/headings/plantgrowth.png', class = 'growthHeadingImg')
+		img(src='/images/plants/plant_image'+data.field.image+'.png', class='plantImg')
+		style
+			include ../public/stylesheets/stylesheet.css

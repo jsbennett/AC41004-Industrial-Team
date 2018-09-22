@@ -10,7 +10,7 @@ u.init();
 fakedata.init(function() {
 	//fakedata.makeData();
 	var today = new Date();
-	var days1 = 200;
+	var days1 = 365;
 	//startDate.setDate(startDate.getDate() - 6 * 30);
 	u.on('Event', function() {
 		var startDate1 = new Date();

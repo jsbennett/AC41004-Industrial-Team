@@ -9,9 +9,9 @@ function AddWrapper(data) {
 	);
 }
 
-function Test() {
+function Crop(id) {
 	$.ajax({
-		url: '/field/1',
+		url: '/field/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
@@ -20,7 +20,7 @@ function Test() {
 
 function Soil() {
 	$.ajax({
-		url: '/soil/1',
+		url: '/soil/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}

@@ -1,3 +1,15 @@
 block content
 	div
-		h1 this is a farm
+		h3 The current season is 
+		div(id='weather' data-bind=data.farm.weather[0].weatherType style='display:none')
+		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
+		hr
+		br
+		if data.farm.weather[0].season == 'Autumn'
+			img(src='images/seasons/autumn.png')
+		else if data.farm.weather[0].season == 'Spring'
+			img(src='images/seasons/spring.png')
+		else if data.farm.weather[0].season == 'Winter'
+			img(src='images/seasons/winter.png')
+		else if data.farm.weather[0].season == 'Summer'
+			img(src='images/seasons/summer.png')
