@@ -11,7 +11,9 @@ block content
 				a.nav-link.disabled(href='#') Disabled
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		img(src="/images/ph/ph"+data.field.phLevel+".png")
-		include ../public/javascript/gauge.html
+			
+		div(id="chart_div")
+		include ../public/javascript/gauge.js
 
 
 
