@@ -1,10 +1,21 @@
 block content
 	div
-		h3 The current season is 
+	ul.nav.nav-tabs
+		li.nav-item
+			a.nav-link.active(href='#' id='Farm' onClick="Summary();") Weather Summary
+		li.nav-item
+			a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
 		div(id='weather' data-bind=data.farm.weather[1].weatherType style='display:none')
 		div(id='season' data-bind=data.farm.weather[1].season style='display:none')
 		hr
 		br
+		h5 Farm Weather Summary
+		br
+		//p.label Date:
+		//p.result #{JSON.stringify(data.farm.weather[0].date)}
+		//p.label Day:
+		//p.result #{JSON.stringify(data.farm.weather[0].dayNumber)}
+		p.label Season: 
 		if data.farm.weather[1].season == 'Autumn'
 			img(src='images/seasons/autumn.png')
 		else if data.farm.weather[1].season == 'Spring'
@@ -13,3 +24,29 @@ block content
 			img(src='images/seasons/winter.png')
 		else if data.farm.weather[1].season == 'Summer'
 			img(src='images/seasons/summer.png')
+		p.label Weather:
+		if data.farm.weather[1].weatherType == 'Clear'
+			img(src='images/weather/clear.png')
+		else if data.farm.weather[1].weatherType == 'Cloudy'
+			img(src='images/weather/cloudy.png')
+		else if data.farm.weather[1].weatherType == 'Fog'
+			img(src='images/weather/fog.png')
+		else if data.farm.weather[1].weatherType == 'Lightning'
+			img(src='images/weather/lightning.png')
+		else if data.farm.weather[1].weatherType == 'Rain'
+			img(src='images/weather/rain.png')
+		else if data.farm.weather[1].weatherType == 'Snow'
+			img(src='images/weather/snow.png')
+		else if data.farm.weather[1].weatherType == 'Sunny'
+			img(src='images/weather/sunny.png')
+		else if data.farm.weather[1].weatherType == 'Cloudy'
+			img(src='images/weather/cloudy.png')
+		br
+		p.label Temperature:
+		p.result #{JSON.stringify(data.farm.weather[0].temperature)}°C
+		br
+		p.label Humidity:
+		p.result #{JSON.stringify(data.farm.weather[0].humidity)}
+		p.label Wind:
+		p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
+		

@@ -141,10 +141,7 @@ time.icon span
 color:#505151;
 font-size:12px;
 }
-.result{
-color:#6D6D6D;
-font-size:12px;
-}
+
 .grid-container {
   display: grid;
   height: 100%;
@@ -158,3 +155,7 @@ font-size:12px;
 
 .weather { grid-area: weather; }
 
+.result{
+	font-size:15px;
+	font-weight: bold;
+}

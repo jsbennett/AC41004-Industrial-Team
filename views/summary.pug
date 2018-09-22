@@ -2,13 +2,9 @@ block content
 	div
 		ul.nav.nav-tabs
 			li.nav-item
-				a.nav-link(href='#' id='Test' onClick="Test();") Test
+				a.nav-link.active(href='#' id='Farm' onClick="Summary();") Weather Summary
 			li.nav-item
-				a.nav-link(href='#' id='Soil' onClick="Soil(this);") Soil
-			li.nav-item
-				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Summary
-			li.nav-item
-				a.nav-link(href='#') Link
+				a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
 			br
 			br
 			.grid-container
@@ -20,12 +16,11 @@ block content
 				else if data.farm.crops[0].cropName == 'Strawberries'
 					img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
 				hr
-				
 				img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
 				time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate}')
-				//em #{data.farm.crops[0].expectedHarvestDate}
-				//strong #{data.farm.crops[0].expectedHarvestDate}
-				//span #{data.farm.crops[0].expectedHarvestDate}
+					em #{data.farm.crops[0].expectedHarvestDate}
+					strong #{data.farm.crops[0].expectedHarvestDate}
+					span #{data.farm.crops[0].expectedHarvestDate}
 				//p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
 				//.farm
 					//h5 Farm Weather Summary
