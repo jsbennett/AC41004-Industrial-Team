@@ -1,4 +1,5 @@
 block content
+	div(id='moisture' data-bind=data.field.moistureLevel style='display:none')
 	div
 		ul.nav.nav-tabs
 			li.nav-item
@@ -11,10 +12,5 @@ block content
 				a.nav-link.disabled(href='#') Disabled
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		img(src="/images/ph/ph"+data.field.phLevel+".png")
-		include ../public/javascript/gauge.html
-
-
-
-
-
-		//- p #{JSON.stringify(data)}
+		#chart_div(style='width: 400px; height: 160px;')
+	script(src="/javascript/gauge.js")

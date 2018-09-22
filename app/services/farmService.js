@@ -39,22 +39,21 @@ module.exports = {
 			timeToGrow = fields[0]['TimeToMature'];
 			cropName = fields[0]['CropName'];
 
-			growthDelay = timeToGrow / 5;
-			image2Date = new Date(fields[0]['PlantDate']);
-			image2Date.setDate(image2Date.getDate() + growthDelay);
-			image3Date = new Date(image2Date);
-			image3Date.setDate(image3Date.getDate() + growthDelay);
-			image4Date = new Date(image3Date);
-			image4Date.setDate(image4Date.getDate() + growthDelay);
-
 			var today = new Date();
-			today.setTime(0, 0, 0, 0, 0);
 			image = 0;
 
 			expectedHarvest = new Date(fields[0]['PlantDate']);
-			expectedHarvest.setDate(expectedHarvest.getDate() + growthDelay); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+			expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
 
 			var expectedHarvestDate = expectedHarvest.getDate();
+
+			growthDelay = timeToGrow / 5;
+			image4Date = new Date(expectedHarvest);
+			image4Date.setDate(expectedHarvest.getDate() - growthDelay);
+			image3Date = new Date(image4Date);
+			image3Date.setDate(image3Date.getDate() - growthDelay);
+			image2Date = new Date(image3Date);
+			image2Date.setDate(image2Date.getDate() - growthDelay);
 
 			var month = [
 				'January',
@@ -83,13 +82,16 @@ module.exports = {
 			];
 			var expectedHarvestDay = day[expectedHarvest.getDay()];
 
-			if (image2Date > today) {
+			if (image2Date <= today) {
 				image = 1;
-			} else if (image3Date > today) {
+			}
+			if (image3Date <= today) {
 				image = 2;
-			} else if (image4Date > today) {
+			}
+			if (image4Date <= today) {
 				image = 3;
-			} else if (expectedHarvest > today) {
+			}
+			if (expectedHarvest <= today) {
 				image = 4;
 			}
 
