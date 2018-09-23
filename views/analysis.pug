@@ -1,0 +1,31 @@
+block content
+	div
+		ul.nav.nav-tabs
+			li.nav-item
+				a.nav-link(href='#' id='Farm' onClick="Weather();") Weather Summary
+			li.nav-item
+				a.nav-link.active(href='#' id='Analysis' onClick="Analysis();") Farm Analysis
+			br
+			br
+			p #{JSON.stringify(data.months[0].fields[1])}
+			.grid-container
+				l1
+					p Field: #{JSON.stringify(data.months[0].fields[0].FarmFieldID)}
+				r1
+				
+				l2
+					p Field: #{JSON.stringify(data.months[0].fields[1].FarmFieldID)}
+				r2
+				l3
+					p Field: #{JSON.stringify(data.months[0].fields[2].FarmFieldID)}
+				r3
+				l4
+					p Field: #{JSON.stringify(data.months[0].fields[3].FarmFieldID)}
+				r4
+				l5
+					p Field: #{JSON.stringify(data.months[0].fields[5].crop)}
+				r5
+				l6
+					p Field: #{JSON.stringify(data.months[0].fields[6].crop)}
+				r6
+ 

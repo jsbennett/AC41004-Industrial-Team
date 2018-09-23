@@ -143,7 +143,9 @@ font-size:15px;
 font-weight: bold;
 
 }
-
+.imlabel{
+	max-width:100px;
+}
 
 .result{
 	font-size:15px;
