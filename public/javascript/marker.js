@@ -64,7 +64,10 @@ $.ajax({
 						var marker = new L.marker(this.location, {
 							icon: farmIcon
 						}).addTo(map);
-						marker.bindPopup(customPopup, customOptions);
+						marker.bindPopup(
+							$(customPopup).click(function() {})[0],
+							customOptions
+						);
 						DynamicMap(marker, customPopup);
 
 						marker.on('popupopen', function(e) {
@@ -92,7 +95,7 @@ $.ajax({
 						);
 						marker.on('popupopen', function(e) {
 							var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
-							px.y -= e.popup._container.clientHeight / 3.5; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+							px.y -= e.popup._container.clientHeight / 3; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
 							map.panTo(map.unproject(px), { animate: true }); // pan to new center
 						});
 						$.ajax({

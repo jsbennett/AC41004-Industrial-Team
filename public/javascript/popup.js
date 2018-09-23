@@ -17,10 +17,28 @@ function Crop(id) {
 		}
 	});
 }
-
+//
 function Soil() {
 	$.ajax({
 		url: '/soil/' + $('#id').data().bind,
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function Summary() {
+	$.ajax({
+		url: '/farmSummary/' + $('#id').data().bind,
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function Weather() {
+	$.ajax({
+		url: '/farm/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}

@@ -5,6 +5,7 @@
 	"scripts": {
 		"test": "mocha",
 		"start": "nodemon ./bin/www",
+		"debug": "nodemon --inspect ./bin/www",
 		"data": "nodemon dataScript.js"
 	},
 	"dependencies": {
@@ -32,6 +33,7 @@
 		"path": "^0.12.7",
 		"path-is-absolute": "^1.0.1",
 		"pug": "2.0.0-beta11",
+		"readdirp": "^2.2.1",
 		"request": "^2.88.0"
 	}
 }

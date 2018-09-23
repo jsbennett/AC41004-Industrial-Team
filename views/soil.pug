@@ -6,10 +6,6 @@ block content
 				a.nav-link(href='#' id='Crop' data-bind=data.field.farmFieldID onClick="Crop();") Crop
 			li.nav-item
 				a.nav-link.active(href='#' id='Soil' onClick="Soil();") Soil
-			li.nav-item
-				a.nav-link(href='#') Link
-			li.nav-item
-				a.nav-link.disabled(href='#') Disabled
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		img(class = "phLevel" src="/images/ph/ph"+data.field.phLevel+".png")
 		#chart_div(style='width: 400px; height: 160px;')

@@ -1,0 +1,31 @@
+block content
+	div
+		ul.nav.nav-tabs
+			li.nav-item
+				a.nav-link(href='#' id='Farm' onClick="Weather();") Weather Summary
+			li.nav-item
+				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Crop Summary
+		div(id='id' data-bind=data.farmID style='display:none')
+		br
+		br
+		.grid-container
+			l1
+				if data.farm.crops[0].cropName == 'Potatoes'
+					img(src='/images/crops/potatoes2.png', class= 'label')
+				else if data.farm.crops[0].cropName == 'Corn'
+					img(src='/images/crops/corn2.png', class= 'label', style= {float: right, padding: '10px'})
+				else if data.farm.crops[0].cropName == 'Strawberries'
+					img(src='images/crops/strawberries2.png', class= 'label', style= {float:right, padding: '10px'})
+			r1
+			l2
+			r2
+			l3
+				img(src='/images/headings/expectedharvestdate.png', class = 'label')
+			r3
+			time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate[0]}')
+						em #{data.farm.crops[0].expectedHarvestDate[1]}
+						strong #{data.farm.crops[0].expectedHarvestDate[2]}
+						span #{data.farm.crops[0].expectedHarvestDate[3]}
+			//p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
+	style
+		include ../public/stylesheets/stylesheet.css
