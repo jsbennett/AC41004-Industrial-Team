@@ -416,6 +416,16 @@ module.exports = {
                                 countRain
                             )
                         );
+                    } else {
+                        weatherMonths.push(
+                            new weatherAnalysisModel(
+                                i,
+                                "No Data",
+                                "No Data",
+                                "No Data",
+                                "No Data"
+                            )
+                        );
                     }
                 }
                 return { farmID, months, weatherMonths };

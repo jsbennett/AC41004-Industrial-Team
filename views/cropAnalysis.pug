@@ -12,41 +12,40 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		p Click on a button to see crop analysis from that month!
 		hr
-		p #{data.farmID}
-		button(id="0", href='#', type='button', onclick='displayCropAnalysis(this.id);') Janurary
+		button(id="0", href='#', type='button', onclick='displayAnalysis(this.id);') Janurary
 		br
 		br
-		button(id="1",href='#', type='button', onclick='displayCropAnalysis(this.id);') February
+		button(id="1",href='#', type='button', onclick='displayAnalysis(this.id);') February
 		br
 		br
-		button(id="2", href='#', type='button', onclick='displayCropAnalysis(this.id);') March
+		button(id="2", href='#', type='button', onclick='displayAnalysis(this.id);') March
 		br
 		br
-		button(id="3", href='#', type='button', onclick='displayCropAnalysis(this.id);') April
+		button(id="3", href='#', type='button', onclick='displayAnalysis(this.id);') April
 		br
 		br
-		button(id="4", href='#', type='button', onclick='displayCropAnalysis(this.id);') May
+		button(id="4", href='#', type='button', onclick='displayAnalysis(this.id);') May
 		br
 		br
-		button(id="5", href='#', type='button', onclick='displayCropAnalysis(this.id);') June
+		button(id="5", href='#', type='button', onclick='displayAnalysis(this.id);') June
 		br
 		br
-		button(id="6", href='#', type='button', onclick='displayCropAnalysis(this.id);') July
+		button(id="6", href='#', type='button', onclick='displayAnalysis(this.id);') July
 		br
 		br
-		button(id="7", href='#', type='button', onclick='displayCropAnalysis(this.id);') August
+		button(id="7", href='#', type='button', onclick='displayAnalysis(this.id);') August
 		br
 		br
-		button(id="8", href='#', type='button', onclick='displayCropAnalysis(this.id);') September
+		button(id="8", href='#', type='button', onclick='displayAnalysis(this.id);') September
 		br
 		br
-		button(id="9", href='#', type='button', onclick='displayCropAnalysis(this.id);') October
+		button(id="9", href='#', type='button', onclick='displayAnalysis(this.id);') October
 		br
 		br
-		button(id="10", href='#', type='button', onclick='displayCropAnalysis(this.id);') November
+		button(id="10", href='#', type='button', onclick='displayAnalysis(this.id);') November
 		br
 		br
-		button(id="11", href='#', type='button', onclick='displayCropAnalysis(this.id);') December
+		button(id="11", href='#', type='button', onclick='displayAnalysis(this.id);') December
 		hr
 		div.displayAnalysis(id="display0")
 			pre
@@ -56,7 +55,10 @@ block content
 					ul
 						each val in data.months[0].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display1")
@@ -67,7 +69,10 @@ block content
 					ul
 						each val in data.months[1].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display2")
@@ -78,7 +83,10 @@ block content
 					ul
 						each val in data.months[2].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display3")
@@ -89,7 +97,10 @@ block content
 					ul
 						each val in data.months[3].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display4")
@@ -100,7 +111,10 @@ block content
 					ul
 						each val in data.months[4].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display5")
@@ -111,7 +125,10 @@ block content
 					ul
 						each val in data.months[5].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display6")
@@ -122,7 +139,10 @@ block content
 					ul
 						each val in data.months[6].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display7")
@@ -133,7 +153,10 @@ block content
 					ul
 						each val in data.months[7].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display8")
@@ -144,7 +167,10 @@ block content
 					ul
 						each val in data.months[8].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display9")
@@ -155,7 +181,10 @@ block content
 					ul
 						each val in data.months[9].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display10")
@@ -166,7 +195,10 @@ block content
 					ul
 						each val in data.months[10].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display11")
@@ -177,7 +209,10 @@ block content
 					ul
 						each val in data.months[11].fields
 							li= "Crop Name: " + val.crop
-							li= "Ready for harvest? " + val.readyToHarvest
+							if(val.readyToHarvest == false)
+								li= "Was it harvested this month? No"
+							else
+								li= "Was it harvested this month? Yes"
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		style
