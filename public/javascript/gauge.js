@@ -33,8 +33,11 @@ function drawChart() {
 }
 
 setInterval(function() {
-	var min = moisture - moisture / 10;
-	var max = moisture + moisture / 10;
+  var formatter = new google.visualization.NumberFormat(
+    {suffix: '%', pattern:info}
+  );
+	var min = moisture - 1;
+	var max = moisture + 2;
 
 	var fluxValue = Math.floor(Math.random() * (max - min)) + min;
 	if (fluxValue < 0) {
@@ -42,4 +45,5 @@ setInterval(function() {
 	}
 	info.setValue(0, 1, fluxValue);
 	chart.draw(info, options);
+  formatter.format(info, 1);
 }, 500);

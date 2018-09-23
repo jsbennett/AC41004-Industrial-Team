@@ -10,7 +10,9 @@ block content
 				a.nav-link(href='#') Link
 			li.nav-item
 				a.nav-link.disabled(href='#') Disabled
+		hr
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
-		img(src="/images/ph/ph"+data.field.phLevel+".png")
+		img(id= "phLevel" src="/images/ph/ph"+data.field.phLevel+".png"  class="center")
+		hr
 		#chart_div(style='width: 400px; height: 160px;')
 	script(src="/javascript/gauge.js")
