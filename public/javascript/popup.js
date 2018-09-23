@@ -46,3 +46,11 @@ function Weather() {
 	});
 }
 
+function Analysis() {
+	$.ajax({
+		url: '/farmAnalysis/1',
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
