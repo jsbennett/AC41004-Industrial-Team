@@ -13,13 +13,6 @@ block content
 		p Click on a button to see crop analysis from that month!
 		hr
 		p #{data.farmID}
-		script.
-			var displayCropAnalysis = function(month)
-			{
-				document.querySelector("div.displayAnalysis").style.display = "none";
-				
-				document.getElementById("display"+ month).style.display = "block";
-			}
 		button(id="0", href='#', type='button', onclick='displayCropAnalysis(this.id);') Janurary
 		br
 		br
@@ -189,3 +182,5 @@ block content
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		style
 			include ../public/stylesheets/stylesheet.css
+		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		script(src="/javascript/monthButtons.js")
