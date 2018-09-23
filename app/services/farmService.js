@@ -311,27 +311,62 @@ module.exports = {
                     for (var j = 0; j < fieldResults.length; j++) {
                         var ready = false;
 
+                        var plantDate = new Date(fieldResults[j].PlantDate)
+                            .toISOString()
+                            .split("T")[0];
                         if (
                             new Date(fieldResults[j].PlantDate)
                                 .getMonth()
                                 .toString() == String(i)
                         ) {
-                            ready = true;
+                            var expectedHarvest = new Date(
+                                fieldResults[j].PlantDate
+                            );
+
+                            expectedHarvest.setDate(
+                                expectedHarvest.getDate() +
+                                    fieldResults[j].TimeToMature
+                            );
+                            if (
+                                expectedHarvest.getMonth().toString() ==
+                                String(i)
+                            ) {
+                                ready = true;
+                                fields.push(
+                                    new cropAnalysisModel(
+                                        fieldResults[j].CropName,
+                                        plantDate,
+                                        fieldResults[j].FarmFieldID,
+                                        ready,
+                                        fieldResults[j].PHLevel,
+                                        fieldResults[j].MoisturePercent
+                                    )
+                                );
+                            } else {
+                                fields.push(
+                                    new cropAnalysisModel(
+                                        fieldResults[j].CropName,
+                                        plantDate,
+                                        fieldResults[j].FarmFieldID,
+                                        ready,
+                                        fieldResults[j].PHLevel,
+                                        fieldResults[j].MoisturePercent
+                                    )
+                                );
+                            }
                         }
-                        fields.push(
-                            new cropAnalysisModel(
-                                fieldResults[j].CropName,
-                                fieldResults[j].FarmFieldID,
-                                ready,
-                                fieldResults[j].PHLevel,
-                                fieldResults[j].MoisturePercent
-                            )
-                        );
                     }
-                    months.push({
-                        month: i,
-                        fields
-                    });
+                    if (fields.length == 0) {
+                        months.push({
+                            month: i,
+                            fields: "No Data"
+                        });
+                    } else {
+                        months.push({
+                            month: i,
+                            fields
+                        });
+                    }
 
                     var avgTemp = 0;
                     var avgWind = 0;

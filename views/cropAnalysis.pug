@@ -12,16 +12,18 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		p Click on a button to see crop analysis from that month!
 		hr
+		p #{data.farmID}
 		script.
-			var displayCropAnalysis = function(month,data)
+			var displayCropAnalysis = function(month)
 			{
-				document.querySelector("div.displayAnalysis").style.display = "block";
-				document.querySelector("div.displayAnalysis").innerHTML = "<p>Hi tony, this is month:" + month + "</p>";
+				document.querySelector("div.displayAnalysis").style.display = "none";
+				
+				document.getElementById("display"+ month).style.display = "block";
 			}
 		button(id="0", href='#', type='button', onclick='displayCropAnalysis(this.id);') Janurary
 		br
 		br
-		button(id="1",href='#', type='button', onclick='displayCropAnalysis(this.id);') Febuary
+		button(id="1",href='#', type='button', onclick='displayCropAnalysis(this.id);') February
 		br
 		br
 		button(id="2", href='#', type='button', onclick='displayCropAnalysis(this.id);') March
@@ -53,8 +55,137 @@ block content
 		br
 		button(id="11", href='#', type='button', onclick='displayCropAnalysis(this.id);') December
 		hr
-		div.displayAnalysis(id="add")
+		div.displayAnalysis(id="display0")
 			pre
-				p hi tony
+				if data.months[0].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[0].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display1")
+			pre
+				if data.months[1].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[1].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display2")
+			pre
+				if data.months[2].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[2].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display3")
+			pre
+				if data.months[3].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[3].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display4")
+			pre
+				if data.months[4].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[4].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display5")
+			pre
+				if data.months[5].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[5].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display6")
+			pre
+				if data.months[6].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[6].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display7")
+			pre
+				if data.months[7].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[7].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display8")
+			pre
+				if data.months[8].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[8].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display9")
+			pre
+				if data.months[9].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[9].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display10")
+			pre
+				if data.months[10].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[10].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
+		div.displayAnalysis(id="display11")
+			pre
+				if data.months[11].fields == "No Data"
+					p No data avaliable for this month! Get farming!
+				else	
+					ul
+						each val in data.months[11].fields
+							li= "Crop Name: " + val.crop
+							li= "Ready for harvest? " + val.readyToHarvest
+							li= "Average PH: " + val.averagePH
+							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		style
 			include ../public/stylesheets/stylesheet.css
