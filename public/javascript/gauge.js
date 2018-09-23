@@ -13,7 +13,7 @@ function drawChart() {
 	]);
 
 	options = {
-		width: 400,
+		width: 160,
 		height: 160,
 		redColor: '#FF9900',
 		yellowFrom: 0,
@@ -44,6 +44,6 @@ setInterval(function() {
 		fluxValue = 0;
 	}
 	info.setValue(0, 1, fluxValue);
-	chart.draw(info, options);
   formatter.format(info, 1);
+	chart.draw(info, options);
 }, 500);

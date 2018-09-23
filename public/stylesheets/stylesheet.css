@@ -136,3 +136,13 @@ time.icon span
   padding-top: 0.8em;
   color: #2f2f2f;
 }
+
+/* soil styling */
+
+.vis{
+	float:right;
+}
+
+.phScale{
+	float: left;
+}
