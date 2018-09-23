@@ -1,0 +1,19 @@
+block content
+	div
+		ul.nav.nav-tabs
+			li.nav-item
+				a.nav-link(href='#' id='Farm' onClick="Weather();") Weather Summary
+			li.nav-item
+				a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
+			li.nav-item
+				a.nav-link.active(href='#' id='weatherAnalysis' onClick="WeatherAnalysis();") Weather Analysis
+			li.nav-item
+				a.nav-link(href='#' id='cropAnalysis' onClick="cropAnalysis();") Crop Analysis
+		// p #{JSON.stringify(data.field)}
+		// h1 #{data.field.cropName}
+		div(id='id' data-bind=data.analysis.farmID style='display:none')
+		br
+		p Hello
+		hr
+		style
+			include ../public/stylesheets/stylesheet.css

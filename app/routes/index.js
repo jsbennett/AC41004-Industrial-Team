@@ -26,7 +26,13 @@ router.get("/farmSummary/:farmID", function(req, res, next) {
     });
 });
 
-router.get("/farmAnalysis/:farmID", function(req, res, next) {
+router.get("/weatherAnalysis/:farmID", function(req, res, next) {
+    farmService.GetFarmAnalysis(req).then(function(json) {
+        res.render("analysis", { data: json });
+    });
+});
+
+router.get("/cropAnalysis/:farmID", function(req, res, next) {
     farmService.GetFarmAnalysis(req).then(function(json) {
         res.render("analysis", { data: json });
     });
