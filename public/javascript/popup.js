@@ -44,3 +44,22 @@ function Weather() {
 		}
 	});
 }
+
+function WeatherAnalysis() {
+	$.ajax({
+		url: '/weatherAnalysis/' + $('#id').data().bind,
+		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function CropAnalysis() {
+	$.ajax({
+		url: '/cropAnalysis/' + $('#id').data().bind,
+		success: function(data) {
+			console.log(data);
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}

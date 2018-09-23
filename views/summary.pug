@@ -5,27 +5,179 @@ block content
 				a.nav-link(href='#' id='Farm' onClick="Weather();") Weather Summary
 			li.nav-item
 				a.nav-link.active(href='#' id='Summary' onClick="Summary();") Crop Summary
+			li.nav-item
+				a.nav-link(href='#' id='weatherAnalysis' onClick="WeatherAnalysis();") Weather Analysis
+			li.nav-item
+				a.nav-link(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='id' data-bind=data.farmID style='display:none')
 		br
 		br
 		.grid-container
 			l1
+				img(src='/images/headings/cropname.png', class = 'imlabel')
+			r1
+				img(src='/images/headings/expectedharvestdate.png', class = 'imlabel')
+			l2
 				if data.farm.crops[0].cropName == 'Potatoes'
 					img(src='/images/crops/potatoes2.png', class= 'label')
 				else if data.farm.crops[0].cropName == 'Corn'
 					img(src='/images/crops/corn2.png', class= 'label', style= {float: right, padding: '10px'})
 				else if data.farm.crops[0].cropName == 'Strawberries'
 					img(src='images/crops/strawberries2.png', class= 'label', style= {float:right, padding: '10px'})
-			r1
-			l2
 			r2
+				-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
+				-var dt = p.split("T")
+				-var d = dt[0].split("-")
+				-var m = "month"
+				if -d[0] == "1"
+					-m = 'January'
+				else if -d[1] == '2'
+					-m= 'February'
+				else if -d[1] == '3'
+					-m= 'March'
+				else if -d[1] == '4'
+					-m= 'April'
+				else if -d[1] == '5'
+					-m= 'May'
+				else if -d[1] == '6'
+					-m= 'June'
+				else if -d[1] == '7'
+					-m= 'July'
+				else if -d[1] == '8'
+					-m= 'August'
+				else if -d[1] == "9"
+					-m= 'September'
+				else if -d[1] == '10'
+					-m= 'October'
+				else if -d[1] == '11'
+					-m= 'November'
+				else if -d[1] == '12'
+					-m= 'December'
+				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
+					em #{m}
+					strong #{d[0]}
+					span #{d[2]}
 			l3
-				img(src='/images/headings/expectedharvestdate.png', class = 'label')
+				if data.farm.crops[1].cropName == 'Potatoes'
+					img(src='/images/crops/potatoes2.png', class= 'imlabel')
+				else if data.farm.crops[1].cropName == 'Corn'
+					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
+				else if data.farm.crops[1].cropName == 'Strawberries'
+					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
 			r3
-			time.icon(datetime='#{data.farm.crops[0].expectedHarvestDate[0]}')
-						em #{data.farm.crops[0].expectedHarvestDate[1]}
-						strong #{data.farm.crops[0].expectedHarvestDate[2]}
-						span #{data.farm.crops[0].expectedHarvestDate[3]}
-			//p Expected harvest date: #{JSON.stringify(data.farm.crops[0].expectedHarvestDate)}
+				-var p = JSON.stringify(data.farm.crops[1].expectedHarvestDate)
+				-var dt = p.split("T")
+				-var d = dt[0].split("-")
+				-var m = "month"
+				if -d[0] == "1"
+					-m = 'January'
+				else if -d[1] == '2'
+					-m= 'February'
+				else if -d[1] == '3'
+					-m= 'March'
+				else if -d[1] == '4'
+					-m= 'April'
+				else if -d[1] == '5'
+					-m= 'May'
+				else if -d[1] == '6'
+					-m= 'June'
+				else if -d[1] == '7'
+					-m= 'July'
+				else if -d[1] == '8'
+					-m= 'August'
+				else if -d[1] == "9"
+					-m= 'September'
+				else if -d[1] == '10'
+					-m= 'October'
+				else if -d[1] == '11'
+					-m= 'November'
+				else if -d[1] == '12'
+					-m= 'December'
+				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
+					em #{m}
+					strong #{d[0]}
+					span #{d[2]}
+			l4
+				if data.farm.crops[2].cropName == 'Potatoes'
+					img(src='/images/crops/potatoes2.png', class= 'imlabel')
+				else if data.farm.crops[2].cropName == 'Corn'
+					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
+				else if data.farm.crops[2].cropName == 'Strawberries'
+					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
+			r4
+				-var p = JSON.stringify(data.farm.crops[2].expectedHarvestDate)
+				-var dt = p.split("T")
+				-var d = dt[0].split("-")
+				-var m = "month"
+				if -d[0] == "1"
+					-m = 'January'
+				else if -d[1] == '2'
+					-m= 'February'
+				else if -d[1] == '3'
+					-m= 'March'
+				else if -d[1] == '4'
+					-m= 'April'
+				else if -d[1] == '5'
+					-m= 'May'
+				else if -d[1] == '6'
+					-m= 'June'
+				else if -d[1] == '7'
+					-m= 'July'
+				else if -d[1] == '8'
+					-m= 'August'
+				else if -d[1] == "9"
+					-m= 'September'
+				else if -d[1] == '10'
+					-m= 'October'
+				else if -d[1] == '11'
+					-m= 'November'
+				else if -d[1] == '12'
+					-m= 'December'
+				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
+					em #{m}
+					strong #{d[0]}
+					span #{d[2]}
+			l5
+				if data.farm.crops[3].cropName == 'Potatoes'
+					img(src='/images/crops/potatoes2.png', class= 'imlabel')
+				else if data.farm.crops[3].cropName == 'Corn'
+					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
+				else if data.farm.crops[3].cropName == 'Strawberries'
+					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
+			r5
+				-var p = JSON.stringify(data.farm.crops[3].expectedHarvestDate)
+				-var dt = p.split("T")
+				-var d = dt[0].split("-")
+				-var m = "month"
+				if -d[0] == "1"
+					-m = 'January'
+				else if -d[1] == '2'
+					-m= 'February'
+				else if -d[1] == '3'
+					-m= 'March'
+				else if -d[1] == '4'
+					-m= 'April'
+				else if -d[1] == '5'
+					-m= 'May'
+				else if -d[1] == '6'
+					-m= 'June'
+				else if -d[1] == '7'
+					-m= 'July'
+				else if -d[1] == '8'
+					-m= 'August'
+				else if -d[1] == "9"
+					-m= 'September'
+				else if -d[1] == '10'
+					-m= 'October'
+				else if -d[1] == '11'
+					-m= 'November'
+				else if -d[1] == '12'
+					-m= 'December'
+				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
+					em #{m}
+					strong #{d[0]}
+					span #{d[2]}
+
+				
 	style
 		include ../public/stylesheets/stylesheet.css
