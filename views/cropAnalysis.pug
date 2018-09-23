@@ -9,11 +9,52 @@ block content
 				a.nav-link(href='#' id='weatherAnalysis' onClick="WeatherAnalysis();") Weather Analysis
 			li.nav-item
 				a.nav-link.active(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
-		// p #{JSON.stringify(data.field)}
-		// h1 #{data.field.cropName}
 		div(id='id' data-bind=data.farmID style='display:none')
-		br
-		p.label Hello
+		p Click on a button to see crop analysis from that month!
 		hr
+		script.
+			var displayCropAnalysis = function(month,data)
+			{
+				document.querySelector("div.displayAnalysis").style.display = "block";
+				document.querySelector("div.displayAnalysis").innerHTML = "<p>Hi tony, this is month:" + month + "</p>";
+			}
+		button(id="0", href='#', type='button', onclick='displayCropAnalysis(this.id);') Janurary
+		br
+		br
+		button(id="1",href='#', type='button', onclick='displayCropAnalysis(this.id);') Febuary
+		br
+		br
+		button(id="2", href='#', type='button', onclick='displayCropAnalysis(this.id);') March
+		br
+		br
+		button(id="3", href='#', type='button', onclick='displayCropAnalysis(this.id);') April
+		br
+		br
+		button(id="4", href='#', type='button', onclick='displayCropAnalysis(this.id);') May
+		br
+		br
+		button(id="5", href='#', type='button', onclick='displayCropAnalysis(this.id);') June
+		br
+		br
+		button(id="6", href='#', type='button', onclick='displayCropAnalysis(this.id);') July
+		br
+		br
+		button(id="7", href='#', type='button', onclick='displayCropAnalysis(this.id);') August
+		br
+		br
+		button(id="8", href='#', type='button', onclick='displayCropAnalysis(this.id);') September
+		br
+		br
+		button(id="9", href='#', type='button', onclick='displayCropAnalysis(this.id);') October
+		br
+		br
+		button(id="10", href='#', type='button', onclick='displayCropAnalysis(this.id);') November
+		br
+		br
+		button(id="11", href='#', type='button', onclick='displayCropAnalysis(this.id);') December
+		hr
+		div.displayAnalysis(id="add")
+			pre
+				p hi tony
 		style
 			include ../public/stylesheets/stylesheet.css
