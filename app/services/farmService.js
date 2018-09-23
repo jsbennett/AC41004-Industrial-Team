@@ -1,3 +1,9 @@
+/*
+*	name: farmService.js
+* 	function: This is the service layer for the application. It acts as the bridge between the repository layer (the data access) and the routes which are used by the front end. 
+			  By doing this, this means that the routes and front end does not need to know about the database.
+
+*/
 var db = require("../config/database.js");
 var dbQueries = require("../respositories/databaseFunctions.js");
 var fieldModel = require("../models/fieldModel.js");
@@ -8,6 +14,11 @@ var weatherAnalysisModel = require("../models/analysisWeatherModel");
 var cropAnalysisModel = require("../models/analysisCropsModel.js");
 
 module.exports = {
+    /*
+	*
+	* Returns an JSON object with all the markers locations and IDs
+	*
+	*/
     GetAllMarkers: function() {
         var markerData = this.GetMarkers();
         return Promise.all([markerData]).then(([markerResults]) => {
@@ -16,7 +27,12 @@ module.exports = {
             return { markers: markers };
         });
     },
-
+    /*
+	*
+	* Returns a JSON object of all the details for the current field
+	* This is used for displaying the information about a field at a point of interest
+	*
+	*/
     GetCurrentFieldDetails: function(req) {
         var fieldID = req.param("fieldID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -35,7 +51,6 @@ module.exports = {
             var growthDelay = 0;
             var image = 0;
 
-            //calculate growing periods - add it to final json
             timeToGrow = fields[0]["TimeToMature"];
             cropName = fields[0]["CropName"];
 
@@ -52,7 +67,7 @@ module.exports = {
             image = 0;
 
             expectedHarvest = new Date(fields[0]["PlantDate"]);
-            expectedHarvest.setDate(expectedHarvest.getDate() + growthDelay); //get the number of days and then add how long it takes the plant to grow. Then convert this into a date.
+            expectedHarvest.setDate(expectedHarvest.getDate() + timeToGrow);
 
             var expectedHarvestDate = expectedHarvest.getDate();
 
@@ -83,13 +98,13 @@ module.exports = {
             ];
             var expectedHarvestDay = day[expectedHarvest.getDay()];
 
-            if (image2Date > today) {
+            if (String(image2Date) >= String(today)) {
                 image = 1;
-            } else if (image3Date > today) {
+            } else if (String(image3Date) >= String(today)) {
                 image = 2;
-            } else if (image4Date > today) {
+            } else if (String(image4Date) >= String(today)) {
                 image = 3;
-            } else if (expectedHarvest > today) {
+            } else if (String(expectedHarvest) >= String(today)) {
                 image = 4;
             }
 
@@ -108,6 +123,12 @@ module.exports = {
             return { field: field };
         });
     },
+    /*
+	*
+	* Returns a JSON object of the information about a farm
+	* This is used to display information about all the crops and the weather for the next 5 days in the summary tab of the farm point of interest
+	*
+	*/
     GetFarmSummary: function(req) {
         var farmID = req.param("farmID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -126,7 +147,7 @@ module.exports = {
             ([fieldResults, weatherResults]) => {
                 var farmCrops = JSON.parse(fieldResults);
                 var weather = JSON.parse(weatherResults);
-                console.log(farmData);
+
                 var today = new Date();
                 today.setHours(0, 0, 0, 0);
                 var currentCrops = [];
@@ -141,7 +162,7 @@ module.exports = {
                             farmCrops[0][i]["TimeToMature"]
                     );
                     var date = new Date();
-                    console.log(farmCrops[0]);
+
                     if (expectedHarvest >= today) {
                         var crop = new cropSummaryModel(
                             farmCrops[0][i]["CropName"],
@@ -252,11 +273,17 @@ module.exports = {
                     (crops = currentCrops),
                     (weather = displayWeather)
                 );
-                return { farm: farm };
+                return { farmID, farm: farm };
             }
         );
     },
-
+    /*
+	*
+	* Returns a JSON object with all the information used for the farm analysis
+	* This is used to display the averages and totals for crops and weather information on the analysis tab on the farm point of interest
+	* This is used to give an insight to the farmer the history of his crops and weather trends
+	*
+	*/
     GetFarmAnalysis: function(req) {
         var farmID = req.param("farmID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
@@ -318,10 +345,6 @@ module.exports = {
                                 .getMonth()
                                 .toString() == String(i)
                         ) {
-                            if (i == 0) {
-                                console.log(weatherResults[j].Temperature);
-                            }
-
                             if (weatherResults[j].Temperature != undefined) {
                                 avgTemp += weatherResults[j].Temperature;
                             }
@@ -360,7 +383,7 @@ module.exports = {
                         );
                     }
                 }
-                return { months, weatherMonths };
+                return { farmID, months, weatherMonths };
             }
         );
     },
@@ -375,13 +398,17 @@ module.exports = {
                 dbQueries
                     .FindField(dbconnection, fieldID, startDate, endDate)
                     .then(function(result) {
-                        console.log(result);
                         dbconnection.end();
                         resolve(result);
                     });
             });
         });
     },
+    /*
+    *
+    *Retrieve field JSON object populated with entries from the marker table.
+    *
+    */
     GetMarkers: function() {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {
@@ -392,7 +419,11 @@ module.exports = {
             });
         });
     },
-
+    /*
+    *
+    *Retrieve field JSON object populated with entries from using the farm analyis stored procedure.
+    *
+    */
     FindFarm: function(farmID, pastDate, todaysDate) {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {

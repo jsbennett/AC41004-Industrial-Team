@@ -5,12 +5,14 @@ module.exports = {
 	InsertWeather: function(data) {
 		db.Connect().then(function(dbconnection) {
 			dbQueries.InsertWeather(dbconnection, data);
+			dbconnection.end();
 		});
 	},
 
 	InsertFarmField: function(data) {
 		db.Connect().then(function(dbconnection) {
 			dbQueries.InsertFarmField(dbconnection, data);
+			dbconnection.end();
 		});
 	}
 };

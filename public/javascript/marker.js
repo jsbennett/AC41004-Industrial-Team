@@ -64,66 +64,27 @@ $.ajax({
 						var marker = new L.marker(this.location, {
 							icon: farmIcon
 						}).addTo(map);
-						marker.bindPopup(customPopup, customOptions);
-						marker.on('popupopen', () => {
-							var curSeason = $($.parseHTML(customPopup))
-								.find('#season')
-								.data().bind;
-							if (curSeason == 'Spring') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Spring
-								);
-							} else if (curSeason == 'Summer') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Summer
-								);
-							} else if (curSeason == 'Autumn') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Autumn
-								);
-							} else if (curSeason == 'Winter') {
-								map.themes.setSeason(
-									L.Wrld.themes.season.Winter
-								);
-							}
-							var curWeather = $($.parseHTML(customPopup))
-								.find('#weather')
-								.data().bind;
+						marker.bindPopup(
+							$(customPopup).click(function() {})[0],
+							customOptions
+						);
+						DynamicMap(marker, customPopup);
 
-							if (curWeather == 'Rain') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Rainy
-								);
-							} else if (curWeather == 'Cloudy') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Overcast
-								);
-							} else if (curWeather == 'Sunny') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Clear
-								);
-							} else if (curWeather == 'Snow') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Snowy
-								);
-							} else if (curWeather == 'Fog') {
-								map.themes.setWeather(
-									L.Wrld.themes.weather.Foggy
-								);
-							}
-						});
-						marker.on('popupclose', () => {
-							map.themes.setWeather(L.Wrld.themes.weather.Clear);
-							map.themes.setSeason(L.Wrld.themes.season.Summer);
+						marker.on('popupopen', function(e) {
+							var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+							px.y -= e.popup._container.clientHeight / 3.5; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+							map.panTo(map.unproject(px), { animate: true }); // pan to new center
 						});
 					}
 				});
 			} else {
 				//This marker is a field
+				var farmID = data['markers'][i].FarmID;
 				$.ajax({
 					url: '/field/' + data['markers'][i].FieldID,
 					location: markerLocation,
 					customOptions,
+					farmID,
 					success: function(customPopup) {
 						var marker = new L.marker(this.location, {
 							icon: fieldIcon
@@ -132,9 +93,59 @@ $.ajax({
 							$(customPopup).click(function() {})[0],
 							customOptions
 						);
+						marker.on('popupopen', function(e) {
+							var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+							px.y -= e.popup._container.clientHeight / 3; // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+							map.panTo(map.unproject(px), { animate: true }); // pan to new center
+						});
+						$.ajax({
+							url: '/farm/' + this.farmID,
+							location: markerLocation,
+							customOptions,
+							marker,
+							success: function(customPopup) {
+								DynamicMap(marker, customPopup);
+							}
+						});
 					}
 				});
 			}
 		}
 	}
 });
+
+function DynamicMap(marker, customPopup) {
+	marker.on('popupopen', () => {
+		var curSeason = $($.parseHTML(customPopup))
+			.find('#season')
+			.data().bind;
+		if (curSeason == 'Spring') {
+			map.themes.setSeason(L.Wrld.themes.season.Spring);
+		} else if (curSeason == 'Summer') {
+			map.themes.setSeason(L.Wrld.themes.season.Summer);
+		} else if (curSeason == 'Autumn') {
+			map.themes.setSeason(L.Wrld.themes.season.Autumn);
+		} else if (curSeason == 'Winter') {
+			map.themes.setSeason(L.Wrld.themes.season.Winter);
+		}
+		var curWeather = $($.parseHTML(customPopup))
+			.find('#weather')
+			.data().bind;
+
+		if (curWeather == 'Rain') {
+			map.themes.setWeather(L.Wrld.themes.weather.Rainy);
+		} else if (curWeather == 'Cloudy') {
+			map.themes.setWeather(L.Wrld.themes.weather.Overcast);
+		} else if (curWeather == 'Sunny') {
+			map.themes.setWeather(L.Wrld.themes.weather.Clear);
+		} else if (curWeather == 'Snow') {
+			map.themes.setWeather(L.Wrld.themes.weather.Snowy);
+		} else if (curWeather == 'Fog') {
+			map.themes.setWeather(L.Wrld.themes.weather.Foggy);
+		}
+	});
+	marker.on('popupclose', () => {
+		map.themes.setWeather(L.Wrld.themes.weather.Clear);
+		map.themes.setSeason(L.Wrld.themes.season.Summer);
+	});
+}
