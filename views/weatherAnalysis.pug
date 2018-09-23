@@ -8,10 +8,10 @@ block content
 			li.nav-item
 				a.nav-link(href='#' id='weatherAnalysis' onClick="WeatherAnalysis();") Weather Analysis
 			li.nav-item
-				a.nav-link.active(href='#' id='cropAnalysis' onClick="cropAnalysis();") Crop Analysis
+				a.nav-link.active(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		// p #{JSON.stringify(data.field)}
 		// h1 #{data.field.cropName}
-		div(id='id' data-bind=data.weatherAnalysis.farmID style='display:none')
+		div(id='id' data-bind=data.farmID style='display:none')
 		br
 		p.label Hello
 		hr
