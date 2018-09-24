@@ -8,11 +8,12 @@ block content
 				a.nav-link.active(href='#' id='Soil' onClick="Soil();") Soil
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		.container
-			img(src="/images/scale/scale"+data.field.phLevel+".png" class="float-right" style="height: 250px;")
-			img(src="/images/ph/ph"+data.field.phLevel+".png")
-			#chart_div(style='width: 400px; height: 160px;')
+			img(src="/images/scale/scale"+data.field.phLevel+".png" class="float-right" style="height:auto; padding-top:20px;")
+			img(src="/images/ph/ph"+data.field.phLevel+".png" style="height: 190px; width:150px; padding-left:5px; padding-top:20px;")
+			hr
+			p(class="soiltitle") Soil Moisture
+			#chart_div(style='width: 400px; height: 180px; padding-top: 150px;')
 			div(style="clear:both;")
-				
 		script(src="/javascript/gauge.js")
 	style
 		include ../public/stylesheets/stylesheet.css

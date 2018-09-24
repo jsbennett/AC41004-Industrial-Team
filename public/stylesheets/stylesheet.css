@@ -137,6 +137,13 @@ time.icon span {
     color: #2f2f2f;
 }
 
+.soiltitle{
+  font-size: 2em;
+  position: absolute;
+  padding-left: 15px;
+  padding-top: 105px;
+}
+
 .label {
     color: #505151;
     font-size: 15px;
