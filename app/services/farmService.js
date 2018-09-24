@@ -292,15 +292,16 @@ module.exports = {
         pastDate = new Date(pastDate).toISOString().split("T")[0];
         var futureDate = new Date();
         futureDate.setDate(futureDate.getDate() + 5);
-
+        var cropData = this.GetCropDetails();
         var fieldData = this.FindFarm(farmID, pastDate, todaysDate);
         var weatherData = this.GetWeatherDetails(farmID, pastDate, futureDate);
-        return Promise.all([fieldData, weatherData]).then(
-            ([fieldResults, weatherResults]) => {
+        return Promise.all([fieldData, weatherData, cropData]).then(
+            ([fieldResults, weatherResults, cropResults]) => {
                 fieldResults = JSON.parse(fieldResults);
                 fieldResults = fieldResults[0];
                 weatherResults = JSON.parse(weatherResults);
                 weatherResults = weatherResults[0];
+                cropResults = JSON.parse(cropResults);
 
                 var months = [];
                 var weatherMonths = [];
@@ -308,65 +309,75 @@ module.exports = {
                 for (var i = 0; i < 12; i++) {
                     var fields = [];
 
-                    for (var j = 0; j < fieldResults.length; j++) {
-                        var ready = false;
+                    var noData = false;
 
-                        var plantDate = new Date(fieldResults[j].PlantDate)
-                            .toISOString()
-                            .split("T")[0];
-                        if (
-                            new Date(fieldResults[j].PlantDate)
-                                .getMonth()
-                                .toString() == String(i)
-                        ) {
-                            var expectedHarvest = new Date(
-                                fieldResults[j].PlantDate
-                            );
-
-                            expectedHarvest.setDate(
-                                expectedHarvest.getDate() +
-                                    fieldResults[j].TimeToMature
-                            );
+                    for (var j = 0; j < cropResults.length; j++) {
+                        var numberHarvested = 0;
+                        var notHarvested = 0;
+                        var avgPH = null;
+                        var avgMoisture = null;
+                        var record = 0;
+                        for (var k = 0; k < fieldResults.length; k++) {
                             if (
-                                expectedHarvest.getMonth().toString() ==
-                                String(i)
+                                fieldResults[k].CropName ==
+                                cropResults[j].CropName
                             ) {
-                                ready = true;
-                                fields.push(
-                                    new cropAnalysisModel(
-                                        fieldResults[j].CropName,
-                                        plantDate,
-                                        fieldResults[j].FarmFieldID,
-                                        ready,
-                                        fieldResults[j].PHLevel,
-                                        fieldResults[j].MoisturePercent
-                                    )
-                                );
-                            } else {
-                                fields.push(
-                                    new cropAnalysisModel(
-                                        fieldResults[j].CropName,
-                                        plantDate,
-                                        fieldResults[j].FarmFieldID,
-                                        ready,
-                                        fieldResults[j].PHLevel,
-                                        fieldResults[j].MoisturePercent
-                                    )
-                                );
+                                if (
+                                    new Date(fieldResults[k].PlantDate)
+                                        .getMonth()
+                                        .toString() == String(i)
+                                ) {
+                                    var expectedHarvest = new Date(
+                                        fieldResults[k].PlantDate
+                                    );
+
+                                    avgPH += fieldResults[k].PHLevel;
+
+                                    avgMoisture +=
+                                        fieldResults[k].MoisturePercent;
+
+                                    record++;
+
+                                    expectedHarvest.setDate(
+                                        expectedHarvest.getDate() +
+                                            fieldResults[k].TimeToMature
+                                    );
+
+                                    if (
+                                        expectedHarvest.getMonth().toString() ==
+                                        String(i)
+                                    ) {
+                                        numberHarvested++;
+                                    } else {
+                                        notHarvested++;
+                                    }
+                                }
                             }
                         }
+
+                        if (avgPH == null && avgMoisture == null) {
+                            noData = true;
+                        } else {
+                            avgPH = (avgPH / record).toFixed(2);
+                            avgMoisture = (avgMoisture / record).toFixed(2);
+                        }
+
+                        fields.push(
+                            new cropAnalysisModel(
+                                cropResults[j].CropName,
+                                numberHarvested,
+                                notHarvested,
+                                avgPH,
+                                avgMoisture
+                            )
+                        );
                     }
-                    if (fields.length == 0) {
-                        months.push({
-                            month: i,
-                            fields: "No Data"
-                        });
-                    } else {
-                        months.push({
-                            month: i,
-                            fields
-                        });
-                    }
+
+                    months.push({
+                        month: i,
+                        fields,
+                        noData
+                    });
 
                     var avgTemp = 0;
                     var avgWind = 0;
@@ -543,7 +554,7 @@ module.exports = {
     *Retrieve crop JSON object populated with entries from the crop table.
     *
     */
-    GetCropDetails: function(res) {
+    GetCropDetails: function() {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {
                 dbQueries.FindCrop(dbconnection).then(function(result) {

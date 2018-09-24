@@ -1,17 +1,17 @@
 function analysisCropModel(
     crop,
-    plantDate,
-    FarmFieldID,
-    readyToHarvest,
+    harvestedNumber,
+    notHarvestedNumber,
     averagePH,
-    averageSoilMoisture
+    averageSoilMoisture,
+    noData
 ) {
     this.crop = crop;
-    this.plantDate = plantDate;
-    this.FarmFieldID = FarmFieldID;
-    this.readyToHarvest = readyToHarvest;
+    this.harvestedNumber = harvestedNumber;
+    this.notHarvestedNumber = notHarvestedNumber;
     this.averagePH = averagePH;
     this.averageSoilMoisture = averageSoilMoisture;
+    this.noData = noData;
 }
 
 module.exports = analysisCropModel;
