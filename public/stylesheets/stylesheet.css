@@ -91,6 +91,15 @@ img {
     margin: 0 auto;
 }
 
+.harvestSummaryImg {
+  padding-left: 20px;
+}
+
+.cropNameImg {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
 time.icon {
     font-size: 1em; /* change icon size */
     display: block;
@@ -137,18 +146,6 @@ time.icon span {
     color: #2f2f2f;
 }
 
-.soiltitle{
-  font-size: 2em;
-  position: absolute;
-  padding-left: 65px;
-  padding-top: 30px;
-}
-
-.phstyle{
-  padding-left:55px;
-  padding-top:20px;"
-}
-
 .label {
     color: #505151;
     font-size: 15px;
@@ -159,10 +156,6 @@ time.icon span {
 }
 .altlabel{
 	width:120px;
-}
-.hlabel{
-	padding:0;
-	width:150px;
 }
 
 .result {
@@ -190,7 +183,7 @@ time.icon span {
 
 .l1 {
     grid-area: l1;
-    padding-top: 30px;
+    padding-top: 20px;
     padding-left: 32px;
 }
 
