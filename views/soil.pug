@@ -7,6 +7,12 @@ block content
 			li.nav-item
 				a.nav-link.active(href='#' id='Soil' onClick="Soil();") Soil
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
-		img(src="/images/ph/ph"+data.field.phLevel+".png")
-		#chart_div(style='width: 400px; height: 160px;')
-	script(src="/javascript/gauge.js")
+		.container
+			img(src="/images/scale/scale"+data.field.phLevel+".png" class="float-right" style="height: 250px;")
+			img(src="/images/ph/ph"+data.field.phLevel+".png")
+			#chart_div(style='width: 400px; height: 160px;')
+			div(style="clear:both;")
+				
+		script(src="/javascript/gauge.js")
+	style
+		include ../public/stylesheets/stylesheet.css

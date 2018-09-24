@@ -45,10 +45,20 @@ function Weather() {
 	});
 }
 
-function Analysis() {
+function WeatherAnalysis() {
 	$.ajax({
-		url: '/farmAnalysis/1',
+		url: '/weatherAnalysis/' + $('#id').data().bind,
 		success: function(data) {
+			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+		}
+	});
+}
+
+function CropAnalysis() {
+	$.ajax({
+		url: '/cropAnalysis/' + $('#id').data().bind,
+		success: function(data) {
+			console.log(data);
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
 	});

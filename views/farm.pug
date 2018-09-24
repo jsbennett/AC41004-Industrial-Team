@@ -5,6 +5,10 @@ block content
 				a.nav-link.active(href='#' id='Farm' onClick="Weather();") Weather Summary
 			li.nav-item
 				a.nav-link(href='#' id='Summary' onClick="Summary();") Crop Summary
+			li.nav-item
+				a.nav-link(href='#' id='weatherAnalysis' onClick="WeatherAnalysis();") Weather Analysis
+			li.nav-item
+				a.nav-link(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='weather' data-bind=data.farm.weather[0].weatherType style='display:none')
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
@@ -37,6 +41,8 @@ block content
 					img(src='images/weather/snow.png')
 				else if data.farm.weather[0].weatherType == 'Sunny'
 					img(src='images/weather/sunny.png')
+				else if data.farm.weather[0].weatherType == 'Windy'
+					img(src='images/weather/windy.png')
 			.l3
 				p.label Temperature:
 			.r3
