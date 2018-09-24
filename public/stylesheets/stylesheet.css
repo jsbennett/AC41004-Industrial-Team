@@ -112,6 +112,13 @@ img {
   margin: auto;
 }
 
+.soilMoistureHeading {
+  display: block;
+  margin: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 time.icon {
     font-size: 1em; /* change icon size */
     display: block;
