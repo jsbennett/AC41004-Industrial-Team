@@ -142,10 +142,30 @@ time.icon span {
     font-size: 15px;
     font-weight: bold;
 }
+.imlabel {
+   width:100px;
+}
+.altlabel{
+	width:120px;
+}
+.hlabel{
+	padding:0;
+	width:150px;
+}
 
 .result {
-    font-size: 15px;
+    font-size: 28px;
     font-weight: bold;
+}
+.tempCold {
+    font-size: 28px;
+    font-weight: bold;
+    color:#0A5A61;
+}
+.tempHot {
+    font-size: 28px;
+    font-weight: bold;
+    color:#9E0F13;
 }
 .grid-container {
     display: grid;

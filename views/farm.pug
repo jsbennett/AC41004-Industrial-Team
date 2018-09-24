@@ -46,7 +46,13 @@ block content
 			.l3
 				p.label Temperature:
 			.r3
-				p.result #{JSON.stringify(data.farm.weather[0].temperature)}°C
+				p.tempCold #{JSON.stringify(data.farm.weather[0].temperature)}°C
+			//doesnt work yet
+				-var hc = JSON.stringify(data.farm.weather[0].temperature)
+				-var t = hc.split("-")
+				//if -t[0] == "-"
+				//else
+				//p.tempHot #{JSON.stringify(data.farm.weather[0].temperature)}°C
 			.l4
 				p.label Humidity:
 			.r4

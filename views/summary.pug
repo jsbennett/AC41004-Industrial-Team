@@ -14,48 +14,49 @@ block content
 		br
 		.grid-container
 			l1
-				img(src='/images/headings/cropname.png', class = 'imlabel')
+				img(src='/images/headings/cropname.png', class = 'hlabel')
 			r1
-				img(src='/images/headings/expectedharvestdate.png', class = 'imlabel')
+				img(src='/images/headings/expectedharvestdate.png', class = 'hlabel')
 			l2
 				if data.farm.crops[0].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'label')
+					img(src='/images/crops/potatoes2.png', class= 'imlabel')
 				else if data.farm.crops[0].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'label', style= {float: right, padding: '10px'})
+					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
 				else if data.farm.crops[0].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'label', style= {float:right, padding: '10px'})
+					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
 			r2
 				-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
 				-var dt = p.split("T")
 				-var d = dt[0].split("-")
-				-var m = "month"
-				if -d[0] == "1"
+				-var date = d[0].split('\"')
+				-var m = d[1]
+				if -d[1] == "01"
 					-m = 'January'
-				else if -d[1] == '2'
+				else if d[1] == '02'
 					-m= 'February'
-				else if -d[1] == '3'
+				else if d[1] == '03'
 					-m= 'March'
-				else if -d[1] == '4'
+				else if d[1] == '04'
 					-m= 'April'
-				else if -d[1] == '5'
+				else if d[1] == '05'
 					-m= 'May'
-				else if -d[1] == '6'
+				else if d[1] == '06'
 					-m= 'June'
-				else if -d[1] == '7'
+				else if d[1] == '07'
 					-m= 'July'
-				else if -d[1] == '8'
+				else if d[1] == '08'
 					-m= 'August'
-				else if -d[1] == "9"
+				else if d[1] == '09'
 					-m= 'September'
-				else if -d[1] == '10'
+				else if d[1] == '10'
 					-m= 'October'
-				else if -d[1] == '11'
+				else if d[1] == '11'
 					-m= 'November'
-				else if -d[1] == '12'
+				else if d[1] == '12'
 					-m= 'December'
 				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
 					em #{m}
-					strong #{d[0]}
+					strong #{date[1]}
 					span #{d[2]}
 			l3
 				if data.farm.crops[1].cropName == 'Potatoes'
@@ -63,39 +64,40 @@ block content
 				else if data.farm.crops[1].cropName == 'Corn'
 					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
 				else if data.farm.crops[1].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
+					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
 			r3
 				-var p = JSON.stringify(data.farm.crops[1].expectedHarvestDate)
 				-var dt = p.split("T")
 				-var d = dt[0].split("-")
-				-var m = "month"
-				if -d[0] == "1"
+				-var date = d[0].split('\"')
+				-var m = d[1]
+				if -d[1] == '01'
 					-m = 'January'
-				else if -d[1] == '2'
+				else if d[1] == '02'
 					-m= 'February'
-				else if -d[1] == '3'
+				else if d[1] == '03'
 					-m= 'March'
-				else if -d[1] == '4'
+				else if d[1] == '04'
 					-m= 'April'
-				else if -d[1] == '5'
+				else if d[1] == '05'
 					-m= 'May'
-				else if -d[1] == '6'
+				else if d[1] == '06'
 					-m= 'June'
-				else if -d[1] == '7'
+				else if d[1] == '07'
 					-m= 'July'
-				else if -d[1] == '8'
+				else if d[1] == '08'
 					-m= 'August'
-				else if -d[1] == "9"
+				else if d[1] == '09'
 					-m= 'September'
-				else if -d[1] == '10'
+				else if d[1] == '10'
 					-m= 'October'
-				else if -d[1] == '11'
+				else if d[1] == '11'
 					-m= 'November'
-				else if -d[1] == '12'
+				else if d[1] == '12'
 					-m= 'December'
 				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
 					em #{m}
-					strong #{d[0]}
+					strong #{date[1]}
 					span #{d[2]}
 			l4
 				if data.farm.crops[2].cropName == 'Potatoes'
@@ -103,39 +105,40 @@ block content
 				else if data.farm.crops[2].cropName == 'Corn'
 					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
 				else if data.farm.crops[2].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
+					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
 			r4
 				-var p = JSON.stringify(data.farm.crops[2].expectedHarvestDate)
 				-var dt = p.split("T")
 				-var d = dt[0].split("-")
-				-var m = "month"
-				if -d[0] == "1"
+				-var date = d[0].split('\"')
+				-var m = d[1]
+				if -d[1] == '01'
 					-m = 'January'
-				else if -d[1] == '2'
+				else if d[1] == '02'
 					-m= 'February'
-				else if -d[1] == '3'
+				else if d[1] == '03'
 					-m= 'March'
-				else if -d[1] == '4'
+				else if d[1] == '04'
 					-m= 'April'
-				else if -d[1] == '5'
+				else if d[1] == '05'
 					-m= 'May'
-				else if -d[1] == '6'
+				else if d[1] == '06'
 					-m= 'June'
-				else if -d[1] == '7'
+				else if d[1] == '07'
 					-m= 'July'
-				else if -d[1] == '8'
+				else if d[1] == '08'
 					-m= 'August'
-				else if -d[1] == "9"
+				else if d[1] == '09'
 					-m= 'September'
-				else if -d[1] == '10'
+				else if d[1] == '10'
 					-m= 'October'
-				else if -d[1] == '11'
+				else if d[1] == '11'
 					-m= 'November'
-				else if -d[1] == '12'
+				else if d[1] == '12'
 					-m= 'December'
 				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
 					em #{m}
-					strong #{d[0]}
+					strong #{date[1]}
 					span #{d[2]}
 			l5
 				if data.farm.crops[3].cropName == 'Potatoes'
@@ -143,39 +146,40 @@ block content
 				else if data.farm.crops[3].cropName == 'Corn'
 					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
 				else if data.farm.crops[3].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'imlabel', style= {float:right, padding: '10px'})
+					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '5px, width:120px'})
 			r5
 				-var p = JSON.stringify(data.farm.crops[3].expectedHarvestDate)
 				-var dt = p.split("T")
 				-var d = dt[0].split("-")
-				-var m = "month"
-				if -d[0] == "1"
+				-var date = d[0].split('\"')
+				-var m = d[1]
+				if -d[1] == "01"
 					-m = 'January'
-				else if -d[1] == '2'
+				else if d[1] == '02'
 					-m= 'February'
-				else if -d[1] == '3'
+				else if d[1] == '03'
 					-m= 'March'
-				else if -d[1] == '4'
+				else if d[1] == '04'
 					-m= 'April'
-				else if -d[1] == '5'
+				else if d[1] == '05'
 					-m= 'May'
-				else if -d[1] == '6'
+				else if d[1] == '06'
 					-m= 'June'
-				else if -d[1] == '7'
+				else if d[1] == '07'
 					-m= 'July'
-				else if -d[1] == '8'
+				else if d[1] == '08'
 					-m= 'August'
-				else if -d[1] == "9"
+				else if d[1] == '09'	
 					-m= 'September'
-				else if -d[1] == '10'
+				else if d[1] == '10'
 					-m= 'October'
-				else if -d[1] == '11'
+				else if d[1] == '11'
 					-m= 'November'
-				else if -d[1] == '12'
+				else if d[1] == '12'
 					-m= 'December'
 				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
 					em #{m}
-					strong #{d[0]}
+					strong #{date[1]}
 					span #{d[2]}
 
 				
