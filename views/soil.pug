@@ -9,7 +9,8 @@ block content
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		.container
 			div(class='phstyle')
-				img(src="/images/ph/ph"+data.field.phLevel+".png" style="height: 160px; width:140px;")
+				img(src='/images/headings/phlevel.png' class="phHeading")
+				img(src="/images/ph/ph"+data.field.phLevel+".png" style="height: 140px; width:140px;", class="phLevel")
 			hr(style="margin-top: 20px;")
 			p(class="soiltitle") Soil Moisture
 			hr(style="margin-top: 50px;")
