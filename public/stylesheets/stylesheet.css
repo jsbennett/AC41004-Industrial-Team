@@ -140,8 +140,13 @@ time.icon span {
 .soiltitle{
   font-size: 2em;
   position: absolute;
-  padding-left: 15px;
-  padding-top: 105px;
+  padding-left: 65px;
+  padding-top: 30px;
+}
+
+.phstyle{
+  padding-left:55px;
+  padding-top:20px;"
 }
 
 .label {
