@@ -292,28 +292,80 @@ module.exports = {
         pastDate = new Date(pastDate).toISOString().split("T")[0];
         var futureDate = new Date();
         futureDate.setDate(futureDate.getDate() + 5);
-
+        var cropData = this.GetCropDetails();
         var fieldData = this.FindFarm(farmID, pastDate, todaysDate);
         var weatherData = this.GetWeatherDetails(farmID, pastDate, futureDate);
-        return Promise.all([fieldData, weatherData]).then(
-            ([fieldResults, weatherResults]) => {
+        return Promise.all([fieldData, weatherData, cropData]).then(
+            ([fieldResults, weatherResults, cropResults]) => {
                 fieldResults = JSON.parse(fieldResults);
                 fieldResults = fieldResults[0];
                 weatherResults = JSON.parse(weatherResults);
                 weatherResults = weatherResults[0];
-
+                cropResults = JSON.parse(cropResults);
+                console.log(cropResults);
                 var months = [];
                 var weatherMonths = [];
+                var harvestedNumber;
+                var notHarvestedNumber;
 
                 for (var i = 0; i < 12; i++) {
                     var fields = [];
 
-                    for (var j = 0; j < fieldResults.length; j++) {
+                    for (var j = 0; j < cropResults.length; j++) {
+                        var numberHarvested = 0;
+                        var notHarvested = 0;
+                        var avgPH = 0;
+                        var avgMoisture = 0;
+                        var recordCount = 0;
+                        for (var k = 0; k < fieldResults.length; k++) {
+                            if (
+                                fieldResults[k].CropName ==
+                                cropResults[j].CropName
+                            ) {
+                                var plantDate = new Date(
+                                    fieldResults[k].PlantDate
+                                )
+                                    .toISOString()
+                                    .split("T")[0];
+
+                                if (
+                                    new Date(fieldResults[k].PlantDate)
+                                        .getMonth()
+                                        .toString() == String(i)
+                                ) {
+                                    var expectedHarvest = new Date(
+                                        fieldResults[k].PlantDate
+                                    );
+                                    avgPH += fieldResults[k].PHLevel;
+
+                                    avgMoisture +=
+                                        fieldResults[k].MoisturePercent;
+
+                                    recordCount++;
+
+                                    expectedHarvest.setDate(
+                                        expectedHarvest.getDate() +
+                                            fieldResults[k].TimeToMature
+                                    );
+                                    if (
+                                        expectedHarvest.getMonth().toString() ==
+                                        String(i)
+                                    ) {
+                                        harvestedNumber++;
+                                    } else {
+                                        notHarvestedNumber--;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    /*for (var j = 0; j < fieldResults.length; j++) {
                         var ready = false;
 
                         var plantDate = new Date(fieldResults[j].PlantDate)
                             .toISOString()
                             .split("T")[0];
+
                         if (
                             new Date(fieldResults[j].PlantDate)
                                 .getMonth()
@@ -332,28 +384,22 @@ module.exports = {
                                 String(i)
                             ) {
                                 ready = true;
-                                fields.push(
-                                    new cropAnalysisModel(
-                                        fieldResults[j].CropName,
-                                        plantDate,
-                                        fieldResults[j].FarmFieldID,
-                                        ready,
-                                        fieldResults[j].PHLevel,
-                                        fieldResults[j].MoisturePercent
-                                    )
-                                );
+                                harvestedNumber++;
                             } else {
+                                notHarvestedNumber--;
+                            }
+                            
                                 fields.push(
                                     new cropAnalysisModel(
                                         fieldResults[j].CropName,
                                         plantDate,
                                         fieldResults[j].FarmFieldID,
-                                        ready,
+                                        harvestedNumber,
+                                        notHarvestedNumber,
                                         fieldResults[j].PHLevel,
                                         fieldResults[j].MoisturePercent
                                     )
                                 );
-                            }
                         }
                     }
                     if (fields.length == 0) {
@@ -366,7 +412,7 @@ module.exports = {
                             month: i,
                             fields
                         });
-                    }
+                    }*/
 
                     var avgTemp = 0;
                     var avgWind = 0;
@@ -543,7 +589,7 @@ module.exports = {
     *Retrieve crop JSON object populated with entries from the crop table.
     *
     */
-    GetCropDetails: function(res) {
+    GetCropDetails: function() {
         return new Promise(function(resolve, reject) {
             db.Connect().then(function(dbconnection) {
                 dbQueries.FindCrop(dbconnection).then(function(result) {
