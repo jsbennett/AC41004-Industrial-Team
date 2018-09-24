@@ -49,170 +49,146 @@ block content
 		hr
 		div.displayAnalysis(id="display0")
 			pre
-				if data.months[0].fields == "No Data"
+				if data.months[0].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[0].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display1")
 			pre
-				if data.months[1].fields == "No Data"
+				if data.months[1].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[1].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display2")
 			pre
-				if data.months[2].fields == "No Data"
+				if data.months[2].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[2].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display3")
 			pre
-				if data.months[3].fields == "No Data"
+				if data.months[3].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[3].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display4")
 			pre
-				if data.months[4].fields == "No Data"
+				if data.months[4].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[4].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display5")
 			pre
-				if data.months[5].fields == "No Data"
+				if data.months[5].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[5].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display6")
 			pre
-				if data.months[6].fields == "No Data"
+				if data.months[6].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[6].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display7")
 			pre
-				if data.months[7].fields == "No Data"
+				if data.months[7].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[7].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display8")
 			pre
-				if data.months[8].fields == "No Data"
+				if data.months[8].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[8].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display9")
 			pre
-				if data.months[9].fields == "No Data"
+				if data.months[9].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[9].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display10")
 			pre
-				if data.months[10].fields == "No Data"
+				if data.months[10].noData == true
 					p No data avaliable for this month! Get farming!
 				else	
 					ul
 						each val in data.months[10].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		div.displayAnalysis(id="display11")
 			pre
-				if data.months[11].fields == "No Data"
+				if data.months[11].noData == true
 					p No data avaliable for this month! Get farming!
-				else	
+				else
 					ul
 						each val in data.months[11].fields
 							li= "Crop Name: " + val.crop
-							if(val.readyToHarvest == false)
-								li= "Was it harvested this month? No"
-							else
-								li= "Was it harvested this month? Yes"
+							li= "Number Harvested: " + val.harvestedNumber
+							li= "Number Still Growing: " + val.notHarvestedNumber
 							li= "Average PH: " + val.averagePH
 							li= "Average Soil Moisture: " + val.averageSoilMoisture
 		style
