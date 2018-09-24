@@ -14,7 +14,7 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		.grid-container
 			.l1
-				p.label Season: 
+				img(src='images/headings/season.png') 
 			.r1
 				if data.farm.weather[0].season == 'Autumn'
 					img(src='images/seasons/autumn.png')
@@ -25,7 +25,7 @@ block content
 				else if data.farm.weather[0].season == 'Summer'
 					img(src='images/seasons/summer.png')
 			.l2
-				p.label Weather:
+				img(src='images/headings/weather.png')
 			.r2
 				if data.farm.weather[0].weatherType == 'Clear'
 					img(src='images/weather/clear.png')
@@ -44,7 +44,7 @@ block content
 				else if data.farm.weather[0].weatherType == 'Windy'
 					img(src='images/weather/windy.png')
 			.l3
-				p.label Temperature:
+				img(src='images/headings/temperature.png')
 			.r3
 				p.tempCold #{JSON.stringify(data.farm.weather[0].temperature)}°C
 			//doesnt work yet
@@ -54,11 +54,11 @@ block content
 				//else
 				//p.tempHot #{JSON.stringify(data.farm.weather[0].temperature)}°C
 			.l4
-				p.label Humidity:
+				img(src='images/headings/humidity.png')
 			.r4
 				p.result #{JSON.stringify(data.farm.weather[0].humidity)}
 			.l5
-				p.label Wind:
+				img(src='images/headings/wind.png')
 			.r5
 				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
 			
