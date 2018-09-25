@@ -86,11 +86,7 @@ router.get("/api/getPlantData/:farmID", function(req, res, next) {
     });
 });
 
-router.get("Figure 1. Indoor Reality Thermal tracking:farmID", function(
-    req,
-    res,
-    next
-) {
+router.get("/api/getDailyWeather/:farmID", function(req, res, next) {
     farmService.GetDailyWeatherData(req).then(function(json) {
         res.send(json);
     });
