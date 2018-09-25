@@ -264,6 +264,8 @@ time.icon span {
 .thermodiv {
 	width: 20px;
 	border-style: solid;
+    position:relative;
+    left:20px;
 	background-color: none;
 	z-index: 2;
 	border-width: 2px;
@@ -272,12 +274,12 @@ time.icon span {
 	border-bottom-style: none;
 }
 #circle {
-	height: 30px;
-	width: 30px;
+	height: 40px;
+	width: 40px;
 	position: relative;
 	border-width: 2px;
 	bottom: 10px;
-	left: -5px;
+	left: 10px;
 	background-color: red;
 	border-style: solid;
 	border-top: none;
@@ -287,9 +289,10 @@ time.icon span {
 #temperature {
 	color: white;
 	position: relative;
+    font-size:1.5em;
 	padding: 0;
 	top: 10px;
-	left: 10px;
+	left: 5px;
 	z-index: 2;
 }
 
@@ -308,6 +311,36 @@ time.icon span {
 	-webkit-border-radius: 0 !important;
 	-moz-border-radius: 0 !important;
 	border-radius: 0 !important;
+}
+.humcontainer {
+    position:relative;
+    background-color: none;
+    z-index: 3;
+}
+.moisture{
+    width:100px;
+    height:100px;
+    z-index:2;
+    position:absolute;
+}
+#water {
+    background-color: blue;
+    padding:0;
+    width: 50px;
+    left:25px;
+    position: relative;
+    bottom: -90%;
+    height: 1px;
+    z-index: 1;
+}
+
+#humidity{
+    position:absolute;
+    font-size:1.5em;
+    padding-left:35px;
+    padding-bottom:5px;
+    color:white;
+    z-index:4;
 }
 
 .btn.active.focus,
