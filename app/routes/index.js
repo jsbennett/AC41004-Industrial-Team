@@ -44,18 +44,6 @@ router.get("/plantAnalysis/:farmID", function(req, res, next) {
     });
 });
 
-<<<<<<< HEAD
-router.get('/dailyWeatherAnalysis/:farmID', function(req, res, next) {
-	farmService.GetDailyWeatherData(req).then(function(json) {
-		res.render('dailyWeatherAnalysis', { data: json });
-	});
-});
-
-router.get('/', function(req, res, next) {
-	res.render('index', {
-		title: 'FRM3D'
-	});
-=======
 router.get("/dailyWeatherAnalysis/:farmID", function(req, res, next) {
     farmService.GetDailyWeatherData(req).then(function(json) {
         res.render("dailyWeatherAnalysis", { data: json });
@@ -66,7 +54,6 @@ router.get("/", function(req, res, next) {
     res.render("index", {
         title: "FRM3D"
     });
->>>>>>> 57a781dc5b39dd2d9543ebbe195c261de4c58cb3
 });
 
 router.get("/api/getField/:fieldID", function(req, res, next) {
@@ -99,10 +86,10 @@ router.get("/api/getPlantData/:farmID", function(req, res, next) {
     });
 });
 
-router.get('/api/getDailyWeather/:farmID', function(req, res, next) {
-	farmService.GetDailyWeatherData(req).then(function(json) {
-		res.send(json);
-	});
+router.get("/api/getDailyWeather/:farmID", function(req, res, next) {
+    farmService.GetDailyWeatherData(req).then(function(json) {
+        res.send(json);
+    });
 });
 
 module.exports = router;
