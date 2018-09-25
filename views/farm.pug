@@ -13,6 +13,7 @@ block content
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
+		script(src="/javascript/thermometer.js")
 		.grid-container
 			.l1
 				img(src='images/headings/season.png') 
@@ -47,12 +48,12 @@ block content
 			.l3
 				img(src='images/headings/temperature.png')
 			.r3
-				p #{JSON.stringify(data.farm.weather[0].temperature)}
-				button(onclick='move()') Click Me
+				//p #{JSON.stringify(data.farm.weather[0].temperature)}	
 				.thermodiv
-					#mercury
-			script(src="/javascript/thermometer.js")
-				
+					#mercury(onload='move()')
+				#circle
+					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}
+				button(onclick='move()') Click Me				
 			.l4
 				img(src='images/headings/humidity.png')
 			.r4
@@ -60,6 +61,14 @@ block content
 			.l5
 				img(src='images/headings/wind.png')
 			.r5
-				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
+				-var w = JSON.stringify(data.farm.weather[0].windStrength)
+				-w = parseInt(w)
+				p.result #{w}mph
+				if w >= 32
+					img(src='images/arrows/heavy.png')
+				else if w >=13
+					img(src='images/arrows/medium.png')
+				else
+					img(src='images/arrows/light.png')
 		style
 			include ../public/stylesheets/stylesheet.css	

@@ -12,162 +12,33 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		p Click on a button to see weather analysis from that month!
 		hr
-		button(id="0", href='#', type='button', onclick='displayAnalysis(this.id);') Janurary
-		br
-		br
-		button(id="1",href='#', type='button', onclick='displayAnalysis(this.id);') February
-		br
-		br
-		button(id="2", href='#', type='button', onclick='displayAnalysis(this.id);') March
-		br
-		br
-		button(id="3", href='#', type='button', onclick='displayAnalysis(this.id);') April
-		br
-		br
-		button(id="4", href='#', type='button', onclick='displayAnalysis(this.id);') May
-		br
-		br
-		button(id="5", href='#', type='button', onclick='displayAnalysis(this.id);') June
-		br
-		br
-		button(id="6", href='#', type='button', onclick='displayAnalysis(this.id);') July
-		br
-		br
-		button(id="7", href='#', type='button', onclick='displayAnalysis(this.id);') August
-		br
-		br
-		button(id="8", href='#', type='button', onclick='displayAnalysis(this.id);') September
-		br
-		br
-		button(id="9", href='#', type='button', onclick='displayAnalysis(this.id);') October
-		br
-		br
-		button(id="10", href='#', type='button', onclick='displayAnalysis(this.id);') November
-		br
-		br
-		button(id="11", href='#', type='button', onclick='displayAnalysis(this.id);') December
+		- var n = 0;
+		- var max = 12;
+		- var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		div(class="container" id="carousel")
+			.row
+				while n < max/2
+					.col-sm-2(style="padding: 0")
+						button.btn(id=n, href='#', onclick='displayAnalysis(this.id);' style="width:100%; height:40px; border: 1px solid white") #{months[n]}
+					- n++
+			.row
+				while n < max
+					.col-sm-2(style="padding: 0")
+						button.btn(id=n, href='#', onclick='displayAnalysis(this.id);' style="width:100%; height:40px; border: 1px solid white") #{months[n]}
+					- n++
 		hr
-		div.displayAnalysis(id="display0")
-			pre
-				if data.weatherMonths[0].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[0].avgTemp
-						li= "Average Wind: " + data.weatherMonths[0].avgWind
-						li= "Average Humidity: " + data.weatherMonths[0].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[0].daysRained			
-		div.displayAnalysis(id="display1")
-			pre
-				if data.weatherMonths[1].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[1].avgTemp
-						li= "Average Wind: " + data.weatherMonths[1].avgWind
-						li= "Average Humidity: " + data.weatherMonths[1].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[1].daysRained
-		div.displayAnalysis(id="display2")
-			pre
-				if data.weatherMonths[2].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[2].avgTemp
-						li= "Average Wind: " + data.weatherMonths[2].avgWind
-						li= "Average Humidity: " + data.weatherMonths[2].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[2].daysRained
-		div.displayAnalysis(id="display3")
-			pre
-				if data.weatherMonths[3].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[3].avgTemp
-						li= "Average Wind: " + data.weatherMonths[3].avgWind
-						li= "Average Humidity: " + data.weatherMonths[3].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[3].daysRained
-		div.displayAnalysis(id="display4")
-			pre
-				if data.weatherMonths[4].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[4].avgTemp
-						li= "Average Wind: " + data.weatherMonths[4].avgWind
-						li= "Average Humidity: " + data.weatherMonths[4].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[4].daysRained
-		div.displayAnalysis(id="display5")
-			pre
-				if data.weatherMonths[5].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[5].avgTemp
-						li= "Average Wind: " + data.weatherMonths[5].avgWind
-						li= "Average Humidity: " + data.weatherMonths[5].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[5].daysRained
-		div.displayAnalysis(id="display6")
-			pre
-				if data.weatherMonths[6].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[6].avgTemp
-						li= "Average Wind: " + data.weatherMonths[6].avgWind
-						li= "Average Humidity: " + data.weatherMonths[6].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[6].daysRained
-		div.displayAnalysis(id="display7")
-			pre
-				if data.weatherMonths[7].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[7].avgTemp
-						li= "Average Wind: " + data.weatherMonths[7].avgWind
-						li= "Average Humidity: " + data.weatherMonths[7].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[7].daysRained
-		div.displayAnalysis(id="display8")
-			pre
-				if data.weatherMonths[8].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[8].avgTemp
-						li= "Average Wind: " + data.weatherMonths[8].avgWind
-						li= "Average Humidity: " + data.weatherMonths[8].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[8].daysRained
-		div.displayAnalysis(id="display9")
-			pre
-				if data.weatherMonths[9].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[9].avgTemp
-						li= "Average Wind: " + data.weatherMonths[9].avgWind
-						li= "Average Humidity: " + data.weatherMonths[9].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[9].daysRained
-		div.displayAnalysis(id="display10")
-			pre
-				if data.weatherMonths[10].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[10].avgTemp
-						li= "Average Wind: " + data.weatherMonths[10].avgWind
-						li= "Average Humidity: " + data.weatherMonths[10].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[10].daysRained
-		div.displayAnalysis(id="display11")
-			pre
-				if data.weatherMonths[11].avgTemp == "No Data"
-					p No data avaliable for this month! Get farming!
-				else	
-					ul
-						li= "Average Temperature: " + data.weatherMonths[11].avgTemp
-						li= "Average Wind: " + data.weatherMonths[11].avgWind
-						li= "Average Humidity: " + data.weatherMonths[11].avgHumidity
-						li= "Number of Days Rained: " + data.weatherMonths[11].daysRained
-		style
-			include ../public/stylesheets/stylesheet.css
-		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
+		- n = 0
+		while n < max
+			div.displayAnalysis(id="display"+n)
+				pre
+					if data.months[n].noData == true
+						p No data avaliable for this month! Get farming!
+					else	
+						ul
+							each val in data.months[n].fields
+								li= "Average Temperature: " + data.weatherMonths[0].avgTemp
+								li= "Average Wind: " + data.weatherMonths[0].avgWind
+								li= "Average Humidity: " + data.weatherMonths[0].avgHumidity
+								li= "Number of Days Rained: " + data.weatherMonths[0].daysRained	
+			- n++ 
 		script(src="/javascript/monthButtons.js")
