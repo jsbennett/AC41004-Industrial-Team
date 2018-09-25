@@ -306,18 +306,18 @@ time.icon span {
 
 .weatherLabel { grid-area: weatherLabel;height:75px; padding-top:15px; }
 
-.seasonContainer { grid-area: seasonContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px;}
+.seasonContainer { grid-area: seasonContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px;}
 
 .temperatureLabel { grid-area: temperatureLabel;height:75px;}
 
-.temperatureContainer { grid-area: temperatureContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px; }
+.temperatureContainer { grid-area: temperatureContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px; }
 
-.WeatherContainer { grid-area: WeatherContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px; }
+.WeatherContainer { grid-area: WeatherContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px; }
 
 .humidityLabel { grid-area: humidityLabel; }
 
-.humidityContainer { grid-area: humidityContainer;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;  border-bottom-right:solid; padding-bottom: 25px; padding-top: 10px;}
+.humidityContainer { grid-area: humidityContainer;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;  border-bottom-right:solid; padding-bottom: 25px; padding-top: 10px;}
 
-.Speed { grid-area: Speed;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
+.Speed { grid-area: Speed;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;padding-top:10px; }
 
-.arrows { grid-area: arrows;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
+.arrows { grid-area: arrows;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;padding-left:20px; }
