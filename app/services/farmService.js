@@ -53,6 +53,7 @@ module.exports = {
 				}
 				var idsArr = Array.from(ids);
 				var fields = [];
+
 				for (var j = 0; j < idsArr.length; j++) {
 					var months = [];
 					for (var i = 0; i < 12; i++) {
@@ -86,7 +87,7 @@ module.exports = {
 					}
 					fields.push({ fieldID: idsArr[j], months });
 				}
-				return { fields };
+				return { farmID, fields };
 			}
 		);
 	},

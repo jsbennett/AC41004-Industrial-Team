@@ -10,7 +10,13 @@ block content
 			li.nav-item
 				a.nav-link.active(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='id' data-bind=data.farmID style='display:none')
-		div(id='months' data-bind=data.months style='display:none')
+		div(id='data' data-bind=data style='display:none')
+		.container
+			.row
+				.col
+					button.btn(id=n, href='#', onclick='moisture();' style="width:100%; height:40px; border: 1px solid white") moisture
+				.col
+					button.btn(id=n, href='#', onclick='ph();' style="width:100%; height:40px; border: 1px solid white") ph
 		#chart_div
 
 		-var min = 0
@@ -18,17 +24,20 @@ block content
 		-var m = (new Date()).getMonth()
 		-var i = 0
 		-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-		each val in data.months
-			if val.noData == false
-				-max = i
-			-i++
+		each field in data.fields
+			-i = 0
+			each month in field.months
+				if month.noData == false
+					-max = i
+				-i++
 		
-		-i = 0
-		each val in data.months
-			if val.noData == false
-				-min = i
-				-break
-			-i++
+		each field in data.fields
+			-i = 0
+			each month in field.months
+				if month.noData == false
+					-min = i
+					-break
+				-i++
 		.container
 			.row
 				.col
