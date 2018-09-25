@@ -10,11 +10,36 @@ block content
 			li.nav-item
 				a.nav-link(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='id' data-bind=data.farmID style='display:none')
+		div(id='months' data-bind=data.months style='display:none')
+		#chart_div
+
+		-var min = 0
+		-var max = 11
+		-var m = (new Date()).getMonth()
+		-var i = 0
+		-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		each val in data.months
+			if val.noData == false
+				-max = i
+			-i++
+		
+		-i = 0
+		each val in data.months
+			if val.noData == false
+				-min = i
+				-break
+			-i++
+		.container
+			.row
+				.col
+					p(style="display: inline; padding-right: 5px; padding-left:36px") #{months[min]}
+					input#slider.slider(type='range', min=min, max=max, value=m, style="display: inline-block; vertical-align:middle", oninput="showVal(this.value)", onchange="showVal(this.value)")
+					p(style="display: inline; padding-left: 5px") #{months[max]}
+		hr
 		p Click on a button to see weather analysis from that month!
 		hr
 		- var n = 0;
 		- var max = 12;
-		- var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 		div(class="container" id="carousel")
 			.row
 				while n < max/2
@@ -33,12 +58,12 @@ block content
 				pre
 					if data.months[n].noData == true
 						p No data avaliable for this month! Get farming!
-					else	
+					else
 						ul
 							each val in data.months[n].fields
-								li= "Average Temperature: " + data.weatherMonths[0].avgTemp
-								li= "Average Wind: " + data.weatherMonths[0].avgWind
-								li= "Average Humidity: " + data.weatherMonths[0].avgHumidity
-								li= "Number of Days Rained: " + data.weatherMonths[0].daysRained	
+								li= "Average Temperature: " + data.weatherMonths[n].avgTemp
+								li= "Average Wind: " + data.weatherMonths[n].avgWind
+								li= "Average Humidity: " + data.weatherMonths[n].avgHumidity
+								li= "Number of Days Rained: " + data.weatherMonths[n].daysRained	
 			- n++ 
 		script(src="/javascript/monthButtons.js")

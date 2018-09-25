@@ -48,7 +48,7 @@ $.ajax({
 			var markerLocation = new L.LatLng(lati, longi);
 			var todaysDate = new Date();
 			var customOptions = {
-				maxWidth: '1000',
+				maxWidth: '1200',
 				minWidth: '300',
 				className: 'custom',
 				closeOnClick: false

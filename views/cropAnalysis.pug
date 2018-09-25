@@ -10,6 +10,10 @@ block content
 			li.nav-item
 				a.nav-link.active(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='id' data-bind=data.farmID style='display:none')
+		div(id='months' data-bind=data.months style='display:none')
+		#chart_div
+		input#myRange.slider(type='range', min='1', max='100', value='50')
+		hr
 		p Click on a button to see crop analysis from that month!
 		hr
 		- var n = 0;
@@ -34,9 +38,14 @@ block content
 					if data.months[n].noData == true
 						p No data avaliable for this month! Get farming!
 					else	
-						ul
-							each val in data.months[n].fields
-								li= "Crop Name: " + val.crop
+						each val in data.months[n].fields
+							if val.crop == 'Potatoes'
+								img(src='/images/crops/potatoes2.png', style= 'width:30%;')
+							else if val.crop == 'Corn'
+								img(src='/images/crops/corn2.png', style= 'width:20%;')
+							else if val.crop == 'Strawberries'
+								img(src='images/crops/strawberries2.png', style= 'width:45%;')
+							ul
 								li= "Number Harvested: " + val.harvestedNumber
 								li= "Number Still Growing: " + val.notHarvestedNumber
 								li= "Average PH: " + val.averagePH
