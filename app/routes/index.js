@@ -38,6 +38,12 @@ router.get("/cropAnalysis/:farmID", function(req, res, next) {
     });
 });
 
+router.get("/plantAnalysis/:farmID", function(req, res, next) {
+    farmService.GetPlantData(req).then(function(json) {
+        res.render("plantAnalysis", { data: json });
+    });
+});
+
 router.get("/", function(req, res, next) {
     res.render("index", {
         title: "FRM3D"
@@ -64,6 +70,12 @@ router.get("/api/getFarmAnalysis/:farmID", function(req, res, next) {
 
 router.get("/api/getMarkers", function(req, res, next) {
     farmService.GetAllMarkers().then(function(json) {
+        res.send(json);
+    });
+});
+
+router.get("/api/getPlantData/:farmID", function(req, res, next) {
+    farmService.GetPlantData(req).then(function(json) {
         res.send(json);
     });
 });
