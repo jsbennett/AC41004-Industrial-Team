@@ -22,6 +22,6 @@ function move() {
     }
 }
 
-function wiggle(){
+function wind(){
 
 }

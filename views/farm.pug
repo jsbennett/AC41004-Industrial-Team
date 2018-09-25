@@ -61,6 +61,14 @@ block content
 			.l5
 				img(src='images/headings/wind.png')
 			.r5
-				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}
+				-var w = JSON.stringify(data.farm.weather[0].windStrength)
+				-w = parseInt(w)
+				p.result #{w}mph
+				if w >= 32
+					img(src='images/arrows/heavy.png')
+				else if w >=13
+					img(src='images/arrows/medium.png')
+				else
+					img(src='images/arrows/light.png')
 		style
 			include ../public/stylesheets/stylesheet.css	
