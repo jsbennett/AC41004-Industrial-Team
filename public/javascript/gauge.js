@@ -37,8 +37,8 @@ setInterval(function() {
   var formatter = new google.visualization.NumberFormat(
     {suffix: '%', pattern:info}
   );
-	var min = moisture - 1;
-	var max = moisture + 2;
+	var min = moisture - 5;
+	var max = moisture + 5;
 
 	var fluxValue = Math.floor(Math.random() * (max - min)) + min;
 	if (fluxValue < 0) {

@@ -12,176 +12,32 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		br
 		br
-		.grid-container
-			l1
-				img(src='/images/headings/cropname.png', class = 'cropNameImg')
-			r1
-				img(src='/images/headings/expectedharvestdate.png', class = 'harvestSummaryImg')
-			l2
-				if data.farm.crops[0].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'imlabel')
-				else if data.farm.crops[0].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
-				else if data.farm.crops[0].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
-			r2
-				-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
-				-var dt = p.split("T")
-				-var d = dt[0].split("-")
-				-var date = d[0].split('\"')
-				-var m = d[1]
-				if -d[1] == "01"
-					-m = 'January'
-				else if d[1] == '02'
-					-m= 'February'
-				else if d[1] == '03'
-					-m= 'March'
-				else if d[1] == '04'
-					-m= 'April'
-				else if d[1] == '05'
-					-m= 'May'
-				else if d[1] == '06'
-					-m= 'June'
-				else if d[1] == '07'
-					-m= 'July'
-				else if d[1] == '08'
-					-m= 'August'
-				else if d[1] == '09'
-					-m= 'September'
-				else if d[1] == '10'
-					-m= 'October'
-				else if d[1] == '11'
-					-m= 'November'
-				else if d[1] == '12'
-					-m= 'December'
-				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
-					em #{m}
-					strong #{date[1]}
-					span #{d[2]}
-			l3
-				if data.farm.crops[1].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'imlabel')
-				else if data.farm.crops[1].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
-				else if data.farm.crops[1].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
-			r3
-				-var p = JSON.stringify(data.farm.crops[1].expectedHarvestDate)
-				-var dt = p.split("T")
-				-var d = dt[0].split("-")
-				-var date = d[0].split('\"')
-				-var m = d[1]
-				if -d[1] == '01'
-					-m = 'January'
-				else if d[1] == '02'
-					-m= 'February'
-				else if d[1] == '03'
-					-m= 'March'
-				else if d[1] == '04'
-					-m= 'April'
-				else if d[1] == '05'
-					-m= 'May'
-				else if d[1] == '06'
-					-m= 'June'
-				else if d[1] == '07'
-					-m= 'July'
-				else if d[1] == '08'
-					-m= 'August'
-				else if d[1] == '09'
-					-m= 'September'
-				else if d[1] == '10'
-					-m= 'October'
-				else if d[1] == '11'
-					-m= 'November'
-				else if d[1] == '12'
-					-m= 'December'
-				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
-					em #{m}
-					strong #{date[1]}
-					span #{d[2]}
-			l4
-				if data.farm.crops[2].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'imlabel')
-				else if data.farm.crops[2].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
-				else if data.farm.crops[2].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '10px'})
-			r4
-				-var p = JSON.stringify(data.farm.crops[2].expectedHarvestDate)
-				-var dt = p.split("T")
-				-var d = dt[0].split("-")
-				-var date = d[0].split('\"')
-				-var m = d[1]
-				if -d[1] == '01'
-					-m = 'January'
-				else if d[1] == '02'
-					-m= 'February'
-				else if d[1] == '03'
-					-m= 'March'
-				else if d[1] == '04'
-					-m= 'April'
-				else if d[1] == '05'
-					-m= 'May'
-				else if d[1] == '06'
-					-m= 'June'
-				else if d[1] == '07'
-					-m= 'July'
-				else if d[1] == '08'
-					-m= 'August'
-				else if d[1] == '09'
-					-m= 'September'
-				else if d[1] == '10'
-					-m= 'October'
-				else if d[1] == '11'
-					-m= 'November'
-				else if d[1] == '12'
-					-m= 'December'
-				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
-					em #{m}
-					strong #{date[1]}
-					span #{d[2]}
-			l5
-				if data.farm.crops[3].cropName == 'Potatoes'
-					img(src='/images/crops/potatoes2.png', class= 'imlabel')
-				else if data.farm.crops[3].cropName == 'Corn'
-					img(src='/images/crops/corn2.png', class= 'imlabel', style= {float: right, padding: '10px'})
-				else if data.farm.crops[3].cropName == 'Strawberries'
-					img(src='images/crops/strawberries2.png', class= 'altlabel', style= {float:right, padding: '5px, width:120px'})
-			r5
-				-var p = JSON.stringify(data.farm.crops[3].expectedHarvestDate)
-				-var dt = p.split("T")
-				-var d = dt[0].split("-")
-				-var date = d[0].split('\"')
-				-var m = d[1]
-				if -d[1] == "01"
-					-m = 'January'
-				else if d[1] == '02'
-					-m= 'February'
-				else if d[1] == '03'
-					-m= 'March'
-				else if d[1] == '04'
-					-m= 'April'
-				else if d[1] == '05'
-					-m= 'May'
-				else if d[1] == '06'
-					-m= 'June'
-				else if d[1] == '07'
-					-m= 'July'
-				else if d[1] == '08'
-					-m= 'August'
-				else if d[1] == '09'	
-					-m= 'September'
-				else if d[1] == '10'
-					-m= 'October'
-				else if d[1] == '11'
-					-m= 'November'
-				else if d[1] == '12'
-					-m= 'December'
-				time.icon(datetime='JSON.stringify(data.farm.crops[0].expectedHarvestDate')
-					em #{m}
-					strong #{date[1]}
-					span #{d[2]}
-
-				
+		.container
+			.row
+				.col-sm-4
+					img(src='/images/headings/cropname.png')
+				.col-sm-4
+					img(src='/images/headings/expectedharvestdate.png')
+			hr
+			each val in data.farm.crops
+				.row
+					.col-sm-4
+						if val.cropName == 'Potatoes'
+							img(src='/images/crops/potatoes2.png' class= 'imlabel')
+						else if val.cropName == 'Corn'
+							img(src='/images/crops/corn2.png' class= 'imlabel')
+						else if val.cropName == 'Strawberries'
+							img(src='images/crops/strawberries2.png' class= 'altlabel')
+					.col-sm-8(style="padding-left: 80px")
+						-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
+						-var dt = p.split("T")
+						-var d = dt[0].split("-")
+						-var date = d[0].split('\"')
+						-var m = d[1]
+						-var months = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+						time.icon(datetime='JSON.stringify(val.expectedHarvestDate')
+							em #{months[parseInt(d[1])]}
+							strong #{date[1]}
+							span #{d[2]}
 	style
 		include ../public/stylesheets/stylesheet.css
