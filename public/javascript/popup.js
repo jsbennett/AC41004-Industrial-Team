@@ -1,3 +1,6 @@
+var smWidth = 301;
+var bgWidth = 900;
+
 function AddWrapper(data) {
 	var width = $('.leaflet-popup-content').css('width');
 	return (
@@ -14,6 +17,7 @@ function Crop(id) {
 		url: '/field/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(smWidth);
 		}
 	});
 }
@@ -23,6 +27,7 @@ function Soil() {
 		url: '/soil/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(smWidth);
 		}
 	});
 }
@@ -32,6 +37,7 @@ function Summary() {
 		url: '/farmSummary/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(smWidth);
 		}
 	});
 }
@@ -41,15 +47,17 @@ function Weather() {
 		url: '/farm/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(smWidth);
 		}
 	});
 }
 
 function WeatherAnalysis() {
 	$.ajax({
-		url: '/weatherAnalysis/' + $('#id').data().bind,
+		url: '/dailyWeatherAnalysis/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(bgWidth);
 		}
 	});
 }
@@ -59,6 +67,7 @@ function CropAnalysis() {
 		url: '/plantAnalysis/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
+			$('.leaflet-popup-content').width(bgWidth);
 		}
 	});
 }

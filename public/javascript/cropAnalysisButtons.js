@@ -84,7 +84,7 @@ function drawLineColors(m) {
 			title: 'Date'
 		},
 		vAxis: {
-			title: 'Value'
+			title: title
 		},
 		legend: { position: 'top' },
 		colors: colors

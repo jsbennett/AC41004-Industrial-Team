@@ -11,13 +11,14 @@ block content
 				a.nav-link.active(href='#' id='cropAnalysis' onClick="CropAnalysis();") Crop Analysis
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='data' data-bind=data style='display:none')
+		br
 		.container
 			.row
 				.col
 					button.btn.btn-primary(id='moisture', href='#', onclick='moisture();' style="width:100%; height:40px; border: 1px solid white") Moisture
 				.col
 					button.btn(id='ph', href='#', onclick='ph();' style="width:100%; height:40px; border: 1px solid white") PH
-		#chart_div
+		#chart_div(style="height: 400px")
 
 		-var min = 0
 		-var max = 11
