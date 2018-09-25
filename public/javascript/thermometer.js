@@ -1,4 +1,4 @@
-function move() {
+window.onload = function move() {
     var elem = document.getElementById("mercury");
     var temp = -4;
     //temp = $('#temperature').data().bind;
@@ -22,7 +22,7 @@ function move() {
     }
 }
 
-function fill() {
+window.onload = function fill() {
     var elem = document.getElementById("water");
     var temp = -4;
     //temp = $('#temperature').data().bind;
