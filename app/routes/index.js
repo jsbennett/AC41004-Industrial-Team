@@ -1,49 +1,50 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var farmService = require('../services/farmService.js');
+var farmService = require("../services/farmService.js");
 
-router.get('/field/:fieldID', function(req, res, next) {
-	farmService.GetCurrentFieldDetails(req).then(function(json) {
-		res.render('field', { data: json });
-	});
+router.get("/field/:fieldID", function(req, res, next) {
+    farmService.GetCurrentFieldDetails(req).then(function(json) {
+        res.render("field", { data: json });
+    });
 });
 
-router.get('/soil/:fieldID', function(req, res, next) {
-	farmService.GetCurrentFieldDetails(req).then(function(json) {
-		res.render('soil', { data: json });
-	});
+router.get("/soil/:fieldID", function(req, res, next) {
+    farmService.GetCurrentFieldDetails(req).then(function(json) {
+        res.render("soil", { data: json });
+    });
 });
 
-router.get('/farm/:farmID', function(req, res, next) {
-	farmService.GetFarmSummary(req).then(function(json) {
-		res.render('farm', { data: json });
-	});
+router.get("/farm/:farmID", function(req, res, next) {
+    farmService.GetFarmSummary(req).then(function(json) {
+        res.render("farm", { data: json });
+    });
 });
 
-router.get('/farmSummary/:farmID', function(req, res, next) {
-	farmService.GetFarmSummary(req).then(function(json) {
-		res.render('summary', { data: json });
-	});
+router.get("/farmSummary/:farmID", function(req, res, next) {
+    farmService.GetFarmSummary(req).then(function(json) {
+        res.render("summary", { data: json });
+    });
 });
 
-router.get('/weatherAnalysis/:farmID', function(req, res, next) {
-	farmService.GetFarmAnalysis(req).then(function(json) {
-		res.render('weatherAnalysis', { data: json });
-	});
+router.get("/weatherAnalysis/:farmID", function(req, res, next) {
+    farmService.GetFarmAnalysis(req).then(function(json) {
+        res.render("weatherAnalysis", { data: json });
+    });
 });
 
-router.get('/cropAnalysis/:farmID', function(req, res, next) {
-	farmService.GetFarmAnalysis(req).then(function(json) {
-		res.render('cropAnalysis', { data: json });
-	});
+router.get("/cropAnalysis/:farmID", function(req, res, next) {
+    farmService.GetFarmAnalysis(req).then(function(json) {
+        res.render("cropAnalysis", { data: json });
+    });
 });
 
-router.get('/plantAnalysis/:farmID', function(req, res, next) {
-	farmService.GetPlantData(req).then(function(json) {
-		res.render('cropAnalysis', { data: json });
-	});
+router.get("/plantAnalysis/:farmID", function(req, res, next) {
+    farmService.GetPlantData(req).then(function(json) {
+        res.render("cropAnalysis", { data: json });
+    });
 });
 
+<<<<<<< HEAD
 router.get('/dailyWeatherAnalysis/:farmID', function(req, res, next) {
 	farmService.GetDailyWeatherData(req).then(function(json) {
 		res.render('dailyWeatherAnalysis', { data: json });
@@ -54,36 +55,48 @@ router.get('/', function(req, res, next) {
 	res.render('index', {
 		title: 'FRM3D'
 	});
+=======
+router.get("/dailyWeatherAnalysis/:farmID", function(req, res, next) {
+    farmService.GetDailyWeatherData(req).then(function(json) {
+        res.render("dailyWeatherAnalysis", { data: json });
+    });
 });
 
-router.get('/api/getField/:fieldID', function(req, res, next) {
-	farmService.GetCurrentFieldDetails(req).then(function(json) {
-		res.send(json);
-	});
+router.get("/", function(req, res, next) {
+    res.render("index", {
+        title: "FRM3D"
+    });
+>>>>>>> 57a781dc5b39dd2d9543ebbe195c261de4c58cb3
 });
 
-router.get('/api/getFarmSummary/:farmID', function(req, res, next) {
-	farmService.GetFarmSummary(req).then(function(json) {
-		res.send(json);
-	});
+router.get("/api/getField/:fieldID", function(req, res, next) {
+    farmService.GetCurrentFieldDetails(req).then(function(json) {
+        res.send(json);
+    });
 });
 
-router.get('/api/getFarmAnalysis/:farmID', function(req, res, next) {
-	farmService.GetFarmAnalysis(req).then(function(json) {
-		res.send(json);
-	});
+router.get("/api/getFarmSummary/:farmID", function(req, res, next) {
+    farmService.GetFarmSummary(req).then(function(json) {
+        res.send(json);
+    });
 });
 
-router.get('/api/getMarkers', function(req, res, next) {
-	farmService.GetAllMarkers().then(function(json) {
-		res.send(json);
-	});
+router.get("/api/getFarmAnalysis/:farmID", function(req, res, next) {
+    farmService.GetFarmAnalysis(req).then(function(json) {
+        res.send(json);
+    });
 });
 
-router.get('/api/getPlantData/:farmID', function(req, res, next) {
-	farmService.GetPlantData(req).then(function(json) {
-		res.send(json);
-	});
+router.get("/api/getMarkers", function(req, res, next) {
+    farmService.GetAllMarkers().then(function(json) {
+        res.send(json);
+    });
+});
+
+router.get("/api/getPlantData/:farmID", function(req, res, next) {
+    farmService.GetPlantData(req).then(function(json) {
+        res.send(json);
+    });
 });
 
 router.get('/api/getDailyWeather/:farmID', function(req, res, next) {
