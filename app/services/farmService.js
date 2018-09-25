@@ -64,6 +64,8 @@ module.exports = {
                                         .toString() == String(i)
                                 ) {
                                     days.push({
+                                        fieldID: fieldResults[k].FarmFieldID,
+                                        crop: cropResults[j].CropName,
                                         ph: fieldResults[k].PHLevel,
                                         moisture:
                                             fieldResults[k].MoisturePercent
