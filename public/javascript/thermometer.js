@@ -3,10 +3,10 @@ function move() {
     var temp = -4;
     //temp = $('#temperature').data().bind;
     var height = 0;
-    var rheight= -200;
+    var rheight= -100;
     var id = setInterval(frame, 10);
     function frame() {
-        if (height >= 150) {
+        if (height >= 80) {
             clearInterval(id);
         } else{
             height++; 
@@ -23,5 +23,5 @@ function move() {
 }
 
 function wiggle(){
-        
+
 }

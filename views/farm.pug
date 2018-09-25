@@ -48,13 +48,12 @@ block content
 			.l3
 				img(src='images/headings/temperature.png')
 			.r3
-				//p #{JSON.stringify(data.farm.weather[0].temperature)}
-				button(onclick='move()') Click Me
+				//p #{JSON.stringify(data.farm.weather[0].temperature)}	
 				.thermodiv
-					#mercury
+					#mercury(onload='move()')
 				#circle
-			
-				
+					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}
+				button(onclick='move()') Click Me				
 			.l4
 				img(src='images/headings/humidity.png')
 			.r4
