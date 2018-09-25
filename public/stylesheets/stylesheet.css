@@ -166,7 +166,16 @@ time.icon span {
 	padding-top: 0.8em;
 	color: #2f2f2f;
 }
-
+.gridLabel{
+    padding:0;
+    width:125px;
+    height:100px;
+}
+.gridResult{
+    width:90px;
+    height:90px;
+    margin-top:10px;
+}
 .label {
 	color: #505151;
 	font-size: 15px;
@@ -185,82 +194,7 @@ time.icon span {
 	font-size: 28px;
 	font-weight: bold;
 }
-.tempCold {
-	font-size: 28px;
-	font-weight: bold;
-	color: #0a5a61;
-}
-.tempHot {
-	font-size: 28px;
-	font-weight: bold;
-	color: #9e0f13;
-}
-.grid-container {
-	display: grid;
-	height: 100%;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-	grid-gap: 3px 3px;
-	grid-template-areas: 'l1 r1' 'l2 r2' 'l3 r3' 'l4 r4' 'l5 r5';
-}
 
-.l1 {
-	grid-area: l1;
-	padding-top: 20px;
-	padding-left: 32px;
-}
-
-.l2 {
-	grid-area: l2;
-	padding-left: 15px;
-}
-
-.l3 {
-	grid-area: l3;
-	padding-top: 23px;
-}
-
-.l4 {
-	grid-area: l4;
-	padding-top: 12px;
-	padding-left: 25px;
-}
-
-.l5 {
-	grid-area: l5;
-	padding-top: 15px;
-	padding-left: 40px;
-}
-
-.r1 {
-	grid-area: r1;
-	display: block;
-	margin: 0 auto;
-}
-
-.r2 {
-	grid-area: r2;
-	display: block;
-	margin: 0 auto;
-}
-
-.r3 {
-	display: block;
-	margin: 0 auto;
-	grid-area: r3;
-}
-
-.r4 {
-	grid-area: r4;
-	display: block;
-	margin: 0 auto;
-}
-
-.r5 {
-	grid-area: r5;
-	display: block;
-	margin: 0 auto;
-}
 .thermodiv {
 	width: 20px;
 	border-style: solid;
@@ -355,3 +289,35 @@ time.icon span {
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 }
+
+
+.summary-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: .5fr 1fr .5fr 1fr .5fr 1fr;
+  grid-gap: 10px 50px;
+  grid-template-areas: "seasonLabel weatherLabel" "seasonContainer WeatherContainer" "temperatureLabel humidityLabel" "temperatureContainer humidityContainer" "bField bField" "Speed arrows";
+}
+
+.bField { grid-area: bField;height:75px;margin:0;padding:0; }
+
+.seasonLabel { grid-area: seasonLabel;height:75px;  }
+
+.weatherLabel { grid-area: weatherLabel;height:75px;  }
+
+.seasonContainer { grid-area: seasonContainer; }
+
+.temperatureLabel { grid-area: temperatureLabel;height:75px;  }
+
+.temperatureContainer { grid-area: temperatureContainer; }
+
+.WeatherContainer { grid-area: WeatherContainer; }
+
+.humidityLabel { grid-area: humidityLabel; }
+
+.humidityContainer { grid-area: humidityContainer; }
+
+.Speed { grid-area: Speed; }
+
+.arrows { grid-area: arrows; }

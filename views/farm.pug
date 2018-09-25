@@ -14,66 +14,67 @@ block content
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
 		script(src="/javascript/thermometer.js")
-		.grid-container
-			.l1
-				img(src='images/headings/season.png') 
-			.r1
+		.summary-container
+			.bField
+				img.gridLabel(src='images/headings/wind.png', style='height:75px; width:200px; padding-left:75px')
+			.seasonLabel
+				img.gridLabel(src='images/headings/season.png') 
+			.weatherLabel
+				img.gridLabel(src='images/headings/weather.png')
+			.seasonContainer
 				if data.farm.weather[0].season == 'Autumn'
-					img(src='images/seasons/autumn.png')
+					img.gridResult(src='images/seasons/autumn.png')
 				else if data.farm.weather[0].season == 'Spring'
-					img(src='images/seasons/spring.png')
+					img.gridResult(src='images/seasons/spring.png')
 				else if data.farm.weather[0].season == 'Winter'
-					img(src='images/seasons/winter.png')
+					img.gridResult(src='images/seasons/winter.png')
 				else if data.farm.weather[0].season == 'Summer'
-					img(src='images/seasons/summer.png')
-			.l2
-				img(src='images/headings/weather.png')
-			.r2
-				if data.farm.weather[0].weatherType == 'Clear'
-					img(src='images/weather/clear.png')
-				else if data.farm.weather[0].weatherType == 'Cloudy'
-					img(src='images/weather/cloudy.png')
-				else if data.farm.weather[0].weatherType == 'Fog'
-					img(src='images/weather/fog.png')
-				else if data.farm.weather[0].weatherType == 'Lightning'
-					img(src='images/weather/lightning.png')
-				else if data.farm.weather[0].weatherType == 'Rain'
-					img(src='images/weather/rain.png')
-				else if data.farm.weather[0].weatherType == 'Snow'
-					img(src='images/weather/snow.png')
-				else if data.farm.weather[0].weatherType == 'Sunny'
-					img(src='images/weather/sunny.png')
-				else if data.farm.weather[0].weatherType == 'Windy'
-					img(src='images/weather/windy.png')
-			.l3
-				img(src='images/headings/temperature.png')
-			.r3
-				//p #{JSON.stringify(data.farm.weather[0].temperature)}	
+					img.gridResult(src='images/seasons/summer.png')
+			.temperatureLabel
+				img.gridLabel(src='images/headings/temperature.png', style='height:75px')
+			.temperatureContainer
 				.thermodiv
 					#mercury(onload='move()')
 				#circle
 					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}°C
 				br
-				button(onclick='move()') Click Me				
-			.l4
-				img(src='images/headings/humidity.png')
-			.r4
-				button(onclick='fill()') WATER	
+				button(onclick='move()') Click Me		
+			.WeatherContainer
+				if data.farm.weather[0].weatherType == 'Clear'
+					img.gridResult(src='images/weather/clear.png')
+				else if data.farm.weather[0].weatherType == 'Cloudy'
+					img.gridResult(src='images/weather/cloudy.png')
+				else if data.farm.weather[0].weatherType == 'Fog'
+					img.gridResult(src='images/weather/fog.png')
+				else if data.farm.weather[0].weatherType == 'Lightning'
+					img.gridResult(src='images/weather/lightning.png')
+				else if data.farm.weather[0].weatherType == 'Rain'
+					img.gridResult(src='images/weather/rain.png')
+				else if data.farm.weather[0].weatherType == 'Snow'
+					img.gridResult(src='images/weather/snow.png')
+				else if data.farm.weather[0].weatherType == 'Sunny'
+					img.gridResult(src='images/weather/sunny.png')
+				else if data.farm.weather[0].weatherType == 'Windy'
+					img.gridResult(src='images/weather/windy.png')
+			.humidityLabel
+				img.gridLabel(src='images/headings/humidity.png', style='height:75px')
+			.humidityContainer
 				.humcontainer
 					img.moisture(src='images/weather/raindrop.png')
 					#water(onload='fill()')
 				#humidity #{JSON.stringify(data.farm.weather[0].humidity)}%
-			.l5
-				img(src='images/headings/wind.png')
-			.r5
+			br
+			button(onclick='fill()') WATER	
+			.Speed
+				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}MPH
+			.arrows
 				-var w = JSON.stringify(data.farm.weather[0].windStrength)
 				-w = parseInt(w)
-				p.result #{w}mph
 				if w >= 32
-					img(src='images/arrows/heavy.png')
+					img.gridResult(src='images/arrows/heavy.png')
 				else if w >=13
-					img(src='images/arrows/medium.png')
+					img.gridResult(src='images/arrows/medium.png')
 				else
-					img(src='images/arrows/light.png')
+					img.gridResult(src='images/arrows/light.png')
 		style
 			include ../public/stylesheets/stylesheet.css	
