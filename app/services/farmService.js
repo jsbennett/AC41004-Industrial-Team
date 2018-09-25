@@ -63,13 +63,6 @@ module.exports = {
                                         .getMonth()
                                         .toString() == String(i)
                                 ) {
-                                    if (
-                                        fieldResults[k].PHLevel == null &&
-                                        fieldResults[k].MoisturePercent == null
-                                    ) {
-                                        noData = true;
-                                    }
-
                                     days.push({
                                         ph: fieldResults[k].PHLevel,
                                         moisture:
@@ -78,6 +71,9 @@ module.exports = {
                                 }
                             }
                         }
+                    }
+                    if (days[i] == null) {
+                        noData = true;
                     }
 
                     months.push({
