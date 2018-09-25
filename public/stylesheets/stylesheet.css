@@ -282,3 +282,22 @@ time.icon span {
 	border-radius: 30px;
 	z-index: 0;
 }
+
+.btn {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus {
+	outline: 0 !important;
+	outline-offset: 0 !important;
+	background-image: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}

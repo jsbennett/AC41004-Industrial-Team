@@ -34,10 +34,8 @@ block content
 						-var d = dt[0].split("-")
 						-var date = d[0].split('\"')
 						-var m = d[1]
-						-var months = ['January', 'February', 'March', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+						-var months = ['January', 'February', 'March', 'May', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 						time.icon(datetime='JSON.stringify(val.expectedHarvestDate')
 							em #{months[parseInt(d[1])]}
 							strong #{date[1]}
 							span #{d[2]}
-	style
-		include ../public/stylesheets/stylesheet.css
