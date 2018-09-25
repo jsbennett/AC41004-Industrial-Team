@@ -27,6 +27,69 @@ module.exports = {
             return { markers: markers };
         });
     },
+
+    GetPlantData: function(req) {
+        var farmID = req.param("farmID");
+        var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+        var pastDate = new Date();
+        pastDate = pastDate.setMonth(pastDate.getMonth() - 6);
+        pastDate = new Date(pastDate).toISOString().split("T")[0];
+        var futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + 5);
+
+        var cropData = this.GetCropDetails();
+        var fieldData = this.FindFarm(farmID, pastDate, todaysDate);
+
+        return Promise.all([fieldData, cropData]).then(
+            ([fieldResults, cropResults]) => {
+                fieldResults = JSON.parse(fieldResults);
+                fieldResults = fieldResults[0];
+                cropResults = JSON.parse(cropResults);
+                var months = [];
+
+                for (var i = 0; i < 12; i++) {
+                    var days = [];
+
+                    var noData = false;
+
+                    for (var j = 0; j < cropResults.length; j++) {
+                        for (var k = 0; k < fieldResults.length; k++) {
+                            if (
+                                fieldResults[k].CropName ==
+                                cropResults[j].CropName
+                            ) {
+                                if (
+                                    new Date(fieldResults[k].PlantDate)
+                                        .getMonth()
+                                        .toString() == String(i)
+                                ) {
+                                    if (
+                                        fieldResults[k].PHLevel == null &&
+                                        fieldResults[k].MoisturePercent == null
+                                    ) {
+                                        noData = true;
+                                    }
+
+                                    days.push({
+                                        ph: fieldResults[k].PHLevel,
+                                        moisture:
+                                            fieldResults[k].MoisturePercent
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    months.push({
+                        month: i,
+                        days,
+                        noData
+                    });
+                }
+                return { farmID, months };
+            }
+        );
+    },
     /*
 	*
 	* Returns a JSON object of all the details for the current field
@@ -302,7 +365,6 @@ module.exports = {
                 weatherResults = JSON.parse(weatherResults);
                 weatherResults = weatherResults[0];
                 cropResults = JSON.parse(cropResults);
-
                 var months = [];
                 var weatherMonths = [];
 
