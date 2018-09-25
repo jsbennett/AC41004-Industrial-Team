@@ -12,6 +12,7 @@ function drawChart() {
 		['Moisture', 0]
 	]);
 
+
 	options = {
 		width: 160,
 		height: 160,

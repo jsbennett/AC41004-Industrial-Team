@@ -47,6 +47,7 @@ block content
 		br
 		button(id="11", href='#', type='button', onclick='displayAnalysis(this.id);') December
 		hr
+
 		div.displayAnalysis(id="display0")
 			pre
 				if data.months[0].noData == true
@@ -195,3 +196,4 @@ block content
 			include ../public/stylesheets/stylesheet.css
 		script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js")
 		script(src="/javascript/monthButtons.js")
+		
