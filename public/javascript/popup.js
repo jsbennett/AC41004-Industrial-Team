@@ -56,7 +56,7 @@ function WeatherAnalysis() {
 
 function CropAnalysis() {
 	$.ajax({
-		url: '/cropAnalysis/' + $('#id').data().bind,
+		url: '/plantAnalysis/' + $('#id').data().bind,
 		success: function(data) {
 			$('.leaflet-popup-content-wrapper').html(AddWrapper(data));
 		}
