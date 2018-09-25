@@ -72,6 +72,13 @@ function drawLineColors(m) {
 		colors.push(getRandomColor());
 	}
 
+	var title;
+	if (chartType == 'ph') {
+		title = 'PH Value';
+	} else {
+		title = 'Percent';
+	}
+
 	var options = {
 		hAxis: {
 			title: 'Date'
