@@ -13,6 +13,7 @@ block content
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
+		script(src="/javascript/thermometer.js")
 		.grid-container
 			.l1
 				img(src='images/headings/season.png') 
@@ -47,11 +48,12 @@ block content
 			.l3
 				img(src='images/headings/temperature.png')
 			.r3
-				p #{JSON.stringify(data.farm.weather[0].temperature)}
+				//p #{JSON.stringify(data.farm.weather[0].temperature)}
 				button(onclick='move()') Click Me
 				.thermodiv
 					#mercury
-			script(src="/javascript/thermometer.js")
+				#circle
+			
 				
 			.l4
 				img(src='images/headings/humidity.png')
