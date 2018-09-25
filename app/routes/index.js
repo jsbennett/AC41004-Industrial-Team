@@ -44,6 +44,12 @@ router.get("/plantAnalysis/:farmID", function(req, res, next) {
     });
 });
 
+router.get("/dailyWeatherAnalysis/:farmID", function(req, res, next) {
+    farmService.GetDailyWeatherData(req).then(function(json) {
+        res.render("dailyWeatherAnalysis", { data: json });
+    });
+});
+
 router.get("/", function(req, res, next) {
     res.render("index", {
         title: "FRM3D"
@@ -76,6 +82,12 @@ router.get("/api/getMarkers", function(req, res, next) {
 
 router.get("/api/getPlantData/:farmID", function(req, res, next) {
     farmService.GetPlantData(req).then(function(json) {
+        res.send(json);
+    });
+});
+
+router.get("/api/getDailyWeather/:farmID", function(req, res, next) {
+    farmService.GetDailyWeatherData(req).then(function(json) {
         res.send(json);
     });
 });

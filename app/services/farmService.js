@@ -27,7 +27,59 @@ module.exports = {
             return { markers: markers };
         });
     },
+    GetDailyWeatherData: function(req) {
+        var farmID = req.param("farmID");
+        var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
+        var pastDate = new Date();
+        pastDate = pastDate.setMonth(pastDate.getMonth() - 6);
+        pastDate = new Date(pastDate).toISOString().split("T")[0];
+        var futureDate = new Date();
+        futureDate.setDate(futureDate.getDate() + 5);
 
+        var weatherData = this.GetWeatherDetails(farmID, pastDate, futureDate);
+        return Promise.all([weatherData]).then(([weatherResults]) => {
+            var weatherMonths = [];
+
+            var weather = JSON.parse(weatherResults);
+            weather = weather[0];
+            for (var i = 0; i < 12; i++) {
+                var days = [];
+                var raining = false;
+                var recordCount = 0;
+
+                for (var j = 0; j < weather.length; j++) {
+                    if (
+                        new Date(weather[j].RecordDate).getMonth().toString() ==
+                        String(i)
+                    ) {
+                        if (
+                            weather[j].Weathertype == "Rain" ||
+                            weather[j].Weathertype == "Lightning"
+                        ) {
+                            raining = true;
+                        }
+
+                        recordCount++;
+
+                        days.push({
+                            temp: weather[j].Temperature,
+                            wind: weather[j].WindStrength,
+                            humidity: weather[j].Humidity,
+                            rain: raining
+                        });
+                    }
+                }
+
+                if (recordCount > 0) {
+                    weatherMonths.push({ month: i, days: days });
+                } else {
+                    weatherMonths.push({ month: i, days: "No Data" });
+                }
+            }
+
+            return { farmID, weatherMonths };
+        });
+    },
     GetPlantData: function(req) {
         var farmID = req.param("farmID");
         var todaysDate = new Date().toISOString().split("T")[0]; //found at https://stackoverflow.com/questions/2013255/how-to-get-year-month-day-from-a-date-object
