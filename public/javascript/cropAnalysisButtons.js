@@ -108,11 +108,15 @@ function showVal(val) {
 }
 
 function ph() {
+	$('#moisture').removeClass('btn-primary');
+	$('#ph').addClass('btn-primary');
 	chartType = 'ph';
 	showVal(curMonth);
 }
 
 function moisture() {
+	$('#ph').removeClass('btn-primary');
+	$('#moisture').addClass('btn-primary');
 	chartType = 'moisture';
 	showVal(curMonth);
 }
