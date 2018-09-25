@@ -13,7 +13,6 @@ block content
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
-		script(src="/javascript/thermometer.js")
 		.summary-container
 			.bField
 				img.gridLabel(src='images/headings/wind.png', style='height:75px; width:200px; padding-left:75px')
@@ -38,7 +37,7 @@ block content
 				#circle
 					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}°C
 				br
-				button(onclick='move()') Click Me		
+				button(onclick='move()') Display Temperature		
 			.WeatherContainer
 				if data.farm.weather[0].weatherType == 'Clear'
 					img.gridResult(src='images/weather/clear.png')
@@ -61,10 +60,11 @@ block content
 			.humidityContainer
 				.humcontainer
 					img.moisture(src='images/weather/raindrop.png')
+					button(onclick='fill()',style="position:relative;top:150px") Display Moisture
 					#water(onload='fill()')
 				#humidity #{JSON.stringify(data.farm.weather[0].humidity)}%
-			br
-			button(onclick='fill()') WATER	
+				br
+					
 			.Speed
 				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}MPH
 			.arrows
@@ -76,5 +76,6 @@ block content
 					img.gridResult(src='images/arrows/medium.png')
 				else
 					img.gridResult(src='images/arrows/light.png')
+		script(src="/javascript/thermometer.js")
 		style
 			include ../public/stylesheets/stylesheet.css	

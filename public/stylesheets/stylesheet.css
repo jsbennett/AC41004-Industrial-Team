@@ -168,12 +168,12 @@ time.icon span {
 }
 .gridLabel{
     padding:0;
-    width:125px;
+    width:100px;
     height:100px;
 }
 .gridResult{
-    width:90px;
-    height:90px;
+    width:75px;
+    height:75px;
     margin-top:10px;
 }
 .label {
@@ -295,29 +295,29 @@ time.icon span {
   display: grid;
   height: 100%;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: .5fr 1fr .5fr 1fr .5fr 1fr;
+  grid-template-rows: .5fr .5fr .5fr 1fr .5fr 1fr;
   grid-gap: 10px 50px;
   grid-template-areas: "seasonLabel weatherLabel" "seasonContainer WeatherContainer" "temperatureLabel humidityLabel" "temperatureContainer humidityContainer" "bField bField" "Speed arrows";
 }
 
 .bField { grid-area: bField;height:75px;margin:0;padding:0; }
 
-.seasonLabel { grid-area: seasonLabel;height:75px;  }
+.seasonLabel { grid-area: seasonLabel;height:75px; padding-top:15px;  }
 
-.weatherLabel { grid-area: weatherLabel;height:75px;  }
+.weatherLabel { grid-area: weatherLabel;height:75px; padding-top:15px; }
 
-.seasonContainer { grid-area: seasonContainer; }
+.seasonContainer { grid-area: seasonContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px;}
 
-.temperatureLabel { grid-area: temperatureLabel;height:75px;  }
+.temperatureLabel { grid-area: temperatureLabel;height:75px;}
 
-.temperatureContainer { grid-area: temperatureContainer; }
+.temperatureContainer { grid-area: temperatureContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px; }
 
-.WeatherContainer { grid-area: WeatherContainer; }
+.WeatherContainer { grid-area: WeatherContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px; }
 
 .humidityLabel { grid-area: humidityLabel; }
 
-.humidityContainer { grid-area: humidityContainer; }
+.humidityContainer { grid-area: humidityContainer;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;  border-bottom-right:solid; padding-bottom: 25px; padding-top: 10px;}
 
-.Speed { grid-area: Speed; }
+.Speed { grid-area: Speed;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
 
-.arrows { grid-area: arrows; }
+.arrows { grid-area: arrows;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
