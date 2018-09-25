@@ -52,12 +52,17 @@ block content
 				.thermodiv
 					#mercury(onload='move()')
 				#circle
-					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}
+					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}°C
+				br
 				button(onclick='move()') Click Me				
 			.l4
 				img(src='images/headings/humidity.png')
 			.r4
-				p.result #{JSON.stringify(data.farm.weather[0].humidity)}
+				button(onclick='fill()') WATER	
+				.humcontainer
+					img.moisture(src='images/weather/raindrop.png')
+					#water(onload='fill()')
+				#humidity #{JSON.stringify(data.farm.weather[0].humidity)}%
 			.l5
 				img(src='images/headings/wind.png')
 			.r5
