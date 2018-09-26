@@ -17,7 +17,7 @@ block content
 		.container
 			.row
 				.col
-					img(src='images/headings/season.png') 
+					img(src='images/headings/season.png', style="padding-top: 2px;") 
 				.col(style="padding-top: 13px; padding-left: 60px")
 					if data.farm.weather[0].season == 'Autumn'
 						img(src='images/seasons/autumn.png')
@@ -30,28 +30,28 @@ block content
 			hr
 			.row
 				.col 
-					img(src='images/headings/weather.png')
+					img(src='images/headings/weather.png', class='weatherHeading')
 				.col(style="padding-top: 20px")
 					if data.farm.weather[0].weatherType == 'Clear'
-						img(src='images/weather/clear.png')
+						img(src='images/weather/clear.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Cloudy'
-						img(src='images/weather/cloudy.png')
+						img(src='images/weather/cloudy.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Fog'
-						img(src='images/weather/fog.png')
+						img(src='images/weather/fog.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Lightning'
-						img(src='images/weather/lightning.png')
+						img(src='images/weather/lightning.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Rain'
-						img(src='images/weather/rain.png')
+						img(src='images/weather/rain.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Snow'
-						img(src='images/weather/snow.png')
+						img(src='images/weather/snow.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Sunny'
-						img(src='images/weather/sunny.png')
+						img(src='images/weather/sunny.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Windy'
-						img(src='images/weather/windy.png')
+						img(src='images/weather/windy.png', class='weatherImg')
 			hr
 			.row
 				.col(style="padding-top: 24px;")
-					img(src='images/headings/temperature.png')
+					img(src='images/headings/temperature.png', class='temperatureHeading')
 				.col(style="padding-left: 65px")
 					.thermodiv
 						#mercury(onload='move()')

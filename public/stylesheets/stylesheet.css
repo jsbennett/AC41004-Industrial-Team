@@ -121,6 +121,18 @@ img {
     padding-top: 30px;
 }
 
+.weatherImg {
+  padding-left: 25px;
+}
+
+.weatherHeading {
+  padding-top: 5px;
+}
+
+.temperatureHeading {
+  padding-top: 15px;
+}
+
 time.icon {
     font-size: 1em; /* change icon size */
     display: block;
