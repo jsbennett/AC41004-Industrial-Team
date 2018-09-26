@@ -2,6 +2,6 @@ language: node_js
 node_js:
   - "8.11.4"
 script:
-  - npm test
+  - npm run test
 notifications:
     slack: team2industrial:Ip29T7QzZ3MN6oXeL0RINJp1
