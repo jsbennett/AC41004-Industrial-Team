@@ -33,14 +33,14 @@ function FakeData() {
 	this.init = function(callback) {
 		this.ph = Math.floor(Math.random() * 14);
 		this.moisture = Math.floor(Math.random() * 100);
-		this.temp = Math.floor(Math.random() * 50 + -20);
+		this.temp = Math.floor(Math.random() * 50 + -10);
 		this.humid = Math.floor(Math.random() * 100);
 		this.wind = Math.floor(Math.random() * 150);
-		this.phAlpha = 0.05;
-		this.moistureAlpha = 0.1;
-		this.tempAlpha = 0.3;
-		this.humidAlpha = 0.2;
-		this.windAlpha = 0.5;
+		this.phAlpha = 2;
+		this.moistureAlpha = 20;
+		this.tempAlpha = 10;
+		this.humidAlpha = 20;
+		this.windAlpha = 30;
 
 		farmService.GetAllMarkers().then(function(markerData) {
 			markers = markerData.markers;
@@ -105,13 +105,25 @@ function FakeData() {
 		//Season
 		var season = this.currentSeason(date);
 		//Temperature
-		var temperature = this.smoothRandom(this.tempAlpha, this.temp);
+		var temperature = this.clamp(
+			this.smoothRandom(this.tempAlpha, this.temp),
+			-10,
+			35
+		);
 		//Weathertype
 		var weather = weathers[Math.floor(Math.random() * weathers.length)];
 		//Humidity
-		var humidity = this.smoothRandom(this.humidAlpha, this.humid);
+		var humidity = this.clamp(
+			this.smoothRandom(this.humidAlpha, this.humid),
+			0,
+			100
+		);
 		//WindStrength
-		var windStrength = this.smoothRandom(this.windAlpha, this.wind);
+		var windStrength = this.clamp(
+			this.smoothRandom(this.windAlpha, this.wind),
+			0,
+			150
+		);
 		//FarmID
 		var id = marker.FarmID;
 		//CurrentTime
@@ -171,11 +183,16 @@ function FakeData() {
 		//FarmFieldID
 		var id = marker.FieldID;
 		//PHLevel
-		var phLevel = this.smoothRandom(this.phAlpha, this.ph);
+		var phLevel = this.clamp(
+			this.smoothRandom(this.phAlpha, this.ph),
+			1,
+			14
+		);
 		//MoisturePercent
-		var moisturePercent = this.smoothRandom(
-			this.moistureAlpha,
-			this.moisture
+		var moisturePercent = this.clamp(
+			this.smoothRandom(this.moistureAlpha, this.moisture),
+			0,
+			100
 		);
 		//CropID
 		var cropID;
@@ -235,8 +252,8 @@ function FakeData() {
 		if (start == 0) {
 			start = 1;
 		}
-		var max = start + start * factor;
-		var min = start - start * factor;
+		var max = start + factor;
+		var min = start - factor;
 		return Math.floor(Math.random() * (max - min) + min);
 	};
 
