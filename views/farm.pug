@@ -13,6 +13,7 @@ block content
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
 		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
+		script(src="/javascript/thermometer.js")
 		.summary-container
 			.bField
 				img(src='images/headings/wind.png', style='padding-left:50px')
@@ -33,7 +34,7 @@ block content
 				img.gridLabel(src='images/headings/temperature.png', style='height:75px')
 			.temperatureContainer
 				.thermodiv
-					#mercury(onload='move()')
+					#mercury(onclick='move()')
 				#circle
 					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}°C
 				br
@@ -61,7 +62,7 @@ block content
 				.humcontainer
 					img.moisture(src='images/weather/raindrop.png')
 					button(onclick='fill()',style="position:relative;top:150px") Display Moisture
-					#water(onload='fill()')
+					#water(onclick='fill()')
 				#humidity #{JSON.stringify(data.farm.weather[0].humidity)}%
 				br
 					
@@ -76,6 +77,6 @@ block content
 					img.gridResult(src='images/arrows/medium.png')
 				else
 					img.gridResult(src='images/arrows/light.png')
-		script(src="/javascript/thermometer.js")
+		
 		style
 			include ../public/stylesheets/stylesheet.css	

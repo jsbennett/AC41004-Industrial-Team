@@ -1,4 +1,4 @@
-window.onload = function move() {
+function move() {
     var elem = document.getElementById("mercury");
     var temp = -4;
     //temp = $('#temperature').data().bind;
@@ -22,26 +22,19 @@ window.onload = function move() {
     }
 }
 
-window.onload = function fill() {
+function fill() {
     var elem = document.getElementById("water");
-    var temp = -4;
-    //temp = $('#temperature').data().bind;
     var height = 0;
-    var bottom= -100;
+    var bottom= -120;
     var id = setInterval(frame, 10);
     function frame() {
-        if (height >= 50) {
+        if (height >= 65) {
             clearInterval(id);
         } else{
             height++; 
             bottom++;
-            console.log(temp);
             elem.style.bottom = bottom +'px'; 
             elem.style.height = height +'px'; 
         }
-        /*else if(height >= temp){
-            height--; 
-            elem.style.height = height - '%'; 
-        }*/
     }
 }

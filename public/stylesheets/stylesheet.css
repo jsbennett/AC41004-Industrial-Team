@@ -199,22 +199,24 @@ time.icon span {
 	width: 20px;
 	border-style: solid;
     position:relative;
-    left:20px;
+    left:25px;
 	background-color: none;
 	z-index: 2;
 	border-width: 2px;
 	height: 100px;
 	border-radius: 20px;
+    bottom:5px;
 	border-bottom-style: none;
 }
 #circle {
-	height: 40px;
-	width: 40px;
+	height: 50px;
+	width: 50px;
 	position: relative;
 	border-width: 2px;
 	bottom: 10px;
 	left: 10px;
-	background-color: red;
+    padding-bottom:10px;
+	background-color: #AE1C27;
 	border-style: solid;
 	border-top: none;
 	border-radius: 50%;
@@ -231,14 +233,14 @@ time.icon span {
 }
 
 #mercury {
-	background-color: red;
+	background-color: #AE1C27;
 	width: 15px;
 	position: relative;
-	bottom: -90%;
-	padding-left: 11.5px;
+	bottom: -80%;
+	left: 0px;
 	height: 1px;
 	border-radius: 30px;
-	z-index: 1;
+	z-index: 2;
 }
 
 .btn {
@@ -252,16 +254,16 @@ time.icon span {
     z-index: 3;
 }
 .moisture{
-    width:100px;
-    height:100px;
+    width:120px;
+    height:150px;
     z-index:2;
     position:absolute;
 }
 #water {
-    background-color: blue;
+    background-color: #2CAEFF;
     padding:0;
-    width: 50px;
-    left:25px;
+    width: 75px;
+    left:35px;
     position: relative;
     bottom: -90%;
     height: 1px;
@@ -270,8 +272,9 @@ time.icon span {
 
 #humidity{
     position:absolute;
+    padding-top:5px;
     font-size:1.5em;
-    padding-left:35px;
+    padding-left:45px;
     padding-bottom:5px;
     color:white;
     z-index:4;
@@ -306,18 +309,18 @@ time.icon span {
 
 .weatherLabel { grid-area: weatherLabel;height:75px; padding-top:15px; }
 
-.seasonContainer { grid-area: seasonContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px;}
+.seasonContainer { grid-area: seasonContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px;}
 
 .temperatureLabel { grid-area: temperatureLabel;height:75px;}
 
-.temperatureContainer { grid-area: temperatureContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px; }
+.temperatureContainer { grid-area: temperatureContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 25px; padding-top: 10px; }
 
-.WeatherContainer { grid-area: WeatherContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:solid; padding-bottom: 25px; padding-top: 10px; }
+.WeatherContainer { grid-area: WeatherContainer;border-width: 2px;border-color:#BFBFBF; border-bottom-style:dashed; padding-bottom: 20px; padding-top: 10px; }
 
 .humidityLabel { grid-area: humidityLabel; }
 
-.humidityContainer { grid-area: humidityContainer;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;  border-bottom-right:solid; padding-bottom: 25px; padding-top: 10px;}
+.humidityContainer { grid-area: humidityContainer;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;  border-bottom-right:solid; padding-bottom: 25px; padding-top: 10px;}
 
-.Speed { grid-area: Speed;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;padding-top:10px; }
+.Speed { grid-area: Speed;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
 
-.arrows { grid-area: arrows;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:solid;padding-left:20px; }
+.arrows { grid-area: arrows;border-width: 2px;border-color:#BFBFBF;  border-bottom-style:dashed;padding:0px; }
