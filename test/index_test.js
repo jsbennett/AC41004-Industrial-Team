@@ -18,22 +18,19 @@ describe('/GET', ()=>{
 			done();
 		});
 	});
-});*/
+});
 
-/* GET field */
+/* GET field 
 describe('/GET field details', function(){
-	it('returns 1 if the getField API route returns populated object', (done) => {
+	it('returns 1 if the field API route returns populated object', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/api/getField/1')
+		.get('/field/1')
 		.end((err, res) => {
 		try{
 			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			console.log(res.body);
-			//res.body.should.have.property('field');
-			//expect({ res: {} }).to.have.property('FieldID').that.deep.equals(1);
-			//res.body.should.have.property('field');
-			done();
+			done();//
 		}
 
 		catch(e){
@@ -42,43 +39,37 @@ describe('/GET field details', function(){
 			
 		});
 	});
-});
+});*/	
 
-
-describe('/GET farm summary', ()=>{
-	it('returns 1 if the farm details GET call returns an object', (done) => {
+/*
+describe('/GET field', ()=>{
+	it('returns 1 if the farm GET call returns an object', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/api/getFarmSummary/1')
+		.get('api/getField/1')
 		.end((err, res) => {
 			try{
 			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			console.log(res.body);
-			//res.body.should.have.property('1');
-			//expect({ res: {} }).to.have.property('FarmID').that.deep.equals(1);
-			//res.body.should.have.property('farmID');
 			done();
 		}
-
 		catch(e){
 				done(e);
-		}
+			}
 		});
 	});
-});
+});*/
 
 describe('/GET farm analysis', ()=>{
-	it('returns 1 if the farm details GET call returns an object', (done) => {
+	it('returns 1 if the farm analysis GET call returns an object containing a farmID', (done) => {
 		chai.request('http://localhost:3000')
-		.get('/api/getFarmSummary/1')
+		.get('/api/getFarmAnalysis/1')
 		.end((err, res) => {
 			try{
 			res.should.have.status(200);
 			res.body.should.be.a('Object');
 			console.log(res.body);
-			//res.body.should.have.property('1');
-			//expect({ res: {} }).to.have.property('farmID').that.deep.equals(1);
-			//res.body.should.have.property('farmID');
+			res.body.should.have.property('farmID');
 			done();
 		}
 		catch(e){
@@ -97,12 +88,92 @@ describe('/GET markers', ()=>{
 				res.should.have.status(200);
 				res.body.should.be.a('Object');
 				console.log(res.body);
-				//expect({ res: {} }).to.have.property('marker').that.deep.equals({});
 				done();
 			}
 		catch(e){
 				done(e);
 			}
+		});
+	});
+});
+
+describe('/GET farm summary', ()=>{
+	it('returns 1 if the farm summary GET call returns an object containing a farmID', (done) => {
+		chai.request('http://localhost:3000')
+		.get('/api/getFarmSummary/1')
+		.end((err, res) => {
+			try{
+			res.should.have.status(200);
+			res.body.should.be.a('Object');
+			console.log(res.body);
+			res.body.should.have.property('farmID');
+			done();
+		}
+
+		catch(e){
+				done(e);
+		}
+		});
+	});
+});
+
+describe('/GET farm analysis', ()=>{
+	it('returns 1 if the farm GET call returns an object containing a farmID', (done) => {
+		chai.request('http://localhost:3000')
+		.get('/api/getFarmAnalysis/1')
+		.end((err, res) => {
+			try{
+			res.should.have.status(200);
+			res.body.should.be.a('Object');
+			console.log(res.body);
+			res.body.should.have.property('farmID');
+			
+			done();
+		}
+
+		catch(e){
+				done(e);
+		}
+		});
+	});
+});
+
+describe('/GET plant data', ()=>{
+	it('returns 1 if the farm GET call returns an object containing a farmID', (done) => {
+		chai.request('http://localhost:3000')
+		.get('/api/getPlantData/1')
+		.end((err, res) => {
+			try{
+			res.should.have.status(200);
+			res.body.should.be.a('Object');
+			console.log(res.body);
+			res.body.should.have.property('farmID');
+			done();
+		}
+
+		catch(e){
+				done(e);
+		}
+		});
+	});
+});
+
+describe('/GET daily weather', ()=>{
+	it('returns 1 if the farm GET call returns an object containing a farmID', (done) => {
+		chai.request('http://localhost:3000')
+		.get('/api/getDailyWeather/1')
+		.end((err, res) => {
+			try{
+			res.should.have.status(200);
+			res.body.should.be.a('Object');
+			console.log(res.body);
+			res.body.should.have.property('farmID');
+			done();
+		}
+
+		catch(e){
+				done(e);
+		}
 		});
 	});
 });

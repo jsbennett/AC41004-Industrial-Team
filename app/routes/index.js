@@ -72,7 +72,7 @@ router.get('/api/getFarmAnalysis/:farmID', function(req, res, next) {
 	farmService.GetFarmAnalysis(req).then(function(json) {
 		res.send(json);
 	});
-});
+});//
 
 router.get('/api/getMarkers', function(req, res, next) {
 	farmService.GetAllMarkers().then(function(json) {
