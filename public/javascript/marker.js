@@ -57,7 +57,7 @@ $.ajax({
 			if (data['markers'][i].Type == 'Farm') {
 				//This marker is a farm
 				$.ajax({
-					url: '/farm/' + data['markers'][i].FarmID,
+					url: '/farmSummary/' + data['markers'][i].FarmID,
 					location: markerLocation,
 					customOptions,
 					success: function(customPopup) {
