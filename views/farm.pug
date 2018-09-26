@@ -12,7 +12,6 @@ block content
 		div(id='weather' data-bind=data.farm.weather[0].weatherType style='display:none')
 		div(id='season' data-bind=data.farm.weather[0].season style='display:none')
 		div(id='id' data-bind=data.farmID style='display:none')
-<<<<<<< HEAD
 		div(id='temperatureVal' data-bind=data.farm.weather[0].temperature style='display:none')
 		div(id='humidityVal' data-bind=data.farm.weather[0].humidity style='display:none')
 		.container
@@ -84,73 +83,5 @@ block content
 					else
 						img(src='images/arrows/light.png')
 		script(src="/javascript/thermometer.js")
-=======
-		div(id='temperature' data-bind=data.farm.weather[0].temperature style='display:none')
-		script(src="/javascript/thermometer.js")
-		.summary-container
-			.bField
-				img(src='images/headings/wind.png', style='padding-left:50px')
-			.seasonLabel
-				img.gridLabel(src='images/headings/season.png') 
-			.weatherLabel
-				img.gridLabel(src='images/headings/weather.png')
-			.seasonContainer
-				if data.farm.weather[0].season == 'Autumn'
-					img.gridResult(src='images/seasons/autumn.png')
-				else if data.farm.weather[0].season == 'Spring'
-					img.gridResult(src='images/seasons/spring.png')
-				else if data.farm.weather[0].season == 'Winter'
-					img.gridResult(src='images/seasons/winter.png')
-				else if data.farm.weather[0].season == 'Summer'
-					img.gridResult(src='images/seasons/summer.png')
-			.temperatureLabel
-				img.gridLabel(src='images/headings/temperature.png', style='height:75px')
-			.temperatureContainer
-				.thermodiv
-					#mercury(onclick='move()')
-				#circle
-					#temperature #{JSON.stringify(data.farm.weather[0].temperature)}°C
-				br
-				button(onclick='move()') Display Temperature		
-			.WeatherContainer
-				if data.farm.weather[0].weatherType == 'Clear'
-					img.gridResult(src='images/weather/clear.png')
-				else if data.farm.weather[0].weatherType == 'Cloudy'
-					img.gridResult(src='images/weather/cloudy.png')
-				else if data.farm.weather[0].weatherType == 'Fog'
-					img.gridResult(src='images/weather/fog.png')
-				else if data.farm.weather[0].weatherType == 'Lightning'
-					img.gridResult(src='images/weather/lightning.png')
-				else if data.farm.weather[0].weatherType == 'Rain'
-					img.gridResult(src='images/weather/rain.png')
-				else if data.farm.weather[0].weatherType == 'Snow'
-					img.gridResult(src='images/weather/snow.png')
-				else if data.farm.weather[0].weatherType == 'Sunny'
-					img.gridResult(src='images/weather/sunny.png')
-				else if data.farm.weather[0].weatherType == 'Windy'
-					img.gridResult(src='images/weather/windy.png')
-			.humidityLabel
-				img.gridLabel(src='images/headings/humidity.png', style='height:75px')
-			.humidityContainer
-				.humcontainer
-					img.moisture(src='images/weather/raindrop.png')
-					button(onclick='fill()',style="position:relative;top:150px") Display Moisture
-					#water(onclick='fill()')
-				#humidity #{JSON.stringify(data.farm.weather[0].humidity)}%
-				br
-					
-			.Speed
-				p.result #{JSON.stringify(data.farm.weather[0].windStrength)}MPH
-			.arrows
-				-var w = JSON.stringify(data.farm.weather[0].windStrength)
-				-w = parseInt(w)
-				if w >= 32
-					img.gridResult(src='images/arrows/heavy.png')
-				else if w >=13
-					img.gridResult(src='images/arrows/medium.png')
-				else
-					img.gridResult(src='images/arrows/light.png')
-		
->>>>>>> eef43f773b818fa70a5391e3d48f9ea1dcf1a881
 		style
 			include ../public/stylesheets/stylesheet.css	
