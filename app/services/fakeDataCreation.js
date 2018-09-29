@@ -3,6 +3,7 @@ var fakeDataService = require('./fakeDataService');
 var request = require('request');
 var dateFormat = require('dateformat');
 
+//Data creation variables
 var seasons = ['Spring', 'Summer', 'Autumn', 'Winter'];
 var weathers = [
 	'Cloudy',
@@ -15,9 +16,11 @@ var weathers = [
 	'Clear'
 ];
 
+//Used to keep track of previous records inserted
 var r = [];
 var l = [];
 
+//Fake data class
 function FakeData() {
 	this.ph;
 	this.moisture;
@@ -31,6 +34,7 @@ function FakeData() {
 	this.crops;
 
 	this.init = function(callback) {
+		//Set values used to create random data
 		this.ph = Math.floor(Math.random() * 14);
 		this.moisture = Math.floor(Math.random() * 100);
 		this.temp = Math.floor(Math.random() * 50 + -10);
@@ -42,6 +46,7 @@ function FakeData() {
 		this.humidAlpha = 20;
 		this.windAlpha = 30;
 
+		//Get all markers in the database
 		farmService.GetAllMarkers().then(function(markerData) {
 			markers = markerData.markers;
 			farmService.GetCropDetails().then(cropData => {
@@ -51,16 +56,22 @@ function FakeData() {
 		});
 	};
 
+	//Main data loop for making weather and fields
 	this.makeData = function(date) {
+		//For all markers
 		for (var i = 0; i < markers.length; i++) {
+			//Keep track of the random crop made for the marker
 			r.push(crops[Math.floor(Math.random() * crops.length)].CropID);
+			//Keep track of the location ID of this marker
 			if (l.length <= markers.length) {
 				l.push(markers[i].LocationID);
 			}
 			if (markers[i].Type == 'Field') {
+				//Create data for field
 				var marker = markers[i];
 				this.makeFarmFieldLoop(marker, new Date(date), i);
 			} else {
+				//Create weather for farm
 				var forecast = [];
 				for (var j = 0; j < 5; j++) {
 					forecast.push(
@@ -72,7 +83,9 @@ function FakeData() {
 		}
 	};
 
+	//Makes farm data for the amount of hours you want each day
 	this.makeFarmFieldLoop = function(marker, date, i) {
+		//Get any current database info about this farm
 		farmService
 			.GetFieldDetails(
 				marker.FarmID,
@@ -81,6 +94,7 @@ function FakeData() {
 			)
 			.then(fieldData => {
 				var fields = [];
+				//Loop for number of hours
 				for (var j = 0; j < 1; j++) {
 					fields.push(
 						this.makeFakeFieldData(
@@ -97,6 +111,7 @@ function FakeData() {
 			});
 	};
 
+	//Generate a weather record to be inserted
 	this.makeFakeWeatherData = function(marker, dayOffset, startdate) {
 		//WeatherID Auto
 		//RecordDate
@@ -142,6 +157,7 @@ function FakeData() {
 		return data;
 	};
 
+	//Get the current season using passed date
 	this.currentSeason = function(date) {
 		if (
 			date.getMonth() == 1 ||
@@ -166,10 +182,12 @@ function FakeData() {
 		}
 	};
 
+	//Generate field data
 	this.makeFakeFieldData = function(marker, fieldData, date, j, r, i) {
 		fieldData = JSON.parse(fieldData)[0];
 		var index = 0;
 		var d = new Date(0, 0, 1);
+		//Find the most recent plant date for current field
 		for (var k = 0; k < fieldData.length; k++) {
 			if (
 				fieldData[k].FarmFieldID == marker.FarmID &&
@@ -195,6 +213,7 @@ function FakeData() {
 			100
 		);
 		//CropID
+		//Check to see if current field needs to be harvested and if so choose a new crop and change plant date
 		var cropID;
 		var changePlantDate = false;
 		var splitdate = String(d).split('T')[0];
@@ -213,11 +232,13 @@ function FakeData() {
 		var ttmDate = new Date(d);
 		ttmDate.setDate(ttmDate.getDate() + ttm);
 		if (tempdate > ttmDate) {
+			//Pick new crop because current crop has grown
 			r[i] = crops[Math.floor(Math.random() * crops.length)].CropID;
 			cropID = r[i];
 			//cropID = 10;
 			changePlantDate = true;
 		} else {
+			//Use previous crop id
 			cropID = r[i];
 		}
 		//LocationID
@@ -248,6 +269,7 @@ function FakeData() {
 		return data;
 	};
 
+	//Make a random number but based on the last number generated
 	this.smoothRandom = function(factor, start) {
 		if (start == 0) {
 			start = 1;
@@ -257,6 +279,7 @@ function FakeData() {
 		return Math.floor(Math.random() * (max - min) + min);
 	};
 
+	//https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment
 	this.clamp = function(num, min, max) {
 		return num <= min ? min : num >= max ? max : num;
 	};
