@@ -10,7 +10,7 @@ They can also see the weather for their farm, all the crops and their expected h
 ## Getting Started 
 To have a look at FRM3D, follow the steps below: 
 
-## Steps
+### Steps
 
 1. Navigate to a folder where you want to save the project in a termial of your choice
 2. Run `git clone https://github.com/jsbennett/AC41004-Industrial-Team.git`
