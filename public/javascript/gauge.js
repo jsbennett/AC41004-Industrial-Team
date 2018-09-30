@@ -3,6 +3,7 @@ var info;
 var chart;
 var options;
 
+//Google Charts gauge that updates based on current soil moisture levels
 google.charts.load('current', { packages: ['gauge'] });
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
@@ -32,14 +33,14 @@ function drawChart() {
 
 	chart.draw(info, options);
 }
-
+// Updates gauge every .5 seconds
 setInterval(function() {
   var formatter = new google.visualization.NumberFormat(
     {suffix: '%', pattern:info}
   );
 	var min = moisture - 5;
 	var max = moisture + 5;
-
+	//sets the wiggle amount for the gauge needle
 	var fluxValue = Math.floor(Math.random() * (max - min)) + min;
 	if (fluxValue < 0) {
 		fluxValue = 0;

@@ -1,3 +1,4 @@
+//- Displays the overview for the crop on the selected field -//
 block content
 	div
 		ul.nav.nav-tabs
@@ -10,8 +11,9 @@ block content
 		// h1 #{data.field.cropName}
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		br
-		hr
-		if data.field.cropName == 'Potatoes'
+		hr 
+		//- Selects crop title to display
+		if data.field.cropName == 'Potatoes' 
 			img(src='/images/crops/potatoes2.png', class= 'cropImg')
 		else if data.field.cropName == 'Corn'
 			img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
