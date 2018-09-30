@@ -1,3 +1,8 @@
+/*
+*
+*This model is used to package information for the weather analysis section on a farm
+*
+*/
 function analysisWeatherModel(
     month,
     avgTemp,

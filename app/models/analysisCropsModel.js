@@ -1,3 +1,9 @@
+/*
+*
+*This model is used to package information for the crop analysis section on a farm
+*
+*/
+
 function analysisCropModel(
     crop,
     harvestedNumber,
