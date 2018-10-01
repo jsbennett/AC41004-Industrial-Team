@@ -37,14 +37,14 @@ block content
 							//- display strawberries image
 							img(src='images/crops/strawberries2.png' class= 'altlabel')
 					.col-sm-8(style="padding-left: 80px")
-						-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
+						-var p = JSON.stringify(val.expectedHarvestDate)
 						-var dt = p.split("T")
 						-var d = dt[0].split("-")
 						-var date = d[0].split('\"')
-						-var m = d[1]
+						-var m = parseInt(d[1] - 1)
 						-var months = ['January', 'February', 'March', 'May', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 						//- calendar for expected harvest date - https://www.sitepoint.com/create-calendar-icon-html5-css3/
 						time.icon(datetime='JSON.stringify(val.expectedHarvestDate')
-							em #{months[parseInt(d[1])]}
+							em #{months[m]}
 							strong #{date[1]}
 							span #{d[2]}
