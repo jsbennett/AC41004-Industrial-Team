@@ -25,6 +25,7 @@ var map = L.Wrld.map('map', '534aba75bfd7016e2593d59b9f8845df', {
 	//L.Wrld.themes.season.Spring //June 1 - Aug 31
 	();*/
 
+// icon for farm markers
 var farmIcon = L.icon({
 	iconUrl: 'images/markers/farm_marker.png',
 	iconSize: [60, 60], // size of the icon
@@ -32,6 +33,7 @@ var farmIcon = L.icon({
 	popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
+// icon for field markers
 var fieldIcon = L.icon({
 	iconUrl: 'images/markers/field_marker_green.png',
 	iconSize: [60, 60],

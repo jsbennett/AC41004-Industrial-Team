@@ -17,8 +17,10 @@ block content
 		.container
 			.row
 				.col
+					// image used for season heading
 					img(src='images/headings/season.png', style="padding-top: 2px;") 
 				.col(style="padding-top: 13px; padding-left: 60px")
+					// if statement to display different season types
 					if data.farm.weather[0].season == 'Autumn'
 						img(src='images/seasons/autumn.png')
 					else if data.farm.weather[0].season == 'Spring'
@@ -29,9 +31,11 @@ block content
 						img(src='images/seasons/summer.png')
 			hr
 			.row
-				.col 
+				.col
+					// image used for weather heading
 					img(src='images/headings/weather.png', class='weatherHeading')
 				.col(style="padding-top: 20px")
+					// if statement to display the different weather types
 					if data.farm.weather[0].weatherType == 'Clear'
 						img(src='images/weather/clear.png', class='weatherImg')
 					else if data.farm.weather[0].weatherType == 'Cloudy'
@@ -51,6 +55,7 @@ block content
 			hr
 			.row
 				.col(style="padding-top: 24px;")
+					// image used to display temperature heading
 					img(src='images/headings/temperature.png', class='temperatureHeading')
 				.col(style="padding-left: 65px")
 					.thermodiv
@@ -60,6 +65,7 @@ block content
 			hr
 			.row
 				.col(style="padding-top: 15px")
+					// image used to display humidity heading
 					img(src='images/headings/humidity.png')
 				.col(style="padding-left: 30px; padding-top: -2px")
 					.humcontainer
@@ -70,16 +76,22 @@ block content
 			hr
 			.row(style="align-text: center")
 				.col(style="padding-left: 50px;")
+					// image used to display wind heading
 					img(src='images/headings/wind.png')
 				.col
 					p.result #{JSON.stringify(data.farm.weather[0].windStrength)}MPH
 				.col(style="padding-left: 70px;")
 					-var w = JSON.stringify(data.farm.weather[0].windStrength)
 					-w = parseInt(w)
+					// if wind strength is greater than or equal to 32
 					if w >= 32
+						// display heavy wind strength image
 						img(src='images/arrows/heavy.png')
+					// if wind strength is greater than or equal to 13
 					else if w >=13
+						// display medium wind strength image
 						img(src='images/arrows/medium.png')
+					// else display light wind strength image
 					else
 						img(src='images/arrows/light.png')
 		script(src="/javascript/thermometer.js")

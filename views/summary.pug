@@ -15,18 +15,26 @@ block content
 		.container
 			.row
 				.col-sm-4
+					// image used to display the crop name heading
 					img(src='/images/headings/cropname.png')
 				.col-sm-4
+					// image used to display the expected harvest date heading
 					img(src='/images/headings/expectedharvestdate.png', style="padding-left: 30px;")
 			hr
 			each val in data.farm.crops
 				.row
 					.col-sm-4
+						// if crop name is potatoes
 						if val.cropName == 'Potatoes'
+							// display potato image
 							img(src='/images/crops/potatoes2.png' class= 'imlabel')
+						// if crop name is corn
 						else if val.cropName == 'Corn'
+							// display corn image
 							img(src='/images/crops/corn2.png' class= 'imlabel')
+						// if crop name is strawberries
 						else if val.cropName == 'Strawberries'
+							// display strawberries image
 							img(src='images/crops/strawberries2.png' class= 'altlabel')
 					.col-sm-8(style="padding-left: 80px")
 						-var p = JSON.stringify(data.farm.crops[0].expectedHarvestDate)
@@ -35,6 +43,7 @@ block content
 						-var date = d[0].split('\"')
 						-var m = d[1]
 						-var months = ['January', 'February', 'March', 'May', 'April', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+						// calendar for expected harvest date - https://www.sitepoint.com/create-calendar-icon-html5-css3/
 						time.icon(datetime='JSON.stringify(val.expectedHarvestDate')
 							em #{months[parseInt(d[1])]}
 							strong #{date[1]}

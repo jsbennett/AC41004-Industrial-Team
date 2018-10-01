@@ -11,15 +11,23 @@ block content
 		div(id='id' data-bind=data.field.farmFieldID style='display:none')
 		br
 		hr
+		// if crop name is potatoes
 		if data.field.cropName == 'Potatoes'
+			// display potatoes image
 			img(src='/images/crops/potatoes2.png', class= 'cropImg')
+		// if crop name is corn
 		else if data.field.cropName == 'Corn'
+			// display corn image
 			img(src='/images/crops/corn2.png', class= 'cropImg', style= {float: right, padding: '10px'})
+		// if crop name is strawberries
 		else if data.field.cropName == 'Strawberries'
+			// display strawberries image
 			img(src='images/crops/strawberries2.png', class= 'cropImg', style= {float:right, padding: '10px'})
 		hr
 		br
+		// image to display expected harvest date heading
 		img(src='/images/headings/expectedharvestdate.png', class = 'harvestImg')
+		// calendar for expected harvest date - https://www.sitepoint.com/create-calendar-icon-html5-css3/
 		time.icon(datetime='#{data.field.expectedHarvest}')
 			em #{data.field.harvestDay}
 			strong #{data.field.harvestMonth}
